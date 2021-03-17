@@ -21,12 +21,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.atsistemas.pokemon.R
+import com.atsistemas.pokemon.commons.BaseFragment
 import com.atsistemas.pokemon.main_activity.list.vm.ListViewModel
 
-class ListFragment : Fragment() {
+class ListFragment : BaseFragment() {
 
     private lateinit var listViewModel: ListViewModel
 
@@ -44,4 +44,9 @@ class ListFragment : Fragment() {
         }
         return root
     }
+
+    override fun loadObservers() {
+        // TODO("Not yet implemented")
+    }
+
 }

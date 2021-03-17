@@ -18,9 +18,9 @@ package com.atsistemas.pokemon.main_activity.profile.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.atsistemas.pokemon.commons.BaseViewModel
 
-class ProfileViewModel : ViewModel() {
+class ProfileViewModel : BaseViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is profile Fragment"

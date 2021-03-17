@@ -14,16 +14,18 @@
  *    limitations under the License.
  */
 
-package com.atsistemas.pokemon.main_activity.list.vm
+package com.atsistemas.pokemon.commons
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.atsistemas.pokemon.commons.BaseViewModel
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
 
-class ListViewModel : BaseViewModel() {
+abstract class BaseFragment: Fragment() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is list Fragment"
+    abstract fun loadObservers()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loadObservers()
     }
-    val text: LiveData<String> = _text
 }

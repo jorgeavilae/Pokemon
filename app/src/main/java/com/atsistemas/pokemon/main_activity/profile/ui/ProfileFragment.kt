@@ -21,12 +21,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.atsistemas.pokemon.R
+import com.atsistemas.pokemon.commons.BaseFragment
 import com.atsistemas.pokemon.main_activity.profile.vm.ProfileViewModel
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment() {
 
     private lateinit var profileViewModel: ProfileViewModel
 
@@ -43,5 +43,9 @@ class ProfileFragment : Fragment() {
             textView.text = it
         }
         return root
+    }
+
+    override fun loadObservers() {
+        // TODO("Not yet implemented")
     }
 }

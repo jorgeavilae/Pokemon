@@ -14,16 +14,9 @@
  *    limitations under the License.
  */
 
-package com.atsistemas.pokemon.main_activity.list.vm
+package com.atsistemas.data.repositories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.atsistemas.pokemon.commons.BaseViewModel
+import com.atsistemas.data.commons.BaseRepository
 
-class ListViewModel : BaseViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is list Fragment"
-    }
-    val text: LiveData<String> = _text
+class PokemonRepository : BaseRepository() {
 }
