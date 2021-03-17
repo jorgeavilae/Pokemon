@@ -14,16 +14,11 @@
  *    limitations under the License.
  */
 
-package com.atsistemas.data.di
+package com.atsistemas.data.remote
 
-import com.atsistemas.data.di.providers.*
-import org.koin.dsl.module
-
-val dataModule = module {
-    single { provideMockInterceptor(get()) }
-    single { provideOkHttpClient(get()) }
-    single { provideMoshi() }
-    single { provideRetrofit(get(), get()) }
-    single { providePokemonApi(get()) }
-    single { providePokemonRepository(get()) }
+sealed class ResultHandler <out T: Any>{
+    data class Success<out T: Any>(val data: T): ResultHandler<T>()
+    data class HttpError(val code: Int?, val message: String?): ResultHandler<Nothing>()
+    data class GenericError(val message: String?): ResultHandler<Nothing>()
+    object NetworkError: ResultHandler<Nothing>()
 }

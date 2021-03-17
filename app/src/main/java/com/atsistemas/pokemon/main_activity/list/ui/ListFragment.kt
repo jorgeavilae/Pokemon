@@ -42,9 +42,14 @@ class ListFragment : BaseFragment() {
     }
 
     override fun loadObservers() {
-        listViewModel.text.observe(viewLifecycleOwner) {
-            binding.textList.text = it
+        listViewModel.pokemons.observe(viewLifecycleOwner) {
+            binding.textList.text = it.toString().subSequence(0, 1000)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        listViewModel.fetchData()
     }
 
     override fun onDestroyView() {

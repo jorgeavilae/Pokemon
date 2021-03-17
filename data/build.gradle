@@ -31,9 +31,11 @@ android {
     flavorDimensions "default" //Mandatory
     productFlavors {
         mock {
+            buildConfigField "String", "BaseURL", '"https://google.com/"'
             buildConfigField "boolean", "mock", "true"
         }
         pro {
+            buildConfigField "String", "BaseURL", '"https://pokeapi.co/api/v2/"'
             buildConfigField "boolean", "mock", "false"
         }
     }
@@ -56,6 +58,16 @@ dependencies {
 
     // Koin
     implementation "io.insert-koin:koin-android:$koin_version"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    // OkHttp3
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    // Moshi
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
 
     // Test
     testImplementation "junit:junit:$junit_version"

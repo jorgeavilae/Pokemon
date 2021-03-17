@@ -14,16 +14,14 @@
  *    limitations under the License.
  */
 
-package com.atsistemas.data.di
+package com.atsistemas.data.remote
 
-import com.atsistemas.data.di.providers.*
-import org.koin.dsl.module
+import com.atsistemas.data.models.Generation
+import retrofit2.http.GET
+import retrofit2.http.Path
 
-val dataModule = module {
-    single { provideMockInterceptor(get()) }
-    single { provideOkHttpClient(get()) }
-    single { provideMoshi() }
-    single { provideRetrofit(get(), get()) }
-    single { providePokemonApi(get()) }
-    single { providePokemonRepository(get()) }
+interface IPokemonAPI {
+    // https://pokeapi.co/api/v2/generation/1
+    @GET("generation/{generationId}")
+    suspend fun getGeneration(@Path("generationId") generationId: Int): Generation
 }

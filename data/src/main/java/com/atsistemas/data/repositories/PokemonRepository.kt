@@ -17,9 +17,11 @@
 package com.atsistemas.data.repositories
 
 import com.atsistemas.data.commons.BaseRepository
+import com.atsistemas.data.models.Pokemon
+import com.atsistemas.data.remote.IPokemonAPI
 
-class PokemonRepository : BaseRepository() {
+class PokemonRepository(private val api: IPokemonAPI) : BaseRepository() {
 
-    fun getListData() = "This is list Fragment"
+    suspend fun getListData() : List<Pokemon> = api.getGeneration(1).pokemons
     fun getProfileData() = "This is profile Fragment"
 }

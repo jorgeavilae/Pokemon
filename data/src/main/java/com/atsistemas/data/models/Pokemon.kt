@@ -14,16 +14,17 @@
  *    limitations under the License.
  */
 
-package com.atsistemas.data.di
+package com.atsistemas.data.models
 
-import com.atsistemas.data.di.providers.*
-import org.koin.dsl.module
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-val dataModule = module {
-    single { provideMockInterceptor(get()) }
-    single { provideOkHttpClient(get()) }
-    single { provideMoshi() }
-    single { provideRetrofit(get(), get()) }
-    single { providePokemonApi(get()) }
-    single { providePokemonRepository(get()) }
-}
+@JsonClass(generateAdapter = true)
+data class Generation (
+    @Json(name = "pokemon_species") val pokemons: List<Pokemon>
+)
+
+data class Pokemon(
+    val name: String,
+    val url: String
+)

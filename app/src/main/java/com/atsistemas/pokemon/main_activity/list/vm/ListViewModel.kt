@@ -19,14 +19,24 @@ package com.atsistemas.pokemon.main_activity.list.vm
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.atsistemas.data.models.Pokemon
 import com.atsistemas.data.repositories.PokemonRepository
 import com.atsistemas.pokemon.commons.BaseViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ListViewModel(private val repository: PokemonRepository) : BaseViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        viewModelScope.launch { value = repository.getListData() }
-    }
+    private val _text = MutableLiveData<String>()
     val text: LiveData<String> = _text
+
+    private val _pokemons = MutableLiveData<List<Pokemon>>()
+    val pokemons: LiveData<List<Pokemon>>
+        get() = _pokemons
+
+    fun fetchData() {
+        viewModelScope.launch (Dispatchers.IO) {
+            _pokemons.postValue(repository.getListData())
+        }
+    }
 }
