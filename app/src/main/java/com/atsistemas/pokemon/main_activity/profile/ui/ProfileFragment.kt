@@ -20,32 +20,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
-import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.commons.BaseFragment
+import com.atsistemas.pokemon.databinding.FragmentProfileBinding
 import com.atsistemas.pokemon.main_activity.profile.vm.ProfileViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : BaseFragment() {
 
-    private lateinit var profileViewModel: ProfileViewModel
+    private val profileViewModel: ProfileViewModel by viewModel()
+
+    private var _binding: FragmentProfileBinding? = null
+    private val binding: FragmentProfileBinding get() = _binding!!
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        profileViewModel =
-                ViewModelProvider(this).get(ProfileViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_profile, container, false)
-        val textView: TextView = root.findViewById(R.id.text_profile)
-        profileViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun loadObservers() {
-        // TODO("Not yet implemented")
+        profileViewModel.text.observe(viewLifecycleOwner) {
+            binding.textProfile.text = it
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

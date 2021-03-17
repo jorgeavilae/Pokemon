@@ -16,7 +16,9 @@
 
 package com.atsistemas.data.di
 
+import com.atsistemas.data.repositories.PokemonRepository
 import org.koin.dsl.module
 
 val dataModule = module {
+    single { PokemonRepository() }
 }

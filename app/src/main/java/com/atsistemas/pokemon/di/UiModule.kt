@@ -16,7 +16,12 @@
 
 package com.atsistemas.pokemon.di
 
+import com.atsistemas.pokemon.main_activity.list.vm.ListViewModel
+import com.atsistemas.pokemon.main_activity.profile.vm.ProfileViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val uiModule = module {
+    viewModel { ListViewModel(get()) }
+    viewModel { ProfileViewModel(get()) }
 }

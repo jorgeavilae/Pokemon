@@ -19,4 +19,7 @@ package com.atsistemas.data.repositories
 import com.atsistemas.data.commons.BaseRepository
 
 class PokemonRepository : BaseRepository() {
+
+    fun getListData() = "This is list Fragment"
+    fun getProfileData() = "This is profile Fragment"
 }

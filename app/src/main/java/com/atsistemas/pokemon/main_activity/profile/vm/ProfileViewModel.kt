@@ -18,12 +18,15 @@ package com.atsistemas.pokemon.main_activity.profile.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.atsistemas.data.repositories.PokemonRepository
 import com.atsistemas.pokemon.commons.BaseViewModel
+import kotlinx.coroutines.launch
 
-class ProfileViewModel : BaseViewModel() {
+class ProfileViewModel(private val repository: PokemonRepository) : BaseViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is profile Fragment"
+        viewModelScope.launch { value = repository.getProfileData() }
     }
     val text: LiveData<String> = _text
 }

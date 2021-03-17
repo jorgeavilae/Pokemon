@@ -20,33 +20,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
-import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.commons.BaseFragment
+import com.atsistemas.pokemon.databinding.FragmentListBinding
 import com.atsistemas.pokemon.main_activity.list.vm.ListViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListFragment : BaseFragment() {
 
-    private lateinit var listViewModel: ListViewModel
+    private val listViewModel: ListViewModel by viewModel()
+
+    private var _binding: FragmentListBinding? = null
+    private val binding: FragmentListBinding get() = _binding!!
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        listViewModel =
-                ViewModelProvider(this).get(ListViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_list, container, false)
-        val textView: TextView = root.findViewById(R.id.text_list)
-        listViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun loadObservers() {
-        // TODO("Not yet implemented")
+        listViewModel.text.observe(viewLifecycleOwner) {
+            binding.textList.text = it
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
