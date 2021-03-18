@@ -43,7 +43,7 @@ class ListFragment : BaseFragment() {
 
     override fun loadObservers() {
         listViewModel.pokemons.observe(viewLifecycleOwner) {
-            binding.textList.text = it.toString().subSequence(0, 1000)
+            binding.textList.text = it.toString()
         }
     }
 

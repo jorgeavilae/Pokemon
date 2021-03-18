@@ -41,8 +41,10 @@ class MockInterceptor(private val application: Application) : Interceptor {
             res = getMockResponse("generation/1", R.raw.generation_1, chain, responseCodeOK)
 
         // Un Pokemon
+        // !!! Cuidado con esta dirección que puede coincidir con varias url
+        // Sería mejor utilizar RegEx en MockInterceptor.getMockResponse()
         if (res == null)
-            res = getMockResponse("pokemon/bulbasaur", R.raw.pokemon_bulbasaur, chain, responseCodeOK)
+            res = getMockResponse("pokemon/", R.raw.pokemon_bulbasaur, chain, responseCodeOK)
 
         return res ?: chain.proceed(chain.request())
     }

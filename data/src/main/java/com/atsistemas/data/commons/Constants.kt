@@ -17,4 +17,6 @@
 package com.atsistemas.data.commons
 
 object Constants {
+    const val DATABASE_NAME = "pokemon_database"
+    const val TABLE_POKEMON = "pokemon_table"
 }

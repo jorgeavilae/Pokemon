@@ -19,6 +19,7 @@ package com.atsistemas.data.di.providers
 import android.app.Application
 import android.util.Log
 import com.atsistemas.data.BuildConfig
+import com.atsistemas.data.local.PokemonDatabase
 import com.atsistemas.data.remote.IPokemonAPI
 import com.atsistemas.data.remote.interceptors.MockInterceptor
 import com.atsistemas.data.repositories.PokemonRepository
@@ -74,8 +75,8 @@ fun provideRetrofit(httpClient: OkHttpClient, moshi: Moshi): Retrofit =
 fun providePokemonApi(retrofit: Retrofit): IPokemonAPI =
     retrofit.create(IPokemonAPI::class.java)
 
-//fun provideBankDatabase(application: Application): BankDatabase =
-//    BankDatabase.getInstance(application)
-//
-fun providePokemonRepository(retrofit: IPokemonAPI): PokemonRepository =
-    PokemonRepository(retrofit)
+fun providePokemonDatabase(application: Application): PokemonDatabase =
+    PokemonDatabase.getInstance(application)
+
+fun providePokemonRepository(retrofit: IPokemonAPI, pokemonDatabase: PokemonDatabase): PokemonRepository =
+    PokemonRepository(retrofit, pokemonDatabase)

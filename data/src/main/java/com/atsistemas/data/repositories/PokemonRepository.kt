@@ -16,35 +16,35 @@
 
 package com.atsistemas.data.repositories
 
+import androidx.lifecycle.LiveData
 import com.atsistemas.data.commons.BaseRepository
+import com.atsistemas.data.local.PokemonDatabase
 import com.atsistemas.data.models.Pokemon
 import com.atsistemas.data.remote.IPokemonAPI
 import com.atsistemas.data.remote.ResultHandler
 
-class PokemonRepository(private val api: IPokemonAPI) : BaseRepository() {
+class PokemonRepository(
+    private val api: IPokemonAPI,
+    private val pokemonDatabase: PokemonDatabase
+) : BaseRepository() {
 
-    private var pokemons: List<Pokemon> = emptyList()
-    private var pokemon: Pokemon? = null
-
-    suspend fun getListData(): List<Pokemon> {
-        getGeneration(1)
-        return pokemons
+    val pokemons: LiveData<List<Pokemon>> by lazy {
+        pokemonDatabase.pokemonDao().load()
     }
 
-    suspend fun getProfileData(): Pokemon? {
-        getPokemon("bulbasaur")
-        return pokemon
+    fun getProfileData(): Pokemon? {
+        return pokemonDatabase.pokemonDao().getPokemonById(1)
     }
-
 
 
     //API
     suspend fun getGeneration(generationId: Int): ResultHandler<String> {
         return when (val result = safeApiCall { api.getGeneration(generationId) }) {
             is ResultHandler.Success -> {
-                result.data.let {
-                    pokemons = it.pokemons
-                    // todo save to local db
+                result.data.pokemons.forEach {
+                    val resultPokemon = getPokemon(it.name)
+                    if (resultPokemon !is ResultHandler.Success)
+                        return resultPokemon
                 }
                 ResultHandler.Success("Successful update")
             }
@@ -58,8 +58,7 @@ class PokemonRepository(private val api: IPokemonAPI) : BaseRepository() {
         return when (val result = safeApiCall { api.getPokemon(name) }) {
             is ResultHandler.Success -> {
                 result.data.let {
-                    pokemon = it
-                    // todo save to local db
+                    pokemonDatabase.pokemonDao().save(it)
                 }
                 ResultHandler.Success("Successful update")
             }

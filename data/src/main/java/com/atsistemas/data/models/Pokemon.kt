@@ -16,6 +16,9 @@
 
 package com.atsistemas.data.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.atsistemas.data.commons.Constants
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -24,8 +27,10 @@ data class Generation (
     @Json(name = "pokemon_species") val pokemons: List<Pokemon>
 )
 
+@Entity(tableName = Constants.TABLE_POKEMON)
 data class Pokemon(
-    val name: String,
+    val id: Int?,
+    @PrimaryKey val name: String,
     val height: Int?,
     val weight: Int?
 )

@@ -14,25 +14,27 @@
  *    limitations under the License.
  */
 
-package com.atsistemas.pokemon.main_activity.list.vm
+package com.atsistemas.data.local
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.atsistemas.data.commons.Constants.TABLE_POKEMON
 import com.atsistemas.data.models.Pokemon
-import com.atsistemas.data.repositories.PokemonRepository
-import com.atsistemas.pokemon.commons.BaseViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-class ListViewModel(private val repository: PokemonRepository) : BaseViewModel() {
-
-    val pokemons: LiveData<List<Pokemon>> = repository.pokemons
-
-    fun fetchData() {
-        viewModelScope.launch (Dispatchers.IO) {
-            val result = repository.getGeneration(1)
-            Log.d("fetchData: Result", result.toString())
-        }
-    }
+@Dao
+interface PokemonDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun save(pokemon: Pokemon)
+    
+    @Query("SELECT * FROM $TABLE_POKEMON")
+    fun load(): LiveData<List<Pokemon>>
+    
+    @Query("DELETE FROM $TABLE_POKEMON")
+    fun deleteAll()
+    
+    @Query("SELECT * FROM  $TABLE_POKEMON WHERE id = :pokemonId")
+    fun getPokemonById(pokemonId: Int) : Pokemon?
 }
