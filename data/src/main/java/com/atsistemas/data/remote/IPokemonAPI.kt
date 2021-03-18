@@ -17,11 +17,17 @@
 package com.atsistemas.data.remote
 
 import com.atsistemas.data.models.Generation
+import com.atsistemas.data.models.Pokemon
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface IPokemonAPI {
     // https://pokeapi.co/api/v2/generation/1
     @GET("generation/{generationId}")
-    suspend fun getGeneration(@Path("generationId") generationId: Int): Generation
+    suspend fun getGeneration(@Path("generationId") generationId: Int): Response<Generation>
+
+    // https://pokeapi.co/api/v2/pokemon/bulbasaur
+    @GET("pokemon/{name}")
+    suspend fun getPokemon(@Path("name") name: String): Response<Pokemon>
 }

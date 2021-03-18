@@ -34,8 +34,15 @@ class MockInterceptor(private val application: Application) : Interceptor {
     private val responseCodeOK = 200
 
     override fun intercept(chain: Interceptor.Chain): Response {
+        var res: Response? = null
+
         // Pokemon de la generación 1
-        val res: Response? = getMockResponse("generation/1", R.raw.pokemons, chain, responseCodeOK)
+        if (res == null)
+            res = getMockResponse("generation/1", R.raw.generation_1, chain, responseCodeOK)
+
+        // Un Pokemon
+        if (res == null)
+            res = getMockResponse("pokemon/bulbasaur", R.raw.pokemon_bulbasaur, chain, responseCodeOK)
 
         return res ?: chain.proceed(chain.request())
     }

@@ -27,9 +27,6 @@ import kotlinx.coroutines.launch
 
 class ListViewModel(private val repository: PokemonRepository) : BaseViewModel() {
 
-    private val _text = MutableLiveData<String>()
-    val text: LiveData<String> = _text
-
     private val _pokemons = MutableLiveData<List<Pokemon>>()
     val pokemons: LiveData<List<Pokemon>>
         get() = _pokemons

@@ -19,9 +19,53 @@ package com.atsistemas.data.repositories
 import com.atsistemas.data.commons.BaseRepository
 import com.atsistemas.data.models.Pokemon
 import com.atsistemas.data.remote.IPokemonAPI
+import com.atsistemas.data.remote.ResultHandler
 
 class PokemonRepository(private val api: IPokemonAPI) : BaseRepository() {
 
-    suspend fun getListData() : List<Pokemon> = api.getGeneration(1).pokemons
-    fun getProfileData() = "This is profile Fragment"
+    private var pokemons: List<Pokemon> = emptyList()
+    private var pokemon: Pokemon? = null
+
+    suspend fun getListData(): List<Pokemon> {
+        getGeneration(1)
+        return pokemons
+    }
+
+    suspend fun getProfileData(): Pokemon? {
+        getPokemon("bulbasaur")
+        return pokemon
+    }
+
+
+
+    //API
+    suspend fun getGeneration(generationId: Int): ResultHandler<String> {
+        return when (val result = safeApiCall { api.getGeneration(generationId) }) {
+            is ResultHandler.Success -> {
+                result.data.let {
+                    pokemons = it.pokemons
+                    // todo save to local db
+                }
+                ResultHandler.Success("Successful update")
+            }
+            is ResultHandler.GenericError -> result
+            is ResultHandler.HttpError -> result
+            is ResultHandler.NetworkError -> result
+        }
+    }
+
+    suspend fun getPokemon(name: String): ResultHandler<String> {
+        return when (val result = safeApiCall { api.getPokemon(name) }) {
+            is ResultHandler.Success -> {
+                result.data.let {
+                    pokemon = it
+                    // todo save to local db
+                }
+                ResultHandler.Success("Successful update")
+            }
+            is ResultHandler.GenericError -> result
+            is ResultHandler.HttpError -> result
+            is ResultHandler.NetworkError -> result
+        }
+    }
 }

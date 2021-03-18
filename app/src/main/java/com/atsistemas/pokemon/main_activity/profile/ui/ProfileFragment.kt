@@ -42,9 +42,14 @@ class ProfileFragment : BaseFragment() {
     }
 
     override fun loadObservers() {
-        profileViewModel.text.observe(viewLifecycleOwner) {
-            binding.textProfile.text = it
+        profileViewModel.pokemon.observe(viewLifecycleOwner) {
+            binding.textProfile.text = it?.toString()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        profileViewModel.fetchData()
     }
 
     override fun onDestroyView() {

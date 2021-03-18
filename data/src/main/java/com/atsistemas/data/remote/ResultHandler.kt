@@ -16,8 +16,8 @@
 
 package com.atsistemas.data.remote
 
-sealed class ResultHandler <out T: Any>{
-    data class Success<out T: Any>(val data: T): ResultHandler<T>()
+sealed class ResultHandler <out T>{
+    data class Success<out T>(val data: T): ResultHandler<T>()
     data class HttpError(val code: Int?, val message: String?): ResultHandler<Nothing>()
     data class GenericError(val message: String?): ResultHandler<Nothing>()
     object NetworkError: ResultHandler<Nothing>()

@@ -26,5 +26,6 @@ data class Generation (
 
 data class Pokemon(
     val name: String,
-    val url: String
+    val height: Int?,
+    val weight: Int?
 )
