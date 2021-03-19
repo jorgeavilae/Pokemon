@@ -20,6 +20,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.atsistemas.data.models.PokemonDTO
+import com.atsistemas.pokemon.commons.loadImageFromUrl
 import com.atsistemas.pokemon.databinding.ItemPokemonBinding
 
 class PokemonAdapter(private val cellClickListener: CellClickListener) :
@@ -53,7 +54,7 @@ class PokemonAdapter(private val cellClickListener: CellClickListener) :
 
     inner class ViewHolder(binding: ItemPokemonBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(pokemonDTO: PokemonDTO) {
-//            binding.itemImage.setImageDrawable(R.drawable.pikachu_official)
+            binding.itemImage.loadImageFromUrl(pokemonDTO.imgUrlMini)
             binding.itemName.text = pokemonDTO.name
             binding.itemSpecie.text = pokemonDTO.specie
             binding.itemWeight.text = pokemonDTO.weight.toString()

@@ -20,8 +20,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/item_container_margin"
-    tools:layout_height="200dp"
-    tools:layout_width="200dp">
+    tools:layout_height="150dp"
+    tools:layout_width="150dp">
 
     <ImageView
         android:id="@+id/item_image"
@@ -72,6 +72,9 @@
         android:drawablePadding="@dimen/item_text_margin_inner"
         app:drawableStartCompat="@drawable/ic_leaf"
         app:layout_constraintBottom_toBottomOf="@id/item_background"
+        app:layout_constraintEnd_toStartOf="@+id/item_weight"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@id/item_background"
         tools:text="pikachu" />
 
@@ -80,12 +83,12 @@
         style="@style/FontRegular.M.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/item_text_margin_outer"
+        android:layout_marginStart="@dimen/item_text_margin_inner"
         android:drawablePadding="@dimen/item_text_margin_inner"
         app:drawableStartCompat="@drawable/ic_weight"
         app:layout_constraintBaseline_toBaselineOf="@id/item_specie"
-        app:layout_constraintBottom_toBottomOf="@id/item_background"
-        app:layout_constraintStart_toEndOf="@id/item_specie"
+        app:layout_constraintEnd_toEndOf="@+id/item_background"
+        app:layout_constraintStart_toEndOf="@+id/item_specie"
         tools:text="84" />
 
 

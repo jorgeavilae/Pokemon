@@ -24,6 +24,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="pokemon_red">#FF0000</color>
+    <color name="pokemon_darkRed">#cc0000</color>
+    <color name="pokemon_blue">#3b4cca</color>
+    <color name="pokemon_yellow">#FFde00</color>
+    <color name="pokemon_darkYellow">#b3a125</color>
+
     <color name="almost_white">#e0e0e0</color>
     <color name="light_red">#FF8A80</color>
     <color name="transparent">#00000000</color>

@@ -44,9 +44,13 @@ class ListFragment : BaseFragment() {
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
 
-        binding.buttonList.setOnClickListener { listViewModel.fetchData() }
+        // todo implementar swipe to refresh
+//        binding.buttonList.setOnClickListener { listViewModel.fetchData() }
+        binding.swipeRefreshPokemonList.setOnRefreshListener {
+            binding.swipeRefreshPokemonList.isRefreshing = false
+        }
 
-        binding.pokemonList.layoutManager = GridLayoutManager(activity, 2)
+        binding.pokemonList.layoutManager = GridLayoutManager(activity, 3)
         adapter = PokemonAdapter(object : CellClickListener {
             override fun onCellClickListener(pokemonDTO: PokemonDTO) {
                 Toast.makeText(activity,"Pokemon No. ${pokemonDTO.order}", Toast.LENGTH_SHORT).show()
@@ -59,7 +63,7 @@ class ListFragment : BaseFragment() {
 
     override fun loadObservers() {
         listViewModel.pokemons.observe(viewLifecycleOwner) {
-            adapter?.submitList(it)
+            adapter?.submitList(listOf(it, it, it, it, it).flatten())
         }
     }
 

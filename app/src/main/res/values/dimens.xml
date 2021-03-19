@@ -20,7 +20,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- Pokemon item list -->
-    <dimen name="item_container_margin">8dp</dimen>
+    <dimen name="item_container_margin">4dp</dimen>
     <dimen name="item_container_padding">8dp</dimen>
     <dimen name="item_image_padding">16dp</dimen>
     <dimen name="item_text_margin_outer">16dp</dimen>
