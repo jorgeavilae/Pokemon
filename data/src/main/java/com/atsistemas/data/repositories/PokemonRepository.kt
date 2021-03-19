@@ -22,6 +22,7 @@ import com.atsistemas.data.local.PokemonDatabase
 import com.atsistemas.data.models.PokemonDTO
 import com.atsistemas.data.remote.IPokemonAPI
 import com.atsistemas.data.remote.ResultHandler
+import com.atsistemas.data.remote.models.toPokemonDTO
 
 class PokemonRepository(
     private val api: IPokemonAPI,
@@ -33,7 +34,7 @@ class PokemonRepository(
     }
 
     fun getProfileData(): PokemonDTO? {
-        return pokemonDatabase.pokemonDao().getPokemonById(1)
+        return pokemonDatabase.pokemonDao().getPokemonByName("bulbasaur")
     }
 
 
@@ -58,7 +59,7 @@ class PokemonRepository(
         return when (val result = safeApiCall { api.getPokemon(name) }) {
             is ResultHandler.Success -> {
                 result.data.let {
-                    pokemonDatabase.pokemonDao().save(it)
+                    pokemonDatabase.pokemonDao().save(it.toPokemonDTO())
                 }
                 ResultHandler.Success("Successful update")
             }

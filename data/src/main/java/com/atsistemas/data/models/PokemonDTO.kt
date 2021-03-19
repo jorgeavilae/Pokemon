@@ -19,20 +19,14 @@ package com.atsistemas.data.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.atsistemas.data.commons.Constants
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
 @Entity(tableName = Constants.TABLE_POKEMON)
 data class PokemonDTO(
-    val id: Int?,
     @PrimaryKey val name: String,
-    val height: Int?,
-    val weight: Int?
-)
-
-/* Holder de la lista de pokemons */
-@JsonClass(generateAdapter = true)
-data class Generation (
-    @Json(name = "pokemon_species") val pokemons: List<PokemonDTO>
+    val order: Int,
+    val height: Int,
+    val weight: Int,
+    val imgUrlOfficial: String,
+    val imgUrlMini: String,
+    val imgUrlPaint: String
 )

@@ -24,7 +24,6 @@ import com.atsistemas.data.remote.IPokemonAPI
 import com.atsistemas.data.remote.interceptors.MockInterceptor
 import com.atsistemas.data.repositories.PokemonRepository
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -62,7 +61,6 @@ fun provideOkHttpClient(mockInterceptor: Interceptor?): OkHttpClient {
 fun provideMoshi(): Moshi =
     Moshi.Builder()
         //.add()
-        .addLast(KotlinJsonAdapterFactory())
         .build()
 
 fun provideRetrofit(httpClient: OkHttpClient, moshi: Moshi): Retrofit =
