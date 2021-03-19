@@ -36,4 +36,19 @@ data class PokemonDTO(
     val specialAttack: Int,
     val specialDefense: Int,
     val speed: Int
-)
+) {
+    override fun toString(): String {
+        return "PokemonDTO(\n" +
+                "\tname='$name', \n" +
+                "\torder=$order, \n" +
+                "\theight=$height, \n" +
+                "\tweight=$weight, \n" +
+                "\tspecie='$specie', \n" +
+                "\timgUrlOfficial='$imgUrlOfficial', \n" +
+                "\timgUrlMini='$imgUrlMini', \n" +
+                "\timgUrlPaint='$imgUrlPaint', \n" +
+                "\thp=$hp, attack=$attack, defense=$defense, \n" +
+                "\tspecialAttack=$specialAttack, specialDefense=$specialDefense, \n" +
+                "\tspeed=$speed)"
+    }
+}

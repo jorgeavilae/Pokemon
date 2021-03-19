@@ -39,11 +39,11 @@ class PokemonRepository(
 
 
     //API
-    suspend fun getGeneration(generationId: Int): ResultHandler<String> {
+    suspend fun loadGenerationFromServer(generationId: Int): ResultHandler<String> {
         return when (val result = safeApiCall { api.getGeneration(generationId) }) {
             is ResultHandler.Success -> {
                 result.data.pokemons.forEach {
-                    val resultPokemon = getPokemon(it.name)
+                    val resultPokemon = loadPokemonFromServer(it.name)
                     if (resultPokemon !is ResultHandler.Success)
                         return resultPokemon
                 }
@@ -55,7 +55,7 @@ class PokemonRepository(
         }
     }
 
-    suspend fun getPokemon(name: String): ResultHandler<String> {
+    suspend fun loadPokemonFromServer(name: String): ResultHandler<String> {
         return when (val result = safeApiCall { api.getPokemon(name) }) {
             is ResultHandler.Success -> {
                 result.data.let {

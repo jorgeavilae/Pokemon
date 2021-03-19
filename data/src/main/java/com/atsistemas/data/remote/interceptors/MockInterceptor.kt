@@ -33,18 +33,51 @@ class MockInterceptor(private val application: Application) : Interceptor {
     private val responseSessionError = 401
     private val responseCodeOK = 200
 
+    @Suppress("SpellCheckingInspection")
     override fun intercept(chain: Interceptor.Chain): Response {
         var res: Response? = null
 
-        // Pokemon de la generación 1
+        // Generación 1 de pokemon
         if (res == null)
             res = getMockResponse("generation/1", R.raw.generation_1, chain, responseCodeOK)
 
-        // Un Pokemon
-        // !!! Cuidado con esta dirección que puede coincidir con varias url
+        // Pokemon bulbasaur
+        if (res == null)
+            res = getMockResponse("pokemon/bulbasaur", R.raw.pokemon_001, chain, responseCodeOK)
+        // Pokemon ivysaur
+        if (res == null)
+            res = getMockResponse("pokemon/ivysaur", R.raw.pokemon_002, chain, responseCodeOK)
+        // Pokemon venusaur
+        if (res == null)
+            res = getMockResponse("pokemon/venusaur", R.raw.pokemon_003, chain, responseCodeOK)
+        // Pokemon charmander
+        if (res == null)
+            res = getMockResponse("pokemon/charmander", R.raw.pokemon_004, chain, responseCodeOK)
+        // Pokemon charmeleon
+        if (res == null)
+            res = getMockResponse("pokemon/charmeleon", R.raw.pokemon_005, chain, responseCodeOK)
+        // Pokemon charizard
+        if (res == null)
+            res = getMockResponse("pokemon/charizard", R.raw.pokemon_006, chain, responseCodeOK)
+        // Pokemon squirtle
+        if (res == null)
+            res = getMockResponse("pokemon/squirtle", R.raw.pokemon_007, chain, responseCodeOK)
+        // Pokemon wartortle
+        if (res == null)
+            res = getMockResponse("pokemon/wartortle", R.raw.pokemon_008, chain, responseCodeOK)
+        // Pokemon blastoise
+        if (res == null)
+            res = getMockResponse("pokemon/blastoise", R.raw.pokemon_009, chain, responseCodeOK)
+        // Pokemon pikachu
+        if (res == null)
+            res = getMockResponse("pokemon/pikachu", R.raw.pokemon_010, chain, responseCodeOK)
+
+        // Pokemon por defecto
+        // Esta dirección puede coincidir con varias url.
         // Sería mejor utilizar RegEx en MockInterceptor.getMockResponse()
         if (res == null)
-            res = getMockResponse("pokemon/", R.raw.pokemon_bulbasaur, chain, responseCodeOK)
+            res = getMockResponse("pokemon/", R.raw.pokemon_010, chain, responseCodeOK)
+
 
         return res ?: chain.proceed(chain.request())
     }

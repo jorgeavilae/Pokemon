@@ -31,7 +31,7 @@ class ListViewModel(private val repository: PokemonRepository) : BaseViewModel()
 
     fun fetchData() {
         viewModelScope.launch (Dispatchers.IO) {
-            val result = repository.getGeneration(1)
+            val result = repository.loadGenerationFromServer(1)
 
             //todo show in fragment
             Log.d("fetchData: Result", result.toString())
