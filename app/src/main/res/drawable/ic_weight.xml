@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<!--
   ~    Copyright 2021 Jorge Ávila Estévez
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,15 +14,12 @@
   ~    limitations under the License.
   -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <gradient
-        android:angle="270"
-        android:centerColor="@color/transparent"
-        android:endColor="@color/light_red"
-        android:centerY="0.55"
-        android:startColor="@color/transparent"/>
-    <stroke
-        android:width="2dp"
-        android:color="@color/almost_white" />
-    <corners android:radius="10dp" />
-</shape>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="@dimen/textSizeM"
+    android:height="@dimen/textSizeM"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+    <path
+        android:fillColor="@color/textColorLight"
+        android:pathData="m20,6c0,2.2091 -1.7909,4 -4,4 -2.2091,0 -4,-1.7909 -4,-4 0,-2.2091 1.7909,-4 4,-4 2.2091,0 4,1.7909 4,4zM30,32 L26,10 16,10 6,10 2,32z" />
+</vector>

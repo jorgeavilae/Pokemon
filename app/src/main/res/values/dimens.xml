@@ -22,12 +22,13 @@
     <!-- Pokemon item list -->
     <dimen name="item_container_margin">8dp</dimen>
     <dimen name="item_container_padding">8dp</dimen>
-    <dimen name="item_text_margin_outer">24dp</dimen>
-    <dimen name="item_text_margin_inner">16dp</dimen>
+    <dimen name="item_image_padding">16dp</dimen>
+    <dimen name="item_text_margin_outer">16dp</dimen>
+    <dimen name="item_text_margin_inner">4dp</dimen>
 
     <!-- Text sizes -->
-    <dimen name="textSizeXXXL">20sp</dimen>
-    <dimen name="textSizeXXL">18sp</dimen>
+    <dimen name="textSizeXXXL">24sp</dimen>
+    <dimen name="textSizeXXL">20sp</dimen>
     <dimen name="textSizeXL">16sp</dimen>
     <dimen name="textSizeL">14sp</dimen>
     <dimen name="textSizeM">12sp</dimen>

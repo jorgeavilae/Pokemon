@@ -26,4 +26,5 @@
 
     <color name="almost_white">#e0e0e0</color>
     <color name="light_red">#FF8A80</color>
+    <color name="transparent">#00000000</color>
 </resources>
