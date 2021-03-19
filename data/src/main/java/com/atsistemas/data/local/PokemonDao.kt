@@ -29,12 +29,12 @@ interface PokemonDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(pokemon: PokemonDTO)
     
-    @Query("SELECT * FROM $TABLE_POKEMON")
+    @Query("SELECT * FROM $TABLE_POKEMON ORDER BY `order` ASC")
     fun load(): LiveData<List<PokemonDTO>>
     
     @Query("DELETE FROM $TABLE_POKEMON")
     fun deleteAll()
     
-    @Query("SELECT * FROM  $TABLE_POKEMON WHERE name = :pokemonName")
+    @Query("SELECT * FROM  $TABLE_POKEMON WHERE `name` = :pokemonName")
     fun getPokemonByName(pokemonName: String) : PokemonDTO?
 }
