@@ -21,9 +21,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.atsistemas.data.commons.Constants.DATABASE_NAME
-import com.atsistemas.data.models.Pokemon
+import com.atsistemas.data.models.PokemonDTO
 
-@Database(entities = [Pokemon::class], version = 2, exportSchema = false)
+@Database(entities = [PokemonDTO::class], version = 2, exportSchema = false)
 abstract class PokemonDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
 

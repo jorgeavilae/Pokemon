@@ -38,6 +38,7 @@ class ListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
+        binding.buttonList.setOnClickListener { listViewModel.fetchData() }
         return binding.root
     }
 
@@ -45,11 +46,6 @@ class ListFragment : BaseFragment() {
         listViewModel.pokemons.observe(viewLifecycleOwner) {
             binding.textList.text = it.toString()
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        listViewModel.fetchData()
     }
 
     override fun onDestroyView() {

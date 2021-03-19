@@ -23,14 +23,16 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Generation (
-    @Json(name = "pokemon_species") val pokemons: List<Pokemon>
-)
-
 @Entity(tableName = Constants.TABLE_POKEMON)
-data class Pokemon(
+data class PokemonDTO(
     val id: Int?,
     @PrimaryKey val name: String,
     val height: Int?,
     val weight: Int?
+)
+
+/* Holder de la lista de pokemons */
+@JsonClass(generateAdapter = true)
+data class Generation (
+    @Json(name = "pokemon_species") val pokemons: List<PokemonDTO>
 )

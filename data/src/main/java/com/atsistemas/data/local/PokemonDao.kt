@@ -22,19 +22,19 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.atsistemas.data.commons.Constants.TABLE_POKEMON
-import com.atsistemas.data.models.Pokemon
+import com.atsistemas.data.models.PokemonDTO
 
 @Dao
 interface PokemonDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(pokemon: Pokemon)
+    fun save(pokemon: PokemonDTO)
     
     @Query("SELECT * FROM $TABLE_POKEMON")
-    fun load(): LiveData<List<Pokemon>>
+    fun load(): LiveData<List<PokemonDTO>>
     
     @Query("DELETE FROM $TABLE_POKEMON")
     fun deleteAll()
     
     @Query("SELECT * FROM  $TABLE_POKEMON WHERE id = :pokemonId")
-    fun getPokemonById(pokemonId: Int) : Pokemon?
+    fun getPokemonById(pokemonId: Int) : PokemonDTO?
 }

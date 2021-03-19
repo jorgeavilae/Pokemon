@@ -19,7 +19,7 @@ package com.atsistemas.pokemon.main_activity.list.vm
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.atsistemas.data.models.Pokemon
+import com.atsistemas.data.models.PokemonDTO
 import com.atsistemas.data.repositories.PokemonRepository
 import com.atsistemas.pokemon.commons.BaseViewModel
 import kotlinx.coroutines.Dispatchers
@@ -27,11 +27,13 @@ import kotlinx.coroutines.launch
 
 class ListViewModel(private val repository: PokemonRepository) : BaseViewModel() {
 
-    val pokemons: LiveData<List<Pokemon>> = repository.pokemons
+    val pokemons: LiveData<List<PokemonDTO>> = repository.pokemons
 
     fun fetchData() {
         viewModelScope.launch (Dispatchers.IO) {
             val result = repository.getGeneration(1)
+
+            //todo show in fragment
             Log.d("fetchData: Result", result.toString())
         }
     }

@@ -19,7 +19,7 @@ package com.atsistemas.data.repositories
 import androidx.lifecycle.LiveData
 import com.atsistemas.data.commons.BaseRepository
 import com.atsistemas.data.local.PokemonDatabase
-import com.atsistemas.data.models.Pokemon
+import com.atsistemas.data.models.PokemonDTO
 import com.atsistemas.data.remote.IPokemonAPI
 import com.atsistemas.data.remote.ResultHandler
 
@@ -28,11 +28,11 @@ class PokemonRepository(
     private val pokemonDatabase: PokemonDatabase
 ) : BaseRepository() {
 
-    val pokemons: LiveData<List<Pokemon>> by lazy {
+    val pokemons: LiveData<List<PokemonDTO>> by lazy {
         pokemonDatabase.pokemonDao().load()
     }
 
-    fun getProfileData(): Pokemon? {
+    fun getProfileData(): PokemonDTO? {
         return pokemonDatabase.pokemonDao().getPokemonById(1)
     }
 

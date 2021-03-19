@@ -17,7 +17,7 @@
 package com.atsistemas.data.remote
 
 import com.atsistemas.data.models.Generation
-import com.atsistemas.data.models.Pokemon
+import com.atsistemas.data.models.PokemonDTO
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -29,5 +29,5 @@ interface IPokemonAPI {
 
     // https://pokeapi.co/api/v2/pokemon/bulbasaur
     @GET("pokemon/{name}")
-    suspend fun getPokemon(@Path("name") name: String): Response<Pokemon>
+    suspend fun getPokemon(@Path("name") name: String): Response<PokemonDTO>
 }
