@@ -19,4 +19,11 @@ package com.atsistemas.data.commons
 object Constants {
     const val DATABASE_NAME = "pokemon_database"
     const val TABLE_POKEMON = "pokemon_table"
+
+    const val REMOTE_JSON_STAT_HP = "hp"
+    const val REMOTE_JSON_STAT_ATTACK = "attack"
+    const val REMOTE_JSON_STAT_DEFENSE = "defense"
+    const val REMOTE_JSON_STAT_SPECIAL_ATTACK = "special-attack"
+    const val REMOTE_JSON_STAT_SPECIAL_DEFENSE = "special-defense"
+    const val REMOTE_JSON_STAT_SPEED = "speed"
 }

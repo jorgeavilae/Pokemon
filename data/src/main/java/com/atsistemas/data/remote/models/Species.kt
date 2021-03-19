@@ -14,26 +14,21 @@
  *    limitations under the License.
  */
 
-package com.atsistemas.data.models
+package com.atsistemas.data.remote.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.atsistemas.data.commons.Constants
+import com.squareup.moshi.JsonClass
 
-@Entity(tableName = Constants.TABLE_POKEMON)
-data class PokemonDTO(
-    @PrimaryKey val name: String,
-    val order: Int,
-    val height: Int,
-    val weight: Int,
-    val specie: String,
-    val imgUrlOfficial: String,
-    val imgUrlMini: String,
-    val imgUrlPaint: String,
-    val hp: Int,
-    val attack: Int,
-    val defense: Int,
-    val specialAttack: Int,
-    val specialDefense: Int,
-    val speed: Int
+
+/*
+* La especie se guarda bajo "species" con un nombre y una url con más datos
+*
+  "species":{
+    "name":"bulbasaur",
+    "url":"https://pokeapi.co/api/v2/pokemon-species/1/"
+  }
+ * */
+@JsonClass(generateAdapter = true)
+data class Species(
+    val name: String,
+    val url: String
 )

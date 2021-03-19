@@ -22,6 +22,7 @@ import com.atsistemas.data.BuildConfig
 import com.atsistemas.data.local.PokemonDatabase
 import com.atsistemas.data.remote.IPokemonAPI
 import com.atsistemas.data.remote.interceptors.MockInterceptor
+import com.atsistemas.data.remote.models.StatsAdapter
 import com.atsistemas.data.repositories.PokemonRepository
 import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
@@ -60,7 +61,7 @@ fun provideOkHttpClient(mockInterceptor: Interceptor?): OkHttpClient {
 
 fun provideMoshi(): Moshi =
     Moshi.Builder()
-        //.add()
+        .add(StatsAdapter())
         .build()
 
 fun provideRetrofit(httpClient: OkHttpClient, moshi: Moshi): Retrofit =
@@ -76,5 +77,8 @@ fun providePokemonApi(retrofit: Retrofit): IPokemonAPI =
 fun providePokemonDatabase(application: Application): PokemonDatabase =
     PokemonDatabase.getInstance(application)
 
-fun providePokemonRepository(retrofit: IPokemonAPI, pokemonDatabase: PokemonDatabase): PokemonRepository =
+fun providePokemonRepository(
+    retrofit: IPokemonAPI,
+    pokemonDatabase: PokemonDatabase
+): PokemonRepository =
     PokemonRepository(retrofit, pokemonDatabase)

@@ -16,39 +16,12 @@
 
 package com.atsistemas.data.remote.models
 
-import com.atsistemas.data.models.PokemonDTO
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-// Data classes para mapear el esquema JSON
 
-/* Holder de la lista de pokemons */
-@JsonClass(generateAdapter = true)
-data class Generation (
-    @Json(name = "pokemon_species") val pokemons: List<Pokemon>
-)
-
-fun Pokemon.toPokemonDTO() = PokemonDTO(
-    name = this.name,
-    order = this.order ?: 0,
-    height = this.height ?: 0,
-    weight = this.weight ?: 0,
-    imgUrlOfficial = this.sprites?.other?.official?.url ?: "",
-    imgUrlMini = this.sprites?.front ?: "",
-    imgUrlPaint = this.sprites?.other?.dream?.url ?: ""
-)
-
-/* Pokemon object */
-@JsonClass(generateAdapter = true)
-data class Pokemon (
-    val name: String,
-    val order: Int?,
-    val height: Int?,
-    val weight: Int?,
-    val sprites: Sprites?
-)
-
-/* Todas las URL de imágenes de un Pokemon se guardan bajo la etiqueta "sprites"
+/*
+* Las diferentes imágenes de un pokemon se guardan como URLs bajo la etiqueta "sprites"
 *
   "sprites":{
     "back_default":"URL_completa",
@@ -85,15 +58,17 @@ data class Pokemon (
 * */
 @JsonClass(generateAdapter = true)
 data class Sprites(
-    @Json(name= "front_default") val front: String?,
+    @Json(name = "front_default") val front: String?,
     val other: OtherSprites
 )
+
 @JsonClass(generateAdapter = true)
 data class OtherSprites(
-    @Json(name= "dream_world") val dream: FrontImageUrl,
-    @Json(name= "official-artwork") val official: FrontImageUrl
+    @Json(name = "dream_world") val dream: FrontImageUrl,
+    @Json(name = "official-artwork") val official: FrontImageUrl
 )
+
 @JsonClass(generateAdapter = true)
 data class FrontImageUrl(
-    @Json(name= "front_default") val url: String?
+    @Json(name = "front_default") val url: String?
 )

@@ -34,7 +34,7 @@ class PokemonRepository(
     }
 
     fun getProfileData(): PokemonDTO? {
-        return pokemonDatabase.pokemonDao().getPokemonByName("bulbasaur")
+        return pokemonDatabase.pokemonDao().getPokemonByName("Bulbasaur")
     }
 
 
