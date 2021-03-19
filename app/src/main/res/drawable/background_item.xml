@@ -1,4 +1,4 @@
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~    Copyright 2021 Jorge Ávila Estévez
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +14,14 @@
   ~    limitations under the License.
   -->
 
-<resources>
-    <string name="app_name">Pokemon</string>
-    <string name="title_list">List</string>
-    <string name="title_profile">Profile</string>
-    <string name="pokemon_image_content_description">Image of a Pokemon</string>
-    <string name="background_image_content_description">Gradient used for background</string>
-</resources>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:centerColor="@color/almost_white"
+        android:centerY="0.75"
+        android:endColor="@color/light_red"
+        android:startColor="@color/white"/>
+    <stroke
+        android:width="2dp"
+        android:color="@color/almost_white" />
+    <corners android:radius="10dp" />
+</shape>
