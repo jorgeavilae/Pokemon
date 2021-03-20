@@ -16,7 +16,7 @@
 
 <resources>
     <string name="app_name">Pokemon</string>
-    <string name="title_list">List</string>
+    <string name="title_list">Pokémon List</string>
     <string name="title_profile">Profile</string>
     <string name="pokemon_front_image_content_description">Front image of a Pokemon</string>
     <string name="pokemon_back_image_content_description">Back image of a Pokemon</string>

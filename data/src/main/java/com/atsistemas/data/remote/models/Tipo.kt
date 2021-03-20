@@ -14,29 +14,37 @@
  *    limitations under the License.
  */
 
-package com.atsistemas.data.models
+package com.atsistemas.data.remote.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.atsistemas.data.commons.Constants
+import com.squareup.moshi.JsonClass
 
-@Entity(tableName = Constants.TABLE_POKEMON)
-data class PokemonDTO(
-    @PrimaryKey val id: Int,
+/*
+* Las tipos de un pokemon se guardan en una lista con este aspecto
+*
+  "types": [
+    {
+      "slot": 1,
+      "type": {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      }
+    },
+    {
+      "slot": 2,
+      "type": {
+        "name": "poison",
+        "url": "https://pokeapi.co/api/v2/type/4/"
+      }
+    }
+  ],
+ */
+@JsonClass(generateAdapter = true)
+data class Tipo(
+    val slot: Int,
+    val type: TipoNombre
+)
+@JsonClass(generateAdapter = true)
+data class TipoNombre(
     val name: String,
-    val order: Int,
-    val height: Int,
-    val weight: Int,
-    val specie: String,
-    val type: String,
-    val imgUrlOfficial: String,
-    val imgUrlMiniFront: String,
-    val imgUrlMiniBack: String,
-    val imgUrlPaint: String,
-    val hp: Int,
-    val attack: Int,
-    val defense: Int,
-    val specialAttack: Int,
-    val specialDefense: Int,
-    val speed: Int
+    val url: String
 )

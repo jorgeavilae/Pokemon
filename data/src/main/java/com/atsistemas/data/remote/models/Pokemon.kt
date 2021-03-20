@@ -31,6 +31,7 @@ data class Pokemon(
     val weight: Int,
     val sprites: Sprites,
     val species: Species,
+    val types: List<Tipo>,
     val stats: FullStats
 )
 
@@ -41,6 +42,7 @@ fun Pokemon.toPokemonDTO() = PokemonDTO(
     height = this.height,
     weight = this.weight,
     specie = this.species.name,
+    type = this.types.joinToString(separator = " - ") { it.type.name },
     imgUrlOfficial = this.sprites.other.official.url ?: "",
     imgUrlMiniFront = this.sprites.front ?: "",
     imgUrlMiniBack = this.sprites.back ?: "",

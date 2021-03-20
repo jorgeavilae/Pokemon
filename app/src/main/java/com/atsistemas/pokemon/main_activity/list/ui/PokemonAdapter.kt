@@ -73,7 +73,7 @@ class PokemonAdapter(private val cellClickListener: CellClickListener) :
                 .into(binding.itemFront)
 
             binding.itemName.text = pokemonDTO.name
-            binding.itemSpecie.text = pokemonDTO.specie
+            binding.itemType.text = pokemonDTO.type
             binding.itemWeight.text = pokemonDTO.weight.toString()
 
             this.itemView.setOnClickListener {
@@ -94,7 +94,7 @@ class PokemonAdapter(private val cellClickListener: CellClickListener) :
 
                 /* Swatch tiene un color para cuerpo de texto con el contraste suficiente */
                 palette.dominantSwatch?.bodyTextColor?.let { colorSubtitle ->
-                    binding.itemSpecie.setTextColor(colorSubtitle)
+                    binding.itemType.setTextColor(colorSubtitle)
                     binding.itemWeight.setTextColor(colorSubtitle)
 
                     /* Drawable comparte su estado entre todos los Drawables.

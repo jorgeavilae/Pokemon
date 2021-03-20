@@ -67,7 +67,7 @@
         android:layout_marginStart="@dimen/item_text_margin_outer"
         android:layout_marginBottom="@dimen/item_text_margin_inner"
         android:fontFamily="sans-serif-smallcaps"
-        app:layout_constraintBottom_toTopOf="@id/item_specie"
+        app:layout_constraintBottom_toTopOf="@id/item_type"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
@@ -81,15 +81,15 @@
         android:layout_marginEnd="@dimen/item_text_margin_close"
         android:contentDescription="@string/leaf_icon"
         android:src="@drawable/ic_leaf"
-        app:layout_constraintBottom_toBottomOf="@id/item_specie"
-        app:layout_constraintEnd_toStartOf="@id/item_specie"
+        app:layout_constraintBottom_toBottomOf="@id/item_type"
+        app:layout_constraintEnd_toStartOf="@id/item_type"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/item_specie" />
+        app:layout_constraintTop_toTopOf="@id/item_type" />
 
     <TextView
-        android:id="@+id/item_specie"
+        android:id="@+id/item_type"
         style="@style/FontRegular.M.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
         android:src="@drawable/ic_weight"
         app:layout_constraintBottom_toBottomOf="@id/item_weight"
         app:layout_constraintEnd_toStartOf="@id/item_weight"
-        app:layout_constraintStart_toEndOf="@id/item_specie"
+        app:layout_constraintStart_toEndOf="@id/item_type"
         app:layout_constraintTop_toTopOf="@id/item_weight" />
 
     <TextView
@@ -117,7 +117,7 @@
         style="@style/FontRegular.M.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBaseline_toBaselineOf="@id/item_specie"
+        app:layout_constraintBaseline_toBaselineOf="@id/item_type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_ic_weight"
         tools:text="84" />
