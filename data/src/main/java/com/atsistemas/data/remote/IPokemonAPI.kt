@@ -29,5 +29,9 @@ interface IPokemonAPI {
 
     // https://pokeapi.co/api/v2/pokemon/bulbasaur
     @GET("pokemon/{name}")
-    suspend fun getPokemon(@Path("name") name: String): Response<Pokemon>
+    suspend fun getPokemonByName(@Path("name") name: String): Response<Pokemon>
+
+    // https://pokeapi.co/api/v2/pokemon/1
+    @GET("pokemon/{id}")
+    suspend fun getPokemonById(@Path("id") id: Int): Response<Pokemon>
 }

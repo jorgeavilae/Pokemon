@@ -56,7 +56,7 @@ class PokemonRepository(
     }
 
     suspend fun loadPokemonFromServer(name: String): ResultHandler<String> {
-        return when (val result = safeApiCall { api.getPokemon(name) }) {
+        return when (val result = safeApiCall { api.getPokemonByName(name) }) {
             is ResultHandler.Success -> {
                 result.data.let {
                     pokemonDatabase.pokemonDao().save(it.toPokemonDTO())
@@ -67,5 +67,24 @@ class PokemonRepository(
             is ResultHandler.HttpError -> result
             is ResultHandler.NetworkError -> result
         }
+    }
+
+    suspend fun loadPokemonByIdRangeFromServer(range: IntRange): ResultHandler<String> {
+        for (id in range) {
+            val resultPokemon = when (val result = safeApiCall { api.getPokemonById(id) }) {
+                is ResultHandler.Success -> {
+                    result.data.let {
+                        pokemonDatabase.pokemonDao().save(it.toPokemonDTO())
+                    }
+                    ResultHandler.Success("Successful update")
+                }
+                is ResultHandler.GenericError -> result
+                is ResultHandler.HttpError -> result
+                is ResultHandler.NetworkError -> result
+            }
+            if (resultPokemon !is ResultHandler.Success)
+                return resultPokemon
+        }
+        return ResultHandler.Success("Successful update")
     }
 }
