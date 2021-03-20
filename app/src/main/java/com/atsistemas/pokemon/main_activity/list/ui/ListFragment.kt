@@ -21,7 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.atsistemas.data.models.PokemonDTO
 import com.atsistemas.pokemon.commons.BaseFragment
 import com.atsistemas.pokemon.databinding.FragmentListBinding
@@ -44,13 +44,11 @@ class ListFragment : BaseFragment() {
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
 
-        // todo implementar swipe to refresh
-//        binding.buttonList.setOnClickListener { listViewModel.fetchData() }
         binding.swipeRefreshPokemonList.setOnRefreshListener {
-            binding.swipeRefreshPokemonList.isRefreshing = false
+            listViewModel.fetchData()
         }
 
-        binding.pokemonList.layoutManager = GridLayoutManager(activity, 3)
+        binding.pokemonList.layoutManager = LinearLayoutManager(activity)
         adapter = PokemonAdapter(object : CellClickListener {
             override fun onCellClickListener(pokemonDTO: PokemonDTO) {
                 Toast.makeText(activity,"Pokemon No. ${pokemonDTO.order}", Toast.LENGTH_SHORT).show()
@@ -63,7 +61,8 @@ class ListFragment : BaseFragment() {
 
     override fun loadObservers() {
         listViewModel.pokemons.observe(viewLifecycleOwner) {
-            adapter?.submitList(listOf(it, it, it, it, it).flatten())
+            binding.swipeRefreshPokemonList.isRefreshing = false
+            adapter?.submitList(listOf(it).flatten())
         }
     }
 
