@@ -15,14 +15,3 @@
  */
 
 package com.atsistemas.pokemon.commons
-
-import android.widget.ImageView
-import com.atsistemas.pokemon.R
-import com.bumptech.glide.Glide
-
-fun ImageView.loadImageFromUrl(stringUrl: String) {
-    Glide.with(this)
-        .load(stringUrl)
-        .placeholder(R.drawable.pikachu_mini)
-        .into(this)
-}

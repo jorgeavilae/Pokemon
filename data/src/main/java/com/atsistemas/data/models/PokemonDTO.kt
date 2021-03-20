@@ -22,13 +22,15 @@ import com.atsistemas.data.commons.Constants
 
 @Entity(tableName = Constants.TABLE_POKEMON)
 data class PokemonDTO(
-    @PrimaryKey val name: String,
+    @PrimaryKey val id: Int,
+    val name: String,
     val order: Int,
     val height: Int,
     val weight: Int,
     val specie: String,
     val imgUrlOfficial: String,
-    val imgUrlMini: String,
+    val imgUrlMiniFront: String,
+    val imgUrlMiniBack: String,
     val imgUrlPaint: String,
     val hp: Int,
     val attack: Int,
@@ -36,19 +38,4 @@ data class PokemonDTO(
     val specialAttack: Int,
     val specialDefense: Int,
     val speed: Int
-) {
-    override fun toString(): String {
-        return "PokemonDTO(\n" +
-                "\tname='$name', \n" +
-                "\torder=$order, \n" +
-                "\theight=$height, \n" +
-                "\tweight=$weight, \n" +
-                "\tspecie='$specie', \n" +
-                "\timgUrlOfficial='$imgUrlOfficial', \n" +
-                "\timgUrlMini='$imgUrlMini', \n" +
-                "\timgUrlPaint='$imgUrlPaint', \n" +
-                "\thp=$hp, attack=$attack, defense=$defense, \n" +
-                "\tspecialAttack=$specialAttack, specialDefense=$specialDefense, \n" +
-                "\tspeed=$speed)"
-    }
-}
+)

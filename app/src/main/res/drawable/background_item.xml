@@ -16,13 +16,10 @@
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient
-        android:angle="270"
-        android:centerColor="@color/transparent"
-        android:endColor="@color/light_red"
-        android:centerY="0.55"
-        android:startColor="@color/transparent"/>
-    <stroke
-        android:width="2dp"
-        android:color="@color/almost_white" />
+        android:angle="0"
+        android:centerColor="@color/pokemon_yellow_almost_transparent"
+        android:centerY="0.7"
+        android:endColor="@color/pokemon_yellow_almost_transparent"
+        android:startColor="@color/pokemon_yellow" />
     <corners android:radius="10dp" />
 </shape>

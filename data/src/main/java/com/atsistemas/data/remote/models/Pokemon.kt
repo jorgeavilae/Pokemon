@@ -24,6 +24,7 @@ import java.util.*
 /* Pokemon object from server */
 @JsonClass(generateAdapter = true)
 data class Pokemon(
+    val id: Int,
     val name: String,
     val order: Int,
     val height: Int,
@@ -34,13 +35,15 @@ data class Pokemon(
 )
 
 fun Pokemon.toPokemonDTO() = PokemonDTO(
+    id = this.id,
     name = this.name.capitalize(Locale.getDefault()),
     order = this.order,
     height = this.height,
     weight = this.weight,
     specie = this.species.name,
     imgUrlOfficial = this.sprites.other.official.url ?: "",
-    imgUrlMini = this.sprites.front ?: "",
+    imgUrlMiniFront = this.sprites.front ?: "",
+    imgUrlMiniBack = this.sprites.back ?: "",
     imgUrlPaint = this.sprites.other.dream.url ?: "",
     hp = this.stats.hp,
     attack = this.stats.attack,

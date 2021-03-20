@@ -40,26 +40,25 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="FontRegular.M" parent="FontRegular">
-        <item name="android:textSize">@dimen/textSizeM</item>
-    </style>
-
     <style name="FontRegularBold.XL" parent="FontRegularBold">
         <item name="android:textSize">@dimen/textSizeXL</item>
     </style>
 
-    <style name="FontRegular.M.Subtitle" parent="FontRegular.M">
-        <item name="android:textColor">@color/textColorLight</item>
+    <style name="FontRegular.M" parent="FontRegular">
         <item name="android:textSize">@dimen/textSizeM</item>
     </style>
 
-    <style name="FontRegular.XXL" parent="FontRegular">
-        <item name="android:textSize">@dimen/textSizeXXL</item>
+    <style name="FontRegular.M.Subtitle" parent="FontRegular.M">
+        <item name="android:textColor">@color/textColorLight</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="FontRegular.XXL.Title" parent="FontRegular.XXL">
-        <item name="android:textSize">@dimen/textSizeXXL</item>
-        <item name="android:fontFamily">sans-serif-condensed-light</item>
+    <style name="FontRegular.XXXL" parent="FontRegular">
+        <item name="android:textSize">@dimen/textSizeXXXL</item>
+    </style>
+
+    <style name="FontRegular.XXXL.Title" parent="FontRegular.XXXL">
+        <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
 
 

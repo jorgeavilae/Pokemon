@@ -59,6 +59,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Sprites(
     @Json(name = "front_default") val front: String?,
+    @Json(name = "back_default") val back: String?,
     val other: OtherSprites
 )
 

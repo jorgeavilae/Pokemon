@@ -19,30 +19,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/item_container_margin"
-    tools:layout_height="150dp"
-    tools:layout_width="150dp">
-
-    <ImageView
-        android:id="@+id/item_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/pokemon_image_content_description"
-        android:paddingStart="@dimen/item_image_padding"
-        android:paddingEnd="@dimen/item_image_padding"
-        android:paddingBottom="@dimen/item_image_padding"
-        android:src="@drawable/pikachu_official"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/pikachu_official" />
+    android:layout_margin="@dimen/item_container_margin">
 
     <ImageView
         android:id="@+id/item_background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:contentDescription="@string/background_image_content_description"
         android:src="@drawable/background_item"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,45 +33,93 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/background_item" />
 
+    <ImageView
+        android:id="@+id/item_front"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/item_container_padding"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/pokemon_front_image_content_description"
+        android:src="@drawable/pikachu_mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/item_back"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/pikachu_mini" />
+
+    <ImageView
+        android:id="@+id/item_back"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/item_container_padding"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/pokemon_back_image_content_description"
+        android:src="@drawable/pikachu_mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/pikachu_mini" />
+
     <TextView
         android:id="@+id/item_name"
-        style="@style/FontRegular.XXL.Title"
+        style="@style/FontRegular.XXXL.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/item_text_margin_outer"
         android:layout_marginBottom="@dimen/item_text_margin_inner"
+        android:fontFamily="sans-serif-smallcaps"
         app:layout_constraintBottom_toTopOf="@id/item_specie"
-        app:layout_constraintStart_toStartOf="@id/item_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
         tools:text="Pikachu" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <ImageView
+        android:id="@+id/item_ic_leaf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_text_margin_outer"
+        android:layout_marginEnd="@dimen/item_text_margin_close"
+        android:contentDescription="@string/leaf_icon"
+        android:src="@drawable/ic_leaf"
+        app:layout_constraintBottom_toBottomOf="@id/item_specie"
+        app:layout_constraintEnd_toStartOf="@id/item_specie"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_specie" />
+
+    <TextView
         android:id="@+id/item_specie"
         style="@style/FontRegular.M.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/item_text_margin_outer"
-        android:layout_marginBottom="@dimen/item_text_margin_outer"
-        android:drawablePadding="@dimen/item_text_margin_inner"
-        app:drawableStartCompat="@drawable/ic_leaf"
-        app:layout_constraintBottom_toBottomOf="@id/item_background"
-        app:layout_constraintEnd_toStartOf="@+id/item_weight"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/item_background"
+        android:layout_marginEnd="@dimen/item_text_margin_inner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/item_ic_weight"
+        app:layout_constraintStart_toEndOf="@id/item_ic_leaf"
+        app:layout_constraintTop_toBottomOf="@id/item_name"
         tools:text="pikachu" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <ImageView
+        android:id="@+id/item_ic_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/item_text_margin_close"
+        android:contentDescription="@string/weight_icon"
+        android:src="@drawable/ic_weight"
+        app:layout_constraintBottom_toBottomOf="@id/item_weight"
+        app:layout_constraintEnd_toStartOf="@id/item_weight"
+        app:layout_constraintStart_toEndOf="@id/item_specie"
+        app:layout_constraintTop_toTopOf="@id/item_weight" />
+
+    <TextView
         android:id="@+id/item_weight"
         style="@style/FontRegular.M.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/item_text_margin_inner"
-        android:drawablePadding="@dimen/item_text_margin_inner"
-        app:drawableStartCompat="@drawable/ic_weight"
         app:layout_constraintBaseline_toBaselineOf="@id/item_specie"
-        app:layout_constraintEnd_toEndOf="@+id/item_background"
-        app:layout_constraintStart_toEndOf="@+id/item_specie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_ic_weight"
         tools:text="84" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

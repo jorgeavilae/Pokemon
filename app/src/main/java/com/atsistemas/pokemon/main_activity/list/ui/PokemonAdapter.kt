@@ -16,12 +16,17 @@
 
 package com.atsistemas.pokemon.main_activity.list.ui
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import com.atsistemas.data.models.PokemonDTO
-import com.atsistemas.pokemon.commons.loadImageFromUrl
+import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.databinding.ItemPokemonBinding
+import com.bumptech.glide.Glide
+import com.github.florent37.glidepalette.BitmapPalette
+import com.github.florent37.glidepalette.GlidePalette
 
 class PokemonAdapter(private val cellClickListener: CellClickListener) :
     RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
@@ -52,15 +57,58 @@ class PokemonAdapter(private val cellClickListener: CellClickListener) :
 
     override fun getItemCount(): Int = mValues?.size ?: 0
 
-    inner class ViewHolder(binding: ItemPokemonBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemPokemonBinding) : RecyclerView.ViewHolder(binding.root), BitmapPalette.CallBack {
+
         fun bind(pokemonDTO: PokemonDTO) {
-            binding.itemImage.loadImageFromUrl(pokemonDTO.imgUrlMini)
+            Glide.with(this.itemView)
+                .load(pokemonDTO.imgUrlMiniBack)
+                .placeholder(R.drawable.pikachu_mini)
+                .into(binding.itemBack)
+
+            Glide.with(this.itemView)
+                .load(pokemonDTO.imgUrlMiniFront)
+                .placeholder(R.drawable.pikachu_mini)
+                /* GlidePalette extrae el Palette de una imagen dada su URL. */
+                .listener(GlidePalette.with(pokemonDTO.imgUrlMiniFront).intoCallBack(this))
+                .into(binding.itemFront)
+
             binding.itemName.text = pokemonDTO.name
             binding.itemSpecie.text = pokemonDTO.specie
             binding.itemWeight.text = pokemonDTO.weight.toString()
 
-            binding.root.setOnClickListener {
+            this.itemView.setOnClickListener {
                 cellClickListener.onCellClickListener(pokemonDTO)
+            }
+        }
+
+        override fun onPaletteLoaded(p: Palette?) {
+            p?.let { palette ->
+                /* Palette contiene los colores principales de una imagen */
+                val colorBackground = palette.getDominantColor(Color.WHITE)
+                binding.itemBackground.drawable.setTint(colorBackground)
+
+                /* Swatch tiene un color para títulos con el contraste suficiente */
+                palette.dominantSwatch?.titleTextColor?.let { colorTitle ->
+                    binding.itemName.setTextColor(colorTitle)
+                }
+
+                /* Swatch tiene un color para cuerpo de texto con el contraste suficiente */
+                palette.dominantSwatch?.bodyTextColor?.let { colorSubtitle ->
+                    binding.itemSpecie.setTextColor(colorSubtitle)
+                    binding.itemWeight.setTextColor(colorSubtitle)
+
+                    /* Drawable comparte su estado entre todos los Drawables.
+                     * Cambiar el color de un Drawable los cambia todos.
+                     * Se debe clonar el Drawable (mutate()), cambiarle el estado
+                     * y reasignarlo al ImageView. */
+                    var draw = binding.itemIcLeaf.drawable.mutate()
+                    draw.setTint(colorSubtitle)
+                    binding.itemIcLeaf.setImageDrawable(draw)
+
+                    draw = binding.itemIcWeight.drawable.mutate()
+                    draw.setTint(colorSubtitle)
+                    binding.itemIcWeight.setImageDrawable(draw)
+                }
             }
         }
     }

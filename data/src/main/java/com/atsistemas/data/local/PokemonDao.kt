@@ -35,6 +35,6 @@ interface PokemonDao {
     @Query("DELETE FROM $TABLE_POKEMON")
     fun deleteAll()
     
-    @Query("SELECT * FROM  $TABLE_POKEMON WHERE `name` = :pokemonName")
-    fun getPokemonByName(pokemonName: String) : PokemonDTO?
+    @Query("SELECT * FROM  $TABLE_POKEMON WHERE `id` = :pokemonId")
+    fun getPokemonById(pokemonId: Int) : PokemonDTO?
 }
