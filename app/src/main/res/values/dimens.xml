@@ -27,10 +27,18 @@
     <dimen name="item_text_margin_close">4dp</dimen>
 
     <!-- Text sizes -->
-    <dimen name="textSizeXXXL">24sp</dimen>
-    <dimen name="textSizeXXL">20sp</dimen>
-    <dimen name="textSizeXL">16sp</dimen>
-    <dimen name="textSizeL">14sp</dimen>
-    <dimen name="textSizeM">12sp</dimen>
-    <dimen name="textSizeS">10sp</dimen>
+    <dimen name="textSizeTitle">25sp</dimen>
+    <dimen name="textSizeH1">100sp</dimen>
+    <dimen name="textSizeH2">62sp</dimen>
+    <dimen name="textSizeH3">50sp</dimen>
+    <dimen name="textSizeH4">35sp</dimen>
+    <dimen name="textSizeH5">25sp</dimen>
+    <dimen name="textSizeH5Bigger">28sp</dimen>
+    <dimen name="textSizeH6">21sp</dimen>
+    <dimen name="textSizeS1">17sp</dimen>
+    <dimen name="textSizeS2">15sp</dimen>
+    <dimen name="textSizeBody">16sp</dimen>
+    <dimen name="textSizeButton">14sp</dimen>
+    <dimen name="textSizeCaption">12sp</dimen>
+    <dimen name="textSizeOverlay">10sp</dimen>
 </resources>

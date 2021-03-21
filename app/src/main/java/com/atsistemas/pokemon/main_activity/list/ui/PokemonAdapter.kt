@@ -57,7 +57,8 @@ class PokemonAdapter(private val cellClickListener: CellClickListener) :
 
     override fun getItemCount(): Int = mValues?.size ?: 0
 
-    inner class ViewHolder(private val binding: ItemPokemonBinding) : RecyclerView.ViewHolder(binding.root), BitmapPalette.CallBack {
+    inner class ViewHolder(private val binding: ItemPokemonBinding) :
+        RecyclerView.ViewHolder(binding.root), BitmapPalette.CallBack {
 
         fun bind(pokemonDTO: PokemonDTO) {
             Glide.with(this.itemView)
@@ -74,7 +75,8 @@ class PokemonAdapter(private val cellClickListener: CellClickListener) :
 
             binding.itemName.text = pokemonDTO.name
             binding.itemType.text = pokemonDTO.type
-            binding.itemWeight.text = pokemonDTO.weight.toString()
+            binding.itemWeight.text = this.itemView.context.resources
+                .getString(R.string.item_weight_format, pokemonDTO.weight)
 
             this.itemView.setOnClickListener {
                 cellClickListener.onCellClickListener(pokemonDTO)

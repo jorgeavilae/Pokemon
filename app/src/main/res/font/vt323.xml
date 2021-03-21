@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~    Copyright 2021 Jorge Ávila Estévez
   ~
@@ -14,14 +15,9 @@
   ~    limitations under the License.
   -->
 
-<resources>
-    <string name="app_name">Pokemon</string>
-    <string name="title_list">Pokémon List</string>
-    <string name="title_profile">Profile</string>
-    <string name="pokemon_front_image_content_description">Front image of a Pokemon</string>
-    <string name="pokemon_back_image_content_description">Back image of a Pokemon</string>
-    <string name="background_image_content_description">Gradient used for background</string>
-    <string name="leaf_icon">Leaf Icon</string>
-    <string name="weight_icon">Weight Icon</string>
-    <string name="item_weight_format">%1$.1f</string>
-</resources>
+<font-family xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:fontProviderAuthority="com.google.android.gms.fonts"
+        app:fontProviderCerts="@array/com_google_android_gms_fonts_certs"
+        app:fontProviderPackage="com.google.android.gms"
+        app:fontProviderQuery="VT323">
+</font-family>

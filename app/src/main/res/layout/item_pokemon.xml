@@ -59,15 +59,15 @@
 
     <TextView
         android:id="@+id/item_name"
-        style="@style/FontRegular.XXXL.Title"
+        style="@style/MyFontStyles.Headline5.Bigger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/item_text_margin_outer"
-        android:layout_marginBottom="@dimen/item_text_margin_inner"
-        android:fontFamily="sans-serif-smallcaps"
+        android:layout_marginBottom="@dimen/item_text_margin_close"
         app:layout_constraintBottom_toTopOf="@id/item_type"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Pikachu" />
 
@@ -84,11 +84,12 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/item_type" />
+        app:layout_constraintTop_toTopOf="@id/item_type"
+        app:layout_constraintVertical_bias="0.7" />
 
     <TextView
         android:id="@+id/item_type"
-        style="@style/FontRegular.M.Subtitle"
+        style="@style/MyFontStyles.Body1.AllCaps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/item_text_margin_inner"
@@ -96,23 +97,24 @@
         app:layout_constraintEnd_toStartOf="@+id/item_ic_weight"
         app:layout_constraintStart_toEndOf="@id/item_ic_leaf"
         app:layout_constraintTop_toBottomOf="@id/item_name"
-        tools:text="pikachu" />
+        tools:text="Electric" />
 
     <ImageView
         android:id="@+id/item_ic_weight"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginEnd="@dimen/item_text_margin_close"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/weight_icon"
         android:src="@drawable/ic_weight"
-        app:layout_constraintBottom_toBottomOf="@id/item_weight"
+        app:layout_constraintBottom_toBottomOf="@id/item_ic_leaf"
         app:layout_constraintEnd_toStartOf="@id/item_weight"
         app:layout_constraintStart_toEndOf="@id/item_type"
-        app:layout_constraintTop_toTopOf="@id/item_weight" />
+        app:layout_constraintTop_toTopOf="@id/item_ic_leaf" />
 
     <TextView
         android:id="@+id/item_weight"
-        style="@style/FontRegular.M.Subtitle"
+        style="@style/MyFontStyles.Body1.AllCaps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBaseline_toBaselineOf="@id/item_type"
