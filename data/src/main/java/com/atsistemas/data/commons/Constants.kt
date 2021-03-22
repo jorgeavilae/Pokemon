@@ -26,4 +26,6 @@ object Constants {
     const val REMOTE_JSON_STAT_SPECIAL_ATTACK = "special-attack"
     const val REMOTE_JSON_STAT_SPECIAL_DEFENSE = "special-defense"
     const val REMOTE_JSON_STAT_SPEED = "speed"
+
+    const val TYPE_SEPARATOR = "-"
 }

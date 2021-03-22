@@ -16,9 +16,7 @@
 
 package com.atsistemas.data.remote.models
 
-import com.atsistemas.data.models.PokemonDTO
 import com.squareup.moshi.JsonClass
-import java.util.*
 
 
 /* Pokemon object from server */
@@ -33,24 +31,4 @@ data class Pokemon(
     val species: Species,
     val types: List<Tipo>,
     val stats: FullStats
-)
-
-fun Pokemon.toPokemonDTO() = PokemonDTO(
-    id = this.id,
-    name = this.name.capitalize(Locale.getDefault()),
-    order = this.order,
-    height = this.height/10f,
-    weight = this.weight/10f,
-    specie = this.species.name,
-    type = this.types.joinToString(separator = "-") { it.type.name },
-    imgUrlOfficial = this.sprites.other.official.url ?: "",
-    imgUrlMiniFront = this.sprites.front ?: "",
-    imgUrlMiniBack = this.sprites.back ?: "",
-    imgUrlPaint = this.sprites.other.dream.url ?: "",
-    hp = this.stats.hp,
-    attack = this.stats.attack,
-    defense = this.stats.defense,
-    specialAttack = this.stats.specialAttack,
-    specialDefense = this.stats.specialDefense,
-    speed = this.stats.speed,
 )

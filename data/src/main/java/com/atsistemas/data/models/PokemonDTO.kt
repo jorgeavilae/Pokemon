@@ -18,7 +18,9 @@ package com.atsistemas.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
 import com.atsistemas.data.commons.Constants
+import com.atsistemas.data.utils.PokemonDTOUtils
 
 @Entity(tableName = Constants.TABLE_POKEMON)
 data class PokemonDTO(
@@ -28,7 +30,7 @@ data class PokemonDTO(
     val height: Float,
     val weight: Float,
     val specie: String,
-    val type: String,
+    val types: List<String>,
     val imgUrlOfficial: String,
     val imgUrlMiniFront: String,
     val imgUrlMiniBack: String,
@@ -40,3 +42,22 @@ data class PokemonDTO(
     val specialDefense: Int,
     val speed: Int
 )
+
+/**
+ * Convierte la lista de tipos (Strings) en una sola String, y viceversa, para que pueda ser
+ * manejada por Room.
+ *
+ * Podría hacerse una tabla aparte que relacione cada Pokemon con sus tipos. Pero cada Pokemon
+ * tiene sólo 1 o 2 tipos y la String resultante siempre será menor a los 15 caracteres.
+ * Creo que es más eficiente guardarlo y consultarlo en una sola tabla con un converter,
+ * que usar dos tablas y consultas cruzadas con JOIN.
+ */
+class PokemonListTypesConverter {
+    @TypeConverter
+    fun stringFromListTypes(typesList: List<String>?): String? =
+        typesList?.let { PokemonDTOUtils.convertListTypesToString(it) }
+
+    @TypeConverter
+    fun stringToListTypes(string: String?): List<String>? =
+        string?.let { PokemonDTOUtils.convertStringToListTypes(it) }
+}

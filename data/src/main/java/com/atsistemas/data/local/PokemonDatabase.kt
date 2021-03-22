@@ -20,10 +20,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.atsistemas.data.commons.Constants.DATABASE_NAME
 import com.atsistemas.data.models.PokemonDTO
+import com.atsistemas.data.models.PokemonListTypesConverter
 
 @Database(entities = [PokemonDTO::class], version = 2, exportSchema = false)
+@TypeConverters(PokemonListTypesConverter::class)
 abstract class PokemonDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
 

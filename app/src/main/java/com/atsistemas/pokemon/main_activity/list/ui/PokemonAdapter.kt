@@ -22,6 +22,7 @@ import android.view.ViewGroup
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import com.atsistemas.data.models.PokemonDTO
+import com.atsistemas.data.utils.PokemonDTOUtils
 import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.databinding.ItemPokemonBinding
 import com.bumptech.glide.Glide
@@ -74,7 +75,7 @@ class PokemonAdapter(private val cellClickListener: CellClickListener) :
                 .into(binding.itemFront)
 
             binding.itemName.text = pokemonDTO.name
-            binding.itemType.text = pokemonDTO.type
+            binding.itemType.text = PokemonDTOUtils.convertListTypesToString(pokemonDTO.types)
             binding.itemWeight.text = this.itemView.context.resources
                 .getString(R.string.item_weight_format, pokemonDTO.weight)
 

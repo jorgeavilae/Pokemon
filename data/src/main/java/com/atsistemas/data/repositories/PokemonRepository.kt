@@ -22,7 +22,7 @@ import com.atsistemas.data.local.PokemonDatabase
 import com.atsistemas.data.models.PokemonDTO
 import com.atsistemas.data.remote.IPokemonAPI
 import com.atsistemas.data.remote.ResultHandler
-import com.atsistemas.data.remote.models.toPokemonDTO
+import com.atsistemas.data.utils.PokemonDTOUtils
 
 class PokemonRepository(
     private val api: IPokemonAPI,
@@ -58,9 +58,9 @@ class PokemonRepository(
     suspend fun loadPokemonFromServer(name: String): ResultHandler<String> {
         return when (val result = safeApiCall { api.getPokemonByName(name) }) {
             is ResultHandler.Success -> {
-                result.data.let {
-                    pokemonDatabase.pokemonDao().save(it.toPokemonDTO())
-                }
+                pokemonDatabase.pokemonDao().save(
+                    PokemonDTOUtils.pokemonRemoteToPokemonDTO(result.data)
+                )
                 ResultHandler.Success("Successful update")
             }
             is ResultHandler.GenericError -> result
@@ -73,9 +73,9 @@ class PokemonRepository(
         for (id in range) {
             val resultPokemon = when (val result = safeApiCall { api.getPokemonById(id) }) {
                 is ResultHandler.Success -> {
-                    result.data.let {
-                        pokemonDatabase.pokemonDao().save(it.toPokemonDTO())
-                    }
+                    pokemonDatabase.pokemonDao().save(
+                        PokemonDTOUtils.pokemonRemoteToPokemonDTO(result.data)
+                    )
                     ResultHandler.Success("Successful update")
                 }
                 is ResultHandler.GenericError -> result
