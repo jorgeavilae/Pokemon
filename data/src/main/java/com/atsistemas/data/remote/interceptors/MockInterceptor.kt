@@ -44,35 +44,50 @@ class MockInterceptor(private val application: Application) : Interceptor {
         // Pokemon bulbasaur
         if (res == null)
             res = getMockResponse("pokemon/bulbasaur", R.raw.pokemon_001, chain, responseCodeOK)
+        if (res == null)
+            res = getMockResponse("pokemon/1", R.raw.pokemon_001, chain, responseCodeOK)
         // Pokemon ivysaur
         if (res == null)
             res = getMockResponse("pokemon/ivysaur", R.raw.pokemon_002, chain, responseCodeOK)
+        if (res == null)
+            res = getMockResponse("pokemon/2", R.raw.pokemon_002, chain, responseCodeOK)
         // Pokemon venusaur
         if (res == null)
             res = getMockResponse("pokemon/venusaur", R.raw.pokemon_003, chain, responseCodeOK)
+        if (res == null)
+            res = getMockResponse("pokemon/3", R.raw.pokemon_003, chain, responseCodeOK)
         // Pokemon charmander
         if (res == null)
             res = getMockResponse("pokemon/charmander", R.raw.pokemon_004, chain, responseCodeOK)
+        if (res == null)
+            res = getMockResponse("pokemon/4", R.raw.pokemon_004, chain, responseCodeOK)
         // Pokemon charmeleon
         if (res == null)
             res = getMockResponse("pokemon/charmeleon", R.raw.pokemon_005, chain, responseCodeOK)
+        if (res == null)
+            res = getMockResponse("pokemon/5", R.raw.pokemon_005, chain, responseCodeOK)
         // Pokemon charizard
         if (res == null)
             res = getMockResponse("pokemon/charizard", R.raw.pokemon_006, chain, responseCodeOK)
+        if (res == null)
+            res = getMockResponse("pokemon/6", R.raw.pokemon_006, chain, responseCodeOK)
         // Pokemon squirtle
         if (res == null)
             res = getMockResponse("pokemon/squirtle", R.raw.pokemon_007, chain, responseCodeOK)
+        if (res == null)
+            res = getMockResponse("pokemon/7", R.raw.pokemon_007, chain, responseCodeOK)
         // Pokemon wartortle
         if (res == null)
             res = getMockResponse("pokemon/wartortle", R.raw.pokemon_008, chain, responseCodeOK)
+        if (res == null)
+            res = getMockResponse("pokemon/8", R.raw.pokemon_008, chain, responseCodeOK)
         // Pokemon blastoise
         if (res == null)
             res = getMockResponse("pokemon/blastoise", R.raw.pokemon_009, chain, responseCodeOK)
-        // Pokemon pikachu
         if (res == null)
-            res = getMockResponse("pokemon/pikachu", R.raw.pokemon_010, chain, responseCodeOK)
+            res = getMockResponse("pokemon/9", R.raw.pokemon_009, chain, responseCodeOK)
 
-        // Pokemon por defecto
+        // Pokemon por defecto: pikachu
         // Esta dirección puede coincidir con varias url.
         // Sería mejor utilizar RegEx en MockInterceptor.getMockResponse()
         if (res == null)
