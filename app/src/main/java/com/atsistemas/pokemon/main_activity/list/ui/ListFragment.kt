@@ -25,6 +25,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.atsistemas.data.models.PokemonDTO
 import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.commons.BaseFragment
+import com.atsistemas.pokemon.commons.uicomponents.ErrorDialog
+import com.atsistemas.pokemon.commons.uicomponents.SuccessDialog
 import com.atsistemas.pokemon.databinding.FragmentListBinding
 import com.atsistemas.pokemon.main_activity.list.vm.ListViewModel
 import com.atsistemas.pokemon.utils.SharedPokemonViewModel
@@ -66,8 +68,30 @@ class ListFragment : BaseFragment() {
 
     override fun loadObservers() {
         listViewModel.pokemons.observe(viewLifecycleOwner) {
-            binding.swipeRefreshPokemonList.isRefreshing = false
             adapter?.submitList(listOf(it).flatten())
+        }
+
+        listViewModel.showMessage.observe(viewLifecycleOwner) {
+            successDialog = activity?.let { activity ->
+                SuccessDialog(activity, it)
+            }
+            successDialog?.show()
+        }
+
+        listViewModel.showError.observe(viewLifecycleOwner) {
+            errorDialog = activity?.let { activity ->
+                ErrorDialog(activity, getString(R.string.alert), it, getString(R.string.close)) {
+                    errorDialog?.dismiss()
+                }
+            }
+            errorDialog?.setCancelable(false)
+            errorDialog?.show()
+        }
+
+        listViewModel.isLoading.observe(viewLifecycleOwner) {
+            it?.let { isLoading ->
+                binding.swipeRefreshPokemonList.isRefreshing = isLoading
+            }
         }
     }
 
@@ -76,5 +100,4 @@ class ListFragment : BaseFragment() {
         _binding = null
         adapter = null
     }
-
 }

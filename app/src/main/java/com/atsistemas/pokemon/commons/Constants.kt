@@ -17,4 +17,8 @@
 package com.atsistemas.pokemon.commons
 
 object Constants {
+    // Millis showing Success Dialog
+    const val DIALOG_SUCCESS_SHOW: Long = 2000
+
+    const val NETWORK_ERROR = "Network Error"
 }

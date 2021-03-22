@@ -16,10 +16,10 @@
 
 package com.atsistemas.pokemon.main_activity.list.vm
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.atsistemas.data.models.PokemonDTO
+import com.atsistemas.data.remote.ResultHandler
 import com.atsistemas.data.repositories.PokemonRepository
 import com.atsistemas.pokemon.commons.BaseViewModel
 import kotlinx.coroutines.Dispatchers
@@ -30,11 +30,17 @@ class ListViewModel(private val repository: PokemonRepository) : BaseViewModel()
     val pokemons: LiveData<List<PokemonDTO>> = repository.pokemons
 
     fun fetchData() {
+        setShowLoading(true)
         viewModelScope.launch (Dispatchers.IO) {
-            val result = repository.loadPokemonByIdRangeFromServer(1..50)
-
-            //todo show in fragment
-            Log.d("fetchData: Result", result.toString())
+            when(val result = repository.loadPokemonByIdRangeFromServer(1..50)) {
+                is ResultHandler.Success -> {
+                    setShowMessage(result.data)
+                }
+                else -> {
+                    setShowError(result)
+                }
+            }
+            setShowLoading(false)
         }
     }
 }

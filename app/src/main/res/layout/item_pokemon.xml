@@ -59,11 +59,11 @@
 
     <TextView
         android:id="@+id/item_name"
-        style="@style/MyFontStyles.Headline5.Bigger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/item_text_margin_outer"
         android:layout_marginBottom="@dimen/item_text_margin_close"
+        android:textAppearance="@style/MyFontStyles.Headline5.Bigger"
         app:layout_constraintBottom_toTopOf="@id/item_type"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -89,10 +89,10 @@
 
     <TextView
         android:id="@+id/item_type"
-        style="@style/MyFontStyles.Body1.AllCaps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/item_text_margin_inner"
+        android:textAppearance="@style/MyFontStyles.Subtitle1.AllCaps"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/item_ic_weight"
         app:layout_constraintStart_toEndOf="@id/item_ic_leaf"
@@ -114,9 +114,9 @@
 
     <TextView
         android:id="@+id/item_weight"
-        style="@style/MyFontStyles.Body1.AllCaps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/MyFontStyles.Subtitle1.AllCaps"
         app:layout_constraintBaseline_toBaselineOf="@id/item_type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_ic_weight"

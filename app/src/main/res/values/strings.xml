@@ -16,12 +16,20 @@
 
 <resources>
     <string name="app_name">Pokemon</string>
+
     <string name="title_list">Pokémon List</string>
     <string name="title_profile">Profile</string>
-    <string name="pokemon_front_image_content_description">Front image of a Pokemon</string>
-    <string name="pokemon_back_image_content_description">Back image of a Pokemon</string>
-    <string name="background_image_content_description">Gradient used for background</string>
+
     <string name="leaf_icon">Leaf Icon</string>
     <string name="weight_icon">Weight Icon</string>
     <string name="item_weight_format">%1$.1f</string>
+
+    <string name="alert">Alert</string>
+    <string name="accept">Accept</string>
+    <string name="close">Close</string>
+
+    <!-- Content Description texts -->
+    <string name="pokemon_front_image_content_description">Front image of a Pokemon</string>
+    <string name="pokemon_back_image_content_description">Back image of a Pokemon</string>
+    <string name="background_image_content_description">Gradient used for background</string>
 </resources>

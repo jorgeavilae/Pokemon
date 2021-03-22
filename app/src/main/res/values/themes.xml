@@ -33,13 +33,36 @@
         <item name="android:actionMenuTextColor">@color/textColorDarkRed</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
     </style>
 
+    <!-- Theme para la Toolbar -->
     <style name="Theme.Pokemon.Toolbar" parent="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="android:elevation">4dp</item>
         <item name="android:background">?attr/colorPrimary</item>
         <item name="titleTextAppearance">@style/MyFontStyles.Title</item>
         <item name="titleTextColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <!-- Theme para la Toolbar de un Dialog -->
+    <style name="Theme.Pokemon.Title.Dialog" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:background">@drawable/background_error_dialog_title</item>
+        <item name="android:textAppearance">@style/MyFontStyles.Title</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:layout_gravity">center_vertical|start</item>
+        <item name="android:padding">@dimen/dialog_text_margin_outer</item>
+    </style>
+
+    <!-- Animation para el SuccessDialog -->
+    <style name="SuccessDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_right</item>
+        <item name="android:interpolator">@android:anim/accelerate_interpolator</item>
+    </style>
+    <!-- Animation para el ErrorDialog -->
+    <style name="ErrorDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+        <item name="android:interpolator">@android:anim/accelerate_interpolator</item>
     </style>
 </resources>

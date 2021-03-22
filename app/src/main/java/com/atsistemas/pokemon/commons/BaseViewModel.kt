@@ -16,8 +16,49 @@
 
 package com.atsistemas.pokemon.commons
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.atsistemas.data.remote.ResultHandler
+import com.atsistemas.pokemon.utils.SingleLiveEvent
 
 
-abstract class BaseViewModel: ViewModel() {
+@Suppress("MemberVisibilityCanBePrivate")
+abstract class BaseViewModel : ViewModel() {
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
+    private val _showMessage = SingleLiveEvent<String>()
+    val showMessage: LiveData<String>
+        get() = _showMessage
+
+    private val _showError = SingleLiveEvent<String>()
+    val showError: LiveData<String>
+        get() = _showError
+
+    protected fun setShowLoading(isLoading: Boolean) {
+        _isLoading.postValue(isLoading)
+    }
+
+    protected fun setShowMessage(text: String) {
+        _showMessage.postValue(text)
+    }
+
+    protected fun setShowError(errorMessage: String) {
+        _showError.postValue(errorMessage)
+    }
+
+    protected fun setShowError(resultHandler: ResultHandler<*>) {
+        when (resultHandler) {
+            is ResultHandler.HttpError ->
+                setShowError("HttpError ${resultHandler.code}")
+            is ResultHandler.GenericError ->
+                setShowError("GenericError: ${resultHandler.message}")
+            is ResultHandler.NetworkError ->
+                setShowError(Constants.NETWORK_ERROR)
+            else ->
+                setShowError(Constants.NETWORK_ERROR)
+        }
+    }
 }

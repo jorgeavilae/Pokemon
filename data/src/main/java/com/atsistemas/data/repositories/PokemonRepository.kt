@@ -33,12 +33,13 @@ class PokemonRepository(
         pokemonDatabase.pokemonDao().load()
     }
 
+    //todo cambiar
     fun getProfileData(): PokemonDTO? {
         return pokemonDatabase.pokemonDao().getPokemonById(1)
     }
 
-
     //API
+    @Suppress("unused")
     suspend fun loadGenerationFromServer(generationId: Int): ResultHandler<String> {
         return when (val result = safeApiCall { api.getGeneration(generationId) }) {
             is ResultHandler.Success -> {
@@ -55,6 +56,7 @@ class PokemonRepository(
         }
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     suspend fun loadPokemonFromServer(name: String): ResultHandler<String> {
         return when (val result = safeApiCall { api.getPokemonByName(name) }) {
             is ResultHandler.Success -> {
