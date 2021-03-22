@@ -35,7 +35,7 @@ class PokemonAdapter(private val cellClickListener: CellClickListener) :
     private lateinit var binding: ItemPokemonBinding
     private var mValues: List<PokemonDTO>? = null
 
-    fun submitList(values: List<PokemonDTO>) = values.also {
+    fun submitList(values: List<PokemonDTO>?) = values.also {
         mValues = it
         notifyDataSetChanged()
     }

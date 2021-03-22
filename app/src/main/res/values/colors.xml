@@ -37,4 +37,9 @@
     <color name="light_red">#FF8A80</color>
     <color name="transparent">#00000000</color>
     <color name="pokemon_yellow_almost_transparent">#4DFFDE00</color>
+
+    <!-- Colors for SwipeRefreshLayout progress indicator-->
+    <color name="progress_color_1">@color/pokemon_red</color>
+    <color name="progress_color_2">@color/pokemon_yellow</color>
+    <color name="progress_color_3">@color/pokemon_blue</color>
 </resources>

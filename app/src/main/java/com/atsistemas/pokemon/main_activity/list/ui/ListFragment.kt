@@ -50,6 +50,11 @@ class ListFragment : BaseFragment() {
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
 
+        binding.swipeRefreshPokemonList.setColorSchemeResources(
+            R.color.progress_color_1,
+            R.color.progress_color_2,
+            R.color.progress_color_3
+        )
         binding.swipeRefreshPokemonList.setOnRefreshListener {
             listViewModel.fetchData()
         }
@@ -68,7 +73,7 @@ class ListFragment : BaseFragment() {
 
     override fun loadObservers() {
         listViewModel.pokemons.observe(viewLifecycleOwner) {
-            adapter?.submitList(listOf(it).flatten())
+            adapter?.submitList(it)
         }
 
         listViewModel.showMessage.observe(viewLifecycleOwner) {
