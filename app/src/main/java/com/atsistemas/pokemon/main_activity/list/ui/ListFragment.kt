@@ -20,17 +20,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.atsistemas.data.models.PokemonDTO
+import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.commons.BaseFragment
 import com.atsistemas.pokemon.databinding.FragmentListBinding
 import com.atsistemas.pokemon.main_activity.list.vm.ListViewModel
+import com.atsistemas.pokemon.utils.SharedPokemonViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListFragment : BaseFragment() {
 
     private val listViewModel: ListViewModel by viewModel()
+    private val sharedViewModel: SharedPokemonViewModel by sharedViewModel()
 
     private var _binding: FragmentListBinding? = null
     private val binding: FragmentListBinding get() = _binding!!
@@ -51,7 +55,8 @@ class ListFragment : BaseFragment() {
         binding.pokemonList.layoutManager = LinearLayoutManager(activity)
         adapter = PokemonAdapter(object : CellClickListener {
             override fun onCellClickListener(pokemonDTO: PokemonDTO) {
-                Toast.makeText(activity,"Pokemon No. ${pokemonDTO.order}", Toast.LENGTH_SHORT).show()
+                sharedViewModel.setPokemon(pokemonDTO)
+                findNavController().navigate(R.id.action_navigation_list_to_detailFragment)
             }
         })
         binding.pokemonList.adapter = adapter

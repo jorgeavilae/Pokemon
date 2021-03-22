@@ -14,16 +14,19 @@
  *    limitations under the License.
  */
 
-package com.atsistemas.pokemon.di
+package com.atsistemas.pokemon.utils
 
-import com.atsistemas.pokemon.main_activity.list.vm.ListViewModel
-import com.atsistemas.pokemon.main_activity.profile.vm.ProfileViewModel
-import com.atsistemas.pokemon.utils.SharedPokemonViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.atsistemas.data.models.PokemonDTO
 
-val uiModule = module {
-    viewModel { ListViewModel(get()) }
-    viewModel { ProfileViewModel(get()) }
-    viewModel { SharedPokemonViewModel() }
+class SharedPokemonViewModel: ViewModel() {
+    private val _pokemon = MutableLiveData<PokemonDTO>()
+    val pokemon: LiveData<PokemonDTO>
+        get() = _pokemon
+
+    fun setPokemon(pokemonDTO: PokemonDTO) {
+        _pokemon.value = pokemonDTO
+    }
 }
