@@ -31,5 +31,7 @@
     <!-- Content Description texts -->
     <string name="pokemon_front_image_content_description">Front image of a Pokemon</string>
     <string name="pokemon_back_image_content_description">Back image of a Pokemon</string>
+    <string name="pokemon_official_image_content_description">Official image of a Pokemon</string>
+    <string name="pokemon_paint_image_content_description">Cartoon image of a Pokemon</string>
     <string name="background_image_content_description">Gradient used for background</string>
 </resources>

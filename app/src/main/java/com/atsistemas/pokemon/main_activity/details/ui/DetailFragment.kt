@@ -20,12 +20,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import com.atsistemas.data.utils.PokemonDTOUtils
+import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.commons.BaseFragment
 import com.atsistemas.pokemon.databinding.FragmentDetailBinding
 import com.atsistemas.pokemon.utils.SharedPokemonViewModel
+import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class DetailFragment: BaseFragment() {
+class DetailFragment : BaseFragment() {
 
     private val sharedViewModel: SharedPokemonViewModel by sharedViewModel()
 
@@ -44,9 +48,34 @@ class DetailFragment: BaseFragment() {
     override fun loadObservers() {
         sharedViewModel.pokemon.observe(viewLifecycleOwner) {
             it?.let { pokemonDTO ->
-                binding.detailText.text = "${pokemonDTO.id}. ${pokemonDTO.name} \n $pokemonDTO"
+                loadUrlPngIntoImageView(pokemonDTO.imgUrlMiniFront, binding.detailFront, R.drawable.pikachu_mini)
+                loadUrlPngIntoImageView(pokemonDTO.imgUrlMiniBack, binding.detailBack, R.drawable.pikachu_mini)
+                binding.detailId.text = "ID: ${pokemonDTO.id}"
+                binding.detailName.text = "${pokemonDTO.name}"
+                binding.detailOrder.text = "Order in whole Pokedex: ${pokemonDTO.order}"
+                binding.detailWeight.text = "Weight: ${"%.2f".format(pokemonDTO.weight)} kg"
+                binding.detailHeight.text = "Height: ${"%.2f".format(pokemonDTO.height)} m"
+                binding.detailTypes.text =
+                    "Tipos: ${PokemonDTOUtils.convertListTypesToString(pokemonDTO.types)}"
+                loadUrlPngIntoImageView(pokemonDTO.imgUrlOfficial, binding.detailOfficial, R.drawable.pikachu_official)
+                binding.detailStatHp.text = "HP: ${pokemonDTO.hp}"
+                binding.detailStatAttack.text = "Attack: ${pokemonDTO.attack}"
+                binding.detailStatDefense.text = "Defense: ${pokemonDTO.defense}"
+                binding.detailStatSpAttack.text = "Special Attack: ${pokemonDTO.specialAttack}"
+                binding.detailStatSpDefense.text = "Special Defense: ${pokemonDTO.specialDefense}"
+                binding.detailStatSpeed.text = "Speed: ${pokemonDTO.speed}"
             }
         }
+    }
+
+    private fun loadUrlPngIntoImageView(
+        url: String,
+        imageView: ImageView,
+        placeholderResId: Int? = null
+    ) {
+        val glide = Glide.with(this).load(url)
+        placeholderResId?.let { glide.placeholder(placeholderResId) }
+        glide.into(imageView)
     }
 
     override fun onDestroyView() {

@@ -14,18 +14,119 @@
   ~    limitations under the License.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/detail_text"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/detail_front"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/pokemon_front_image_content_description"
+            tools:src="@drawable/pikachu_mini" />
+
+        <ImageView
+            android:id="@+id/detail_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/pokemon_back_image_content_description"
+            tools:src="@drawable/pikachu_mini" />
+
+        <TextView
+            android:id="@+id/detail_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="ID: 1" />
+
+        <TextView
+            android:id="@+id/detail_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:transitionName="transition_pokemon_name"
+            tools:text="Bulbasaur" />
+
+        <TextView
+            android:id="@+id/detail_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Order in whole Pokedex: 3" />
+
+        <TextView
+            android:id="@+id/detail_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Height: 10,5 m" />
+
+        <TextView
+            android:id="@+id/detail_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Weight: 47.5 kg" />
+
+        <TextView
+            android:id="@+id/detail_types"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Tipos: grass, poison" />
+
+        <ImageView
+            android:id="@+id/detail_official"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/pokemon_official_image_content_description"
+            tools:src="@drawable/pikachu_official" />
+
+        <!-- Stats -->
+        <TextView
+            android:id="@+id/detail_stats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stats"
+            tools:text="Stats" />
+
+        <TextView
+            android:id="@+id/detail_stat_hp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="HP: 34" />
+
+        <TextView
+            android:id="@+id/detail_stat_attack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Attack: 34" />
+
+        <TextView
+            android:id="@+id/detail_stat_defense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Defense: 34" />
+
+        <TextView
+            android:id="@+id/detail_stat_sp_attack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Special Attack: 34" />
+
+        <TextView
+            android:id="@+id/detail_stat_sp_defense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Special Defense: 34" />
+
+        <TextView
+            android:id="@+id/detail_stat_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Speed: 34" />
+    </LinearLayout>
+</ScrollView>
