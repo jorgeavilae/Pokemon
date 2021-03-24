@@ -27,6 +27,7 @@ import com.atsistemas.data.utils.PokemonDTOUtils
 import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.commons.BaseFragment
 import com.atsistemas.pokemon.databinding.FragmentDetailBinding
+import com.atsistemas.pokemon.main_activity.MainActivity
 import com.atsistemas.pokemon.utils.SharedPokemonViewModel
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -69,6 +70,7 @@ class DetailFragment : BaseFragment() {
         sharedViewModel.pokemon.observe(viewLifecycleOwner) {
             it?.let { pokemonDTO ->
                 // todo adecentar
+                (activity as? MainActivity)?.supportActionBar?.title = "${pokemonDTO.name}"
                 loadUrlIntoImageView(pokemonDTO.imgUrlMiniFront, binding.detailFront, R.drawable.pikachu_mini)
                 loadUrlIntoImageView(pokemonDTO.imgUrlMiniBack, binding.detailBack, R.drawable.pikachu_mini)
                 binding.detailId.text = "ID: ${pokemonDTO.id}"
