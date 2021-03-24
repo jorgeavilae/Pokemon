@@ -14,119 +14,180 @@
   ~    limitations under the License.
   -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detail_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:transitionName="transition_pokemon_container"
+    tools:context=".main_activity.details.ui.DetailFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/detail_front"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/pokemon_front_image_content_description"
+        app:layout_constraintBottom_toTopOf="@+id/detail_back"
+        app:layout_constraintEnd_toEndOf="@+id/detail_back"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/pikachu_mini" />
 
-        <ImageView
-            android:id="@+id/detail_front"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/pokemon_front_image_content_description"
-            tools:src="@drawable/pikachu_mini" />
+    <ImageView
+        android:id="@+id/detail_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/pokemon_back_image_content_description"
+        app:layout_constraintBottom_toTopOf="@+id/detail_id"
+        app:layout_constraintEnd_toEndOf="@+id/detail_id"
+        app:layout_constraintTop_toBottomOf="@+id/detail_front"
+        tools:src="@drawable/pikachu_mini" />
 
-        <ImageView
-            android:id="@+id/detail_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/pokemon_back_image_content_description"
-            tools:src="@drawable/pikachu_mini" />
+    <TextView
+        android:id="@+id/detail_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/detail_name"
+        app:layout_constraintEnd_toEndOf="@+id/detail_name"
+        app:layout_constraintTop_toBottomOf="@+id/detail_back"
+        tools:text="ID: 1" />
 
-        <TextView
-            android:id="@+id/detail_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="ID: 1" />
+    <TextView
+        android:id="@+id/detail_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/MyFontStyles.Headline5.Bigger"
+        app:layout_constraintBottom_toTopOf="@+id/detail_order"
+        app:layout_constraintEnd_toEndOf="@+id/detail_order"
+        app:layout_constraintTop_toBottomOf="@+id/detail_id"
+        tools:text="Bulbasaur" />
 
-        <TextView
-            android:id="@+id/detail_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:transitionName="transition_pokemon_name"
-            tools:text="Bulbasaur" />
+    <TextView
+        android:id="@+id/detail_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/detail_height"
+        app:layout_constraintEnd_toEndOf="@+id/detail_height"
+        app:layout_constraintTop_toBottomOf="@+id/detail_name"
+        tools:text="Order in whole Pokedex: 3" />
 
-        <TextView
-            android:id="@+id/detail_order"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Order in whole Pokedex: 3" />
+    <TextView
+        android:id="@+id/detail_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/detail_weight"
+        app:layout_constraintEnd_toEndOf="@+id/detail_weight"
+        app:layout_constraintTop_toBottomOf="@+id/detail_order"
+        tools:text="Height: 10,5 m" />
 
-        <TextView
-            android:id="@+id/detail_height"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Height: 10,5 m" />
+    <TextView
+        android:id="@+id/detail_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/detail_types"
+        app:layout_constraintEnd_toEndOf="@+id/detail_types"
+        app:layout_constraintTop_toBottomOf="@+id/detail_height"
+        tools:text="Weight: 47.5 kg" />
 
-        <TextView
-            android:id="@+id/detail_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Weight: 47.5 kg" />
+    <TextView
+        android:id="@+id/detail_types"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/detail_stats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_weight"
+        tools:text="Tipos: grass, poison" />
 
-        <TextView
-            android:id="@+id/detail_types"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Tipos: grass, poison" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
-        <ImageView
-            android:id="@+id/detail_official"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/pokemon_official_image_content_description"
-            tools:src="@drawable/pikachu_official" />
+    <ImageView
+        android:id="@+id/detail_official"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/pokemon_official_image_content_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/pikachu_official" />
 
-        <!-- Stats -->
-        <TextView
-            android:id="@+id/detail_stats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Stats"
-            tools:text="Stats" />
+    <!-- Stats -->
+    <TextView
+        android:id="@+id/detail_stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stats"
+        app:layout_constraintBottom_toTopOf="@+id/detail_stat_hp"
+        app:layout_constraintEnd_toEndOf="@+id/detail_stat_hp"
+        app:layout_constraintTop_toBottomOf="@id/detail_types"
+        tools:text="Stats" />
 
-        <TextView
-            android:id="@+id/detail_stat_hp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="HP: 34" />
+    <TextView
+        android:id="@+id/detail_stat_hp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/detail_stat_attack"
+        app:layout_constraintEnd_toEndOf="@+id/detail_stat_attack"
+        app:layout_constraintTop_toBottomOf="@+id/detail_stats"
+        tools:text="HP: 34" />
 
-        <TextView
-            android:id="@+id/detail_stat_attack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Attack: 34" />
+    <TextView
+        android:id="@+id/detail_stat_attack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/detail_stat_defense"
+        app:layout_constraintEnd_toEndOf="@+id/detail_stat_defense"
+        app:layout_constraintTop_toBottomOf="@+id/detail_stat_hp"
+        tools:text="Attack: 34" />
 
-        <TextView
-            android:id="@+id/detail_stat_defense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Defense: 34" />
+    <TextView
+        android:id="@+id/detail_stat_defense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/detail_stat_sp_attack"
+        app:layout_constraintEnd_toEndOf="@+id/detail_stat_sp_attack"
+        app:layout_constraintTop_toBottomOf="@+id/detail_stat_attack"
+        tools:text="Defense: 34" />
 
-        <TextView
-            android:id="@+id/detail_stat_sp_attack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Special Attack: 34" />
+    <TextView
+        android:id="@+id/detail_stat_sp_attack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/detail_stat_sp_defense"
+        app:layout_constraintEnd_toEndOf="@+id/detail_stat_sp_defense"
+        app:layout_constraintTop_toBottomOf="@+id/detail_stat_defense"
+        tools:text="Special Attack: 34" />
 
-        <TextView
-            android:id="@+id/detail_stat_sp_defense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Special Defense: 34" />
+    <TextView
+        android:id="@+id/detail_stat_sp_defense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/detail_stat_speed"
+        app:layout_constraintEnd_toEndOf="@+id/detail_stat_speed"
+        app:layout_constraintTop_toBottomOf="@+id/detail_stat_sp_attack"
+        tools:text="Special Defense: 34" />
 
-        <TextView
-            android:id="@+id/detail_stat_speed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Speed: 34" />
-    </LinearLayout>
-</ScrollView>
+    <TextView
+        android:id="@+id/detail_stat_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/detail_front"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_stat_sp_defense"
+        tools:text="Speed: 34" />
+
+</androidx.constraintlayout.widget.ConstraintLayout><!--</ScrollView>-->

@@ -17,10 +17,12 @@
 package com.atsistemas.pokemon.main_activity.details.ui
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.view.doOnPreDraw
 import com.atsistemas.data.utils.PokemonDTOUtils
 import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.commons.BaseFragment
@@ -36,6 +38,16 @@ class DetailFragment : BaseFragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding: FragmentDetailBinding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Establece las animaciones de entrada y salida de este Fragment, declaradas en XML
+        this.sharedElementEnterTransition = TransitionInflater.from(requireContext())
+            .inflateTransition(R.transition.shared_pokemon_details_enter)
+        this.sharedElementReturnTransition = TransitionInflater.from(requireContext())
+            .inflateTransition(R.transition.shared_pokemon_details_return)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,11 +57,19 @@ class DetailFragment : BaseFragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // Aplaza la animación de la transición hasta que los datos se muestren.
+        postponeEnterTransition()
+
+        super.onViewCreated(view, savedInstanceState)
+    }
+
     override fun loadObservers() {
         sharedViewModel.pokemon.observe(viewLifecycleOwner) {
             it?.let { pokemonDTO ->
-                loadUrlPngIntoImageView(pokemonDTO.imgUrlMiniFront, binding.detailFront, R.drawable.pikachu_mini)
-                loadUrlPngIntoImageView(pokemonDTO.imgUrlMiniBack, binding.detailBack, R.drawable.pikachu_mini)
+                // todo adecentar
+                loadUrlIntoImageView(pokemonDTO.imgUrlMiniFront, binding.detailFront, R.drawable.pikachu_mini)
+                loadUrlIntoImageView(pokemonDTO.imgUrlMiniBack, binding.detailBack, R.drawable.pikachu_mini)
                 binding.detailId.text = "ID: ${pokemonDTO.id}"
                 binding.detailName.text = "${pokemonDTO.name}"
                 binding.detailOrder.text = "Order in whole Pokedex: ${pokemonDTO.order}"
@@ -57,21 +77,30 @@ class DetailFragment : BaseFragment() {
                 binding.detailHeight.text = "Height: ${"%.2f".format(pokemonDTO.height)} m"
                 binding.detailTypes.text =
                     "Tipos: ${PokemonDTOUtils.convertListTypesToString(pokemonDTO.types)}"
-                loadUrlPngIntoImageView(pokemonDTO.imgUrlOfficial, binding.detailOfficial, R.drawable.pikachu_official)
+                loadUrlIntoImageView(pokemonDTO.imgUrlOfficial, binding.detailOfficial)
                 binding.detailStatHp.text = "HP: ${pokemonDTO.hp}"
                 binding.detailStatAttack.text = "Attack: ${pokemonDTO.attack}"
                 binding.detailStatDefense.text = "Defense: ${pokemonDTO.defense}"
                 binding.detailStatSpAttack.text = "Special Attack: ${pokemonDTO.specialAttack}"
                 binding.detailStatSpDefense.text = "Special Defense: ${pokemonDTO.specialDefense}"
                 binding.detailStatSpeed.text = "Speed: ${pokemonDTO.speed}"
+
+                // Establece los identificadores de los sharedElements que participan en la animación
+                // de la transición en base al identificador del pokemon mostrado.
+                binding.detailName.transitionName = "transition_pokemon_name_" + pokemonDTO.id
+                binding.detailFront.transitionName = "transition_pokemon_front_" + pokemonDTO.id
+                binding.detailBack.transitionName = "transition_pokemon_back_" + pokemonDTO.id
+
+                // Ahora que los datos se muestran, inicia la animación de la transición
+                (view?.parent as? ViewGroup)?.doOnPreDraw {
+                    startPostponedEnterTransition()
+                }
             }
         }
     }
 
-    private fun loadUrlPngIntoImageView(
-        url: String,
-        imageView: ImageView,
-        placeholderResId: Int? = null
+    private fun loadUrlIntoImageView(
+        url: String, imageView: ImageView, placeholderResId: Int? = null
     ) {
         val glide = Glide.with(this).load(url)
         placeholderResId?.let { glide.placeholder(placeholderResId) }

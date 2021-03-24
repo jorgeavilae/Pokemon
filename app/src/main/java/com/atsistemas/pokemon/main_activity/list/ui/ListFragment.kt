@@ -20,6 +20,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.atsistemas.data.models.PokemonDTO
@@ -33,7 +35,7 @@ import com.atsistemas.pokemon.utils.SharedPokemonViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ListFragment : BaseFragment() {
+class ListFragment : BaseFragment(), CellClickListener {
 
     private val listViewModel: ListViewModel by viewModel()
     private val sharedViewModel: SharedPokemonViewModel by sharedViewModel()
@@ -60,20 +62,27 @@ class ListFragment : BaseFragment() {
         }
 
         binding.pokemonList.layoutManager = LinearLayoutManager(activity)
-        adapter = PokemonAdapter(object : CellClickListener {
-            override fun onCellClickListener(pokemonDTO: PokemonDTO) {
-                sharedViewModel.setPokemon(pokemonDTO)
-                findNavController().navigate(R.id.action_navigation_list_to_detailFragment)
-            }
-        })
+        adapter = PokemonAdapter(this)
         binding.pokemonList.adapter = adapter
 
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // Aplaza la animación de la transición hasta que la lista se muestre.
+        postponeEnterTransition()
+
+        super.onViewCreated(view, savedInstanceState)
+    }
+
     override fun loadObservers() {
         listViewModel.pokemons.observe(viewLifecycleOwner) {
             adapter?.submitList(it)
+
+            // Ahora que la lista muestra los items, inicia la animación de la transición
+            (view?.parent as? ViewGroup)?.doOnPreDraw {
+                startPostponedEnterTransition()
+            }
         }
 
         listViewModel.showMessage.observe(viewLifecycleOwner) {
@@ -104,5 +113,24 @@ class ListFragment : BaseFragment() {
         super.onDestroyView()
         _binding = null
         adapter = null
+    }
+
+    override fun onCellClickListener(viewHolder: PokemonAdapter.ViewHolder, pokemonDTO: PokemonDTO) {
+        sharedViewModel.setPokemon(pokemonDTO)
+
+        // Crea un bundle con los sharedElements que participan en la animación de la transición.
+        val extras = FragmentNavigatorExtras(
+            binding.listContainer to binding.listContainer.transitionName,
+            viewHolder.binding.itemName to viewHolder.binding.itemName.transitionName,
+            viewHolder.binding.itemFront to viewHolder.binding.itemFront.transitionName,
+            viewHolder.binding.itemBack to viewHolder.binding.itemBack.transitionName
+        )
+
+        findNavController().navigate(
+            R.id.action_navigation_list_to_detailFragment,
+            null,
+            null,
+            extras
+        )
     }
 }

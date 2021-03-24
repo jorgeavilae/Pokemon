@@ -28,6 +28,7 @@
     <!-- Pokemon item list -->
     <dimen name="item_container_margin">4dp</dimen>
     <dimen name="item_container_padding">8dp</dimen>
+    <dimen name="item_container_elevation">4dp</dimen>
     <dimen name="item_text_margin_outer">16dp</dimen>
     <dimen name="item_text_margin_inner">8dp</dimen>
     <dimen name="item_text_margin_close">4dp</dimen>

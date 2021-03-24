@@ -58,7 +58,7 @@ class PokemonAdapter(private val cellClickListener: CellClickListener) :
 
     override fun getItemCount(): Int = mValues?.size ?: 0
 
-    inner class ViewHolder(private val binding: ItemPokemonBinding) :
+    inner class ViewHolder(val binding: ItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root), BitmapPalette.CallBack {
 
         fun bind(pokemonDTO: PokemonDTO) {
@@ -80,8 +80,14 @@ class PokemonAdapter(private val cellClickListener: CellClickListener) :
                 .getString(R.string.item_weight_format, pokemonDTO.weight)
 
             this.itemView.setOnClickListener {
-                cellClickListener.onCellClickListener(pokemonDTO)
+                cellClickListener.onCellClickListener(this, pokemonDTO)
             }
+
+            // Establece los identificadores de los sharedElements que participan en la animación
+            // de la transición en base al identificador del pokemon que es único en la lista.
+            binding.itemName.transitionName = "transition_pokemon_name_" + pokemonDTO.id
+            binding.itemFront.transitionName = "transition_pokemon_front_" + pokemonDTO.id
+            binding.itemBack.transitionName = "transition_pokemon_back_" + pokemonDTO.id
         }
 
         override fun onPaletteLoaded(p: Palette?) {
@@ -118,5 +124,5 @@ class PokemonAdapter(private val cellClickListener: CellClickListener) :
 }
 
 interface CellClickListener {
-    fun onCellClickListener(pokemonDTO: PokemonDTO)
+    fun onCellClickListener(viewHolder: PokemonAdapter.ViewHolder, pokemonDTO: PokemonDTO)
 }
