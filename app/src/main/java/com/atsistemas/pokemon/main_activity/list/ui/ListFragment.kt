@@ -69,7 +69,8 @@ class ListFragment : BaseFragment(), CellClickListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // Aplaza la animación de la transición hasta que la lista se muestre.
+        // Aplaza la animación de la transición hasta que la lista se muestre
+        // (ver observer de pokemons en loadObservers()).
         postponeEnterTransition()
 
         super.onViewCreated(view, savedInstanceState)
@@ -80,6 +81,7 @@ class ListFragment : BaseFragment(), CellClickListener {
             adapter?.submitList(it)
 
             // Ahora que la lista muestra los items, inicia la animación de la transición
+            // (postpuesta en onViewCreated())
             (view?.parent as? ViewGroup)?.doOnPreDraw {
                 startPostponedEnterTransition()
             }

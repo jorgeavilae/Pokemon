@@ -59,6 +59,7 @@ class DetailFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Aplaza la animación de la transición hasta que los datos se muestren.
+        // (ver final del observer del pokemon en loadObservers()).
         postponeEnterTransition()
 
         super.onViewCreated(view, savedInstanceState)
@@ -92,6 +93,7 @@ class DetailFragment : BaseFragment() {
                 binding.detailBack.transitionName = "transition_pokemon_back_" + pokemonDTO.id
 
                 // Ahora que los datos se muestran, inicia la animación de la transición
+                // (postpuesta en onViewCreated())
                 (view?.parent as? ViewGroup)?.doOnPreDraw {
                     startPostponedEnterTransition()
                 }
