@@ -9,12 +9,16 @@ La app puede tener de base un ScrollingActivity pero se valorará que sea un Nav
 
 La API será: https://pokeapi.co/docs/v2#pokemon
 
+---
 La práctica dejará bastante flexibilidad a la hora de implementar de diferentes maneras los siguientes puntos:
 
 * En una pantalla se mostrará un listado de al menos 40 Pokémons en el que cada item mostrará su nombre, su foto, su especie y su peso. 
 Al clickar en un item se mostrará un detalle del Pokémon con 4 campos más a elegir.
-* Habrá una segunda pantalla con un perfil de usuario con 4 campos a elegir que deberán de guardarse en persistencia. 
+* Habrá una segunda pantalla con un perfil de usuario con 4 campos a elegir que deberán de guardarse en persistencia.
+  * Idea:
+  * ![search: 'pokemon load save game screen'](https://i.ytimg.com/vi/iF1ik0TDCeI/hqdefault.jpg)
 
+---
 Se valorará:
 
 * Sistema Single Source of Truth si es posible.
