@@ -26,5 +26,5 @@ val dataModule = module {
     single { provideRetrofit(get(), get()) }
     single { providePokemonApi(get()) }
     single { providePokemonDatabase(get()) }
-    single { providePokemonRepository(get(), get()) }
+    single { providePokemonRepository(get(), get(), get()) }
 }

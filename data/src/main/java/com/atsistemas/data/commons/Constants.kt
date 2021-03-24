@@ -28,4 +28,8 @@ object Constants {
     const val REMOTE_JSON_STAT_SPEED = "speed"
 
     const val TYPE_SEPARATOR = "-"
+
+    // Preferences keys
+    const val DATASTORE_NAME = "datastore_pokemon"
+    const val PREFERENCES_NAME_KEY = "preferences_name_key"
 }

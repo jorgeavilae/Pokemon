@@ -78,7 +78,8 @@ fun providePokemonDatabase(application: Application): PokemonDatabase =
     PokemonDatabase.getInstance(application)
 
 fun providePokemonRepository(
+    application: Application,
     retrofit: IPokemonAPI,
     pokemonDatabase: PokemonDatabase
 ): PokemonRepository =
-    PokemonRepository(retrofit, pokemonDatabase)
+    PokemonRepository(application, retrofit, pokemonDatabase)

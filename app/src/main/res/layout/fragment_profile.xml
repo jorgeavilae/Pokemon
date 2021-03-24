@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~    Copyright 2021 Jorge Ávila Estévez
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,17 +21,130 @@
     android:layout_height="match_parent"
     tools:context=".main_activity.profile.ui.ProfileFragment">
 
-    <TextView
-        android:id="@+id/text_profile"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/profile_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@drawable/background_error_dialog"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="ASDASD"
+        android:textAppearance="@style/MyFontStyles.Headline6"
+        app:layout_constraintBottom_toTopOf="@+id/profile_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Ash Ketchup" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/profile_input_name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/profile_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textAppearance="@style/MyFontStyles.Subtitle1"
+            tools:text="Ash Ketchup" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/profile_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@drawable/background_error_dialog"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="ASDASD"
+        android:textAppearance="@style/MyFontStyles.Headline6"
+        app:layout_constraintBottom_toTopOf="@+id/profile_badges"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_input_name"
+        tools:text="Ash Ketchup" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/profile_badges"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@drawable/background_error_dialog"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="ASDASD"
+        android:textAppearance="@style/MyFontStyles.Headline6"
+        app:layout_constraintBottom_toTopOf="@+id/profile_pokedex"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_time"
+        tools:text="Ash Ketchup" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/profile_pokedex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@drawable/background_error_dialog"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="ASDASD"
+        android:textAppearance="@style/MyFontStyles.Headline6"
+        app:layout_constraintBottom_toTopOf="@+id/profile_input_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_badges"
+        tools:text="Ash Ketchup" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/profile_input_time"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/profile_input_badges"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_pokedex">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/profile_input_badges"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/profile_input_pokedex"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_input_time">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/profile_input_pokedex"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_input_badges">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

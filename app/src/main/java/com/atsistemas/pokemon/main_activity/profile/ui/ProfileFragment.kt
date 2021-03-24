@@ -17,10 +17,12 @@
 package com.atsistemas.pokemon.main_activity.profile.ui
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.atsistemas.pokemon.commons.BaseFragment
+import android.view.inputmethod.EditorInfo
+import com.atsistemas.pokemon.commons.*
 import com.atsistemas.pokemon.databinding.FragmentProfileBinding
 import com.atsistemas.pokemon.main_activity.profile.vm.ProfileViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -38,18 +40,62 @@ class ProfileFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+        setEditTextChangeListeners()
+
+        // Show input for this TextView
+        binding.profileName.setOnClickListener {
+            binding.profileInputName.visibility = View.VISIBLE
+            binding.profileInputName.editText?.setText(binding.profileName.text)
+            binding.profileInputName.editText?.requestFocus()
+            (activity as? BaseActivity)?.showKeyboard()
+        }
+        // Hide this input
+        binding.profileInputName.editText?.setOnEditorActionListener { _, actionId, event ->
+            val isDoneOrEnter = (actionId == EditorInfo.IME_ACTION_DONE ||
+                    event.keyCode == KeyEvent.KEYCODE_ENTER ||
+                    event.keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER)
+            return@setOnEditorActionListener if (isDoneOrEnter) {
+                binding.profileInputName.visibility = View.GONE
+                binding.profileInputName.editText?.clearFocus()
+                (activity as? BaseActivity)?.hideKeyboard()
+                true
+            } else {
+                false
+            }
+        }
+
         return binding.root
     }
 
-    override fun loadObservers() {
-        profileViewModel.pokemon.observe(viewLifecycleOwner) {
-            binding.textProfile.text = it?.toString()
+    private fun setEditTextChangeListeners() {
+        // See commons/Extensions.kt
+        binding.profileInputName.editText?.addAfterTextChangedListener {
+            it?.let { inputText ->
+                profileViewModel.setName(inputText.toString())
+            }
+        }
+        binding.profileInputTime.editText?.addAfterTextChangedListener {
+            it?.let { inputText ->
+                profileViewModel.setName(inputText.toString())
+            }
+        }
+        binding.profileInputBadges.editText?.addAfterTextChangedListener {
+            it?.let { inputText ->
+                profileViewModel.setName(inputText.toString())
+            }
+        }
+        binding.profileInputPokedex.editText?.addAfterTextChangedListener {
+            it?.let { inputText ->
+                profileViewModel.setName(inputText.toString())
+            }
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        profileViewModel.fetchData()
+    override fun loadObservers() {
+        profileViewModel.name.observe(viewLifecycleOwner) {
+            binding.profileName.text = it?.toString()
+        }
     }
 
     override fun onDestroyView() {

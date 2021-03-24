@@ -19,3 +19,6 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Exclude fragments for navigation component. (https://stackoverflow.com/a/50378828/4235666)
+-keep class * extends androidx.fragment.app.Fragment{}
