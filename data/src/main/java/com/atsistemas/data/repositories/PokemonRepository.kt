@@ -17,6 +17,7 @@
 package com.atsistemas.data.repositories
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import com.atsistemas.data.commons.BaseRepository
 import com.atsistemas.data.local.PokemonDatabase
 import com.atsistemas.data.local.preferences.ProfilePreferencesWrapper
@@ -89,10 +90,15 @@ class PokemonRepository(
     }
 
     // DATASTORE
-    val preferencesName: LiveData<String> by lazy { profilePreferences.preferencesName }
-    val preferencesTime: LiveData<String> by lazy { profilePreferences.preferencesTime }
-    val preferencesBadges: LiveData<String> by lazy { profilePreferences.preferencesBadges }
-    val preferencesPokedex: LiveData<String> by lazy { profilePreferences.preferencesPokedex }
+    val preferencesName: LiveData<String> = profilePreferences.preferencesName.asLiveData()
+    val preferencesTime: LiveData<String> = profilePreferences.preferencesTime.asLiveData()
+    val preferencesBadges: LiveData<String> = profilePreferences.preferencesBadges.asLiveData()
+    val preferencesPokedex: LiveData<String> = profilePreferences.preferencesPokedex.asLiveData()
+
+    suspend fun getName() = profilePreferences.getName()
+    suspend fun getTime() = profilePreferences.getTime()
+    suspend fun getBadges() = profilePreferences.getBadges()
+    suspend fun getPokedex() = profilePreferences.getPokedex()
 
     suspend fun setName(name: String) = profilePreferences.setName(name)
     suspend fun setTime(time: String) = profilePreferences.setTime(time)

@@ -79,6 +79,10 @@
         <item name="android:textSize">@dimen/textSizeS1</item>
     </style>
 
+    <style name="MyFontStyles.Subtitle1.Bigger" parent="MyFontStyles.Subtitle1">
+        <item name="android:textSize">@dimen/textSizeH6</item>
+    </style>
+
     <style name="MyFontStyles.Subtitle1.AllCaps" parent="MyFontStyles.Subtitle1">
         <item name="android:textAllCaps">true</item>
     </style>

@@ -25,10 +25,10 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
         style="@style/Theme.Pokemon.Toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"/>
+        android:minHeight="?attr/actionBarSize" />
 
     <include layout="@layout/content_nav_fragment" />
 
@@ -36,10 +36,10 @@
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         android:layout_gravity="bottom"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
         android:background="?android:attr/windowBackground"
+        android:minHeight="?attr/actionBarSize"
         app:itemTextAppearanceActive="@style/MyFontStyles.Caption.Bigger"
         app:itemTextAppearanceInactive="@style/MyFontStyles.Caption"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"

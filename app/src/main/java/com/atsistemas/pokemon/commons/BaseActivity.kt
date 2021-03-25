@@ -16,21 +16,7 @@
 
 package com.atsistemas.pokemon.commons
 
-import android.content.Context
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 
 abstract class BaseActivity : AppCompatActivity() {
-
-    fun showKeyboard() {
-        (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
-            toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0)
-        }
-    }
-
-    fun hideKeyboard() {
-        (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
-            toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
-        }
-    }
 }

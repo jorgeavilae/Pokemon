@@ -18,6 +18,12 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fragment_margin_outer">16dp</dimen>
+    <dimen name="fragment_margin_inner">8dp</dimen>
+
+    <!-- Profile fragment -->
+    <dimen name="card_container_elevation">4dp</dimen>
+    <dimen name="card_container_margin">24dp</dimen>
 
     <!-- Dialogs -->
     <dimen name="dialog_container_margin">24dp</dimen>

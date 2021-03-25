@@ -20,28 +20,30 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.atsistemas.data.repositories.PokemonRepository
 import com.atsistemas.pokemon.commons.BaseViewModel
+import com.atsistemas.pokemon.utils.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val repository: PokemonRepository) : BaseViewModel() {
 
-    // Nombre del personaje
     val name: LiveData<String> = repository.preferencesName
+    val time: LiveData<String> = repository.preferencesTime
+    val badges: LiveData<String> = repository.preferencesBadges
+    val pokedex: LiveData<String> = repository.preferencesPokedex
 
-//    // Tiempo jugado
-//    private val _time = MutableLiveData<Long>()
-//    val time: LiveData<Long>
-//        get() = _time
-//
-//    // Medallas de gimnasio obtenidas
-//    private val _badges = MutableLiveData<Int>()
-//    val badges: LiveData<Int>
-//        get() = _badges
-//
-//    // Pokemons de la Pokedex avistados
-//    private val _pokedex = MutableLiveData<Int>()
-//    val pokedex: LiveData<Int>
-//        get() = _pokedex
+    val nameEvent = SingleLiveEvent<String>()
+    val timeEvent = SingleLiveEvent<String>()
+    val badgesEvent = SingleLiveEvent<String>()
+    val pokedexEvent = SingleLiveEvent<String>()
+
+    fun fetchData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            nameEvent.postValue(repository.getName())
+            timeEvent.postValue(repository.getTime())
+            badgesEvent.postValue(repository.getBadges())
+            pokedexEvent.postValue(repository.getPokedex())
+        }
+    }
 
     fun setName(name: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -49,21 +51,21 @@ class ProfileViewModel(private val repository: PokemonRepository) : BaseViewMode
         }
     }
 
-//    fun setTime(time: Long) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            repository.setTime(time)
-//        }
-//    }
-//
-//    fun setBadges(badges: Int) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            repository.setBadges(badges)
-//        }
-//    }
-//
-//    fun setPokedex(pokedex: Int) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            repository.setPokedex(pokedex)
-//        }
-//    }
+    fun setTime(time: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.setTime(time)
+        }
+    }
+
+    fun setBadges(badges: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.setBadges(badges)
+        }
+    }
+
+    fun setPokedex(pokedex: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.setPokedex(pokedex)
+        }
+    }
 }

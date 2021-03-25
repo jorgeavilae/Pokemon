@@ -24,6 +24,11 @@
     <string name="weight_icon">Weight Icon</string>
     <string name="item_weight_format">%1$.1f</string>
 
+    <string name="player">Player</string>
+    <string name="badges">Badges</string>
+    <string name="pokedex">Pokedex</string>
+    <string name="time">Time</string>
+
     <string name="alert">Alert</string>
     <string name="accept">Accept</string>
     <string name="close">Close</string>

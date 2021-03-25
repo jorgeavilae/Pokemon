@@ -22,11 +22,11 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import com.atsistemas.data.commons.Constants
 import com.atsistemas.data.commons.catchPreferencesException
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 
@@ -35,14 +35,15 @@ class ProfilePreferencesWrapper(private val context: Context) {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.DATASTORE_NAME)
 
     // Name
-    val preferencesName: LiveData<String> = context.dataStore.data
+    val preferencesName: Flow<String> = context.dataStore.data
         .catch {
             catchPreferencesException(it)
         }.map { preferences ->
             val nameKey = stringPreferencesKey(Constants.PREFERENCES_NAME_KEY)
             preferences[nameKey] ?: ""
-        }.asLiveData()
+        }
 
+    suspend fun getName() : String = preferencesName.first()
     suspend fun setName(name: String) {
         context.dataStore.edit { preferences ->
             val nameKey = stringPreferencesKey(Constants.PREFERENCES_NAME_KEY)
@@ -51,14 +52,15 @@ class ProfilePreferencesWrapper(private val context: Context) {
     }
 
     // Time
-    val preferencesTime: LiveData<String> = context.dataStore.data
+    val preferencesTime: Flow<String> = context.dataStore.data
         .catch {
             catchPreferencesException(it)
         }.map { preferences ->
             val timeKey = stringPreferencesKey(Constants.PREFERENCES_TIME_KEY)
             preferences[timeKey] ?: ""
-        }.asLiveData()
+        }
 
+    suspend fun getTime() : String = preferencesTime.first()
     suspend fun setTime(time: String) {
         context.dataStore.edit { preferences ->
             val timeKey = stringPreferencesKey(Constants.PREFERENCES_TIME_KEY)
@@ -67,14 +69,15 @@ class ProfilePreferencesWrapper(private val context: Context) {
     }
 
     // Badges
-    val preferencesBadges: LiveData<String> = context.dataStore.data
+    val preferencesBadges: Flow<String> = context.dataStore.data
         .catch {
             catchPreferencesException(it)
         }.map { preferences ->
             val badgesKey = stringPreferencesKey(Constants.PREFERENCES_BADGES_KEY)
             preferences[badgesKey] ?: ""
-        }.asLiveData()
+        }
 
+    suspend fun getBadges() : String = preferencesBadges.first()
     suspend fun setBadges(badges: String) {
         context.dataStore.edit { preferences ->
             val badgesKey = stringPreferencesKey(Constants.PREFERENCES_BADGES_KEY)
@@ -83,14 +86,15 @@ class ProfilePreferencesWrapper(private val context: Context) {
     }
 
     // Pokedex
-    val preferencesPokedex: LiveData<String> = context.dataStore.data
+    val preferencesPokedex: Flow<String> = context.dataStore.data
         .catch {
             catchPreferencesException(it)
         }.map { preferences ->
             val pokedexKey = stringPreferencesKey(Constants.PREFERENCES_POKEDEX_KEY)
             preferences[pokedexKey] ?: ""
-        }.asLiveData()
+        }
 
+    suspend fun getPokedex() : String = preferencesPokedex.first()
     suspend fun setPokedex(pokedex: String) {
         context.dataStore.edit { preferences ->
             val pokedexKey = stringPreferencesKey(Constants.PREFERENCES_POKEDEX_KEY)

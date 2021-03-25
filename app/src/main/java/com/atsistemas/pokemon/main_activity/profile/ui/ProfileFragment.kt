@@ -17,12 +17,11 @@
 package com.atsistemas.pokemon.main_activity.profile.ui
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import com.atsistemas.pokemon.commons.*
+import com.atsistemas.pokemon.commons.BaseFragment
+import com.atsistemas.pokemon.commons.addAfterTextChangedListener
 import com.atsistemas.pokemon.databinding.FragmentProfileBinding
 import com.atsistemas.pokemon.main_activity.profile.vm.ProfileViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,31 +42,10 @@ class ProfileFragment : BaseFragment() {
 
         setEditTextChangeListeners()
 
-        // Show input for this TextView
-        binding.profileName.setOnClickListener {
-            binding.profileInputName.visibility = View.VISIBLE
-            binding.profileInputName.editText?.setText(binding.profileName.text)
-            binding.profileInputName.editText?.requestFocus()
-            (activity as? BaseActivity)?.showKeyboard()
-        }
-        // Hide this input
-        binding.profileInputName.editText?.setOnEditorActionListener { _, actionId, event ->
-            val isDoneOrEnter = (actionId == EditorInfo.IME_ACTION_DONE ||
-                    event.keyCode == KeyEvent.KEYCODE_ENTER ||
-                    event.keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER)
-            return@setOnEditorActionListener if (isDoneOrEnter) {
-                binding.profileInputName.visibility = View.GONE
-                binding.profileInputName.editText?.clearFocus()
-                (activity as? BaseActivity)?.hideKeyboard()
-                true
-            } else {
-                false
-            }
-        }
-
         return binding.root
     }
 
+    // Guarda en persistencia el contenido del EditText cuando cambia.
     private fun setEditTextChangeListeners() {
         // See commons/Extensions.kt
         binding.profileInputName.editText?.addAfterTextChangedListener {
@@ -77,25 +55,54 @@ class ProfileFragment : BaseFragment() {
         }
         binding.profileInputTime.editText?.addAfterTextChangedListener {
             it?.let { inputText ->
-                profileViewModel.setName(inputText.toString())
+                profileViewModel.setTime(inputText.toString())
             }
         }
         binding.profileInputBadges.editText?.addAfterTextChangedListener {
             it?.let { inputText ->
-                profileViewModel.setName(inputText.toString())
+                profileViewModel.setBadges(inputText.toString())
             }
         }
         binding.profileInputPokedex.editText?.addAfterTextChangedListener {
             it?.let { inputText ->
-                profileViewModel.setName(inputText.toString())
+                profileViewModel.setPokedex(inputText.toString())
             }
         }
     }
 
     override fun loadObservers() {
+        // Ongoing observers for TextViews in card
         profileViewModel.name.observe(viewLifecycleOwner) {
             binding.profileName.text = it?.toString()
         }
+        profileViewModel.time.observe(viewLifecycleOwner) {
+            binding.profileTime.text = it?.toString()
+        }
+        profileViewModel.badges.observe(viewLifecycleOwner) {
+            binding.profileBadges.text = it?.toString()
+        }
+        profileViewModel.pokedex.observe(viewLifecycleOwner) {
+            binding.profilePokedex.text = it?.toString()
+        }
+
+        // Single event observers for EditTexts
+        profileViewModel.nameEvent.observe(viewLifecycleOwner) {
+            binding.profileInputName.editText?.setText(it?.toString())
+        }
+        profileViewModel.timeEvent.observe(viewLifecycleOwner) {
+            binding.profileInputTime.editText?.setText(it?.toString())
+        }
+        profileViewModel.badgesEvent.observe(viewLifecycleOwner) {
+            binding.profileInputBadges.editText?.setText(it?.toString())
+        }
+        profileViewModel.pokedexEvent.observe(viewLifecycleOwner) {
+            binding.profileInputPokedex.editText?.setText(it?.toString())
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        profileViewModel.fetchData()
     }
 
     override fun onDestroyView() {
