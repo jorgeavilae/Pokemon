@@ -32,4 +32,7 @@ object Constants {
     // Preferences keys
     const val DATASTORE_NAME = "datastore_pokemon"
     const val PREFERENCES_NAME_KEY = "preferences_name_key"
+    const val PREFERENCES_TIME_KEY = "preferences_time_key"
+    const val PREFERENCES_BADGES_KEY = "preferences_badges_key"
+    const val PREFERENCES_POKEDEX_KEY = "preferences_pokedex_key"
 }

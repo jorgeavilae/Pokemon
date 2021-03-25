@@ -14,18 +14,15 @@
  *    limitations under the License.
  */
 
-package com.atsistemas.data.di
+package com.atsistemas.data.commons
 
-import com.atsistemas.data.di.providers.*
-import org.koin.dsl.module
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.emptyPreferences
+import kotlinx.coroutines.flow.FlowCollector
+import java.io.IOException
 
-val dataModule = module {
-    single { provideMockInterceptor(get()) }
-    single { provideOkHttpClient(get()) }
-    single { provideMoshi() }
-    single { provideRetrofit(get(), get()) }
-    single { providePokemonApi(get()) }
-    single { providePokemonDatabase(get()) }
-    single { provideProfilePreferencesWrapper(get()) }
-    single { providePokemonRepository(get(), get(), get()) }
+
+suspend fun FlowCollector<Preferences>.catchPreferencesException(exception: Throwable) {
+    if (exception is IOException) emit(emptyPreferences())
+    else throw exception
 }

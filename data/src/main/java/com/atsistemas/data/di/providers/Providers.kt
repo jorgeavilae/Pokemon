@@ -20,6 +20,7 @@ import android.app.Application
 import android.util.Log
 import com.atsistemas.data.BuildConfig
 import com.atsistemas.data.local.PokemonDatabase
+import com.atsistemas.data.local.preferences.ProfilePreferencesWrapper
 import com.atsistemas.data.remote.IPokemonAPI
 import com.atsistemas.data.remote.interceptors.MockInterceptor
 import com.atsistemas.data.remote.models.StatsAdapter
@@ -77,9 +78,12 @@ fun providePokemonApi(retrofit: Retrofit): IPokemonAPI =
 fun providePokemonDatabase(application: Application): PokemonDatabase =
     PokemonDatabase.getInstance(application)
 
+fun provideProfilePreferencesWrapper(application: Application): ProfilePreferencesWrapper =
+    ProfilePreferencesWrapper(application)
+
 fun providePokemonRepository(
-    application: Application,
     retrofit: IPokemonAPI,
-    pokemonDatabase: PokemonDatabase
+    pokemonDatabase: PokemonDatabase,
+    profilePreferences: ProfilePreferencesWrapper
 ): PokemonRepository =
-    PokemonRepository(application, retrofit, pokemonDatabase)
+    PokemonRepository(retrofit, pokemonDatabase, profilePreferences)
