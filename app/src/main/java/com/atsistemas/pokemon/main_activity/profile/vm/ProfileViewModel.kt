@@ -17,6 +17,7 @@
 package com.atsistemas.pokemon.main_activity.profile.vm
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.viewModelScope
 import com.atsistemas.data.repositories.PokemonRepository
 import com.atsistemas.pokemon.commons.BaseViewModel
@@ -24,24 +25,47 @@ import com.atsistemas.pokemon.utils.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@Suppress("MemberVisibilityCanBePrivate")
 class ProfileViewModel(private val repository: PokemonRepository) : BaseViewModel() {
 
+    // Nombre del jugador (en DataStore)
     val name: LiveData<String> = repository.preferencesName
-    val badges: LiveData<Int> = repository.preferencesBadges
-    val time: LiveData<String> = repository.preferencesTime
-    val pokedex: LiveData<String> = repository.preferencesPokedex
 
+    // Medallas "conseguidas" por el jugador (en DataStore)
+    val badges: LiveData<Int> = repository.preferencesBadges
+
+    // MediatorLiveData permite fusionar LiveDatas reaccionando a los cambios en todos (ver init{})
+    val pokedex: MediatorLiveData<String> = MediatorLiveData()
+    // Pokemon "capturados" (en DataStore)
+    val pokedexCount: LiveData<Int> = repository.preferencesPokedex
+    // Pokemons en la Pokedex (Room rows count)
+    val maxPokedex: LiveData<Int> = repository.pokemonCount
+
+    // Tiempo jugado (en DataStore)
+    val time: LiveData<String> = repository.preferencesTime
+
+    // Single Events para inicializar las Vistas de entrada de datos
     val nameEvent = SingleLiveEvent<String>()
     val badgesEvent = SingleLiveEvent<Int>()
+    val pokedexEvent = SingleLiveEvent<Int>()
     val timeEvent = SingleLiveEvent<String>()
-    val pokedexEvent = SingleLiveEvent<String>()
+
+    init {
+        // Asigna las fuentes de LiveData con las que se construirá el String de MediatorLiveData
+        pokedex.addSource(pokedexCount) {
+            pokedex.value = "$it / ${maxPokedex.value}"
+        }
+        pokedex.addSource(maxPokedex) {
+            pokedex.value = "${pokedexCount.value} / $it"
+        }
+    }
 
     fun fetchData() {
         viewModelScope.launch(Dispatchers.IO) {
             nameEvent.postValue(repository.getName())
             badgesEvent.postValue(repository.getBadges())
-            timeEvent.postValue(repository.getTime())
             pokedexEvent.postValue(repository.getPokedex())
+            timeEvent.postValue(repository.getTime())
         }
     }
 
@@ -57,15 +81,15 @@ class ProfileViewModel(private val repository: PokemonRepository) : BaseViewMode
         }
     }
 
-    fun setTime(time: String) {
+    fun setPokedex(pokedex: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.setTime(time)
+            repository.setPokedex(pokedex)
         }
     }
 
-    fun setPokedex(pokedex: String) {
+    fun setTime(time: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.setPokedex(pokedex)
+            repository.setTime(time)
         }
     }
 }

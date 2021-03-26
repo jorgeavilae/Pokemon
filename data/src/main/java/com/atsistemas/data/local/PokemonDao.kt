@@ -28,9 +28,12 @@ import com.atsistemas.data.models.PokemonDTO
 interface PokemonDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(pokemon: PokemonDTO)
-    
+
     @Query("SELECT * FROM $TABLE_POKEMON ORDER BY `order` ASC")
     fun load(): LiveData<List<PokemonDTO>>
+
+    @Query("SELECT COUNT(`id`) FROM $TABLE_POKEMON")
+    fun getPokemonCount(): LiveData<Int>
     
     @Query("DELETE FROM $TABLE_POKEMON")
     fun deleteAll()

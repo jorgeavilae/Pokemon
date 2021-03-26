@@ -25,6 +25,9 @@ import androidx.core.widget.TextViewCompat
 import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.databinding.LayoutDpadCountBinding
 
+// Custom View Layout que representa un contador con unos botones que lo aumentan o lo disminuyen.
+// Los botones pueden orientarse en vertical o en horizontal.
+// Utilizado en la pantalla Profile para introducir datos numéricos.
 class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout(context, attrs) {
 
     // Interfaz para avisar de cuando cambia el valor del contador
@@ -45,9 +48,18 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
     // Listener que se activa cuando cambia el contador
     var valueUpdateListener: ValueUpdateListener? = null
 
-    // Límites del valor del contador
+    // Límites del valor del contador. Con el setter se controla que los botones
+    // se activen/desactiven si los límites cambian.
     var minCount: Int = defaultMinCount
+        set(value) {
+            field = value
+            enableButtons(field)
+        }
     var maxCount: Int = defaultMaxCount
+        set(value) {
+            field = value
+            enableButtons(field)
+        }
 
     // Contador.
     var count: Int = minCount
@@ -65,6 +77,7 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
     // Views de este componente
     private val binding: LayoutDpadCountBinding
 
+    // Constructor
     init {
         val inflater = LayoutInflater.from(context)
         binding = LayoutDpadCountBinding.inflate(inflater, this, true)
@@ -172,6 +185,12 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
 
     private fun enableButtons(count: Int) {
         when {
+            count == minCount && count == maxCount -> {
+                binding.dpadLeftButton.isEnabled = false
+                binding.dpadLeftButton.background.setTint(defaultColor)
+                binding.dpadRightButton.isEnabled = false
+                binding.dpadRightButton.background.setTint(defaultColor)
+            }
             count <= minCount -> {
                 binding.dpadLeftButton.isEnabled = false
                 binding.dpadLeftButton.background.setTint(defaultColor)

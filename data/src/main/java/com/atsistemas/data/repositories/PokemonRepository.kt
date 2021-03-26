@@ -36,6 +36,9 @@ class PokemonRepository(
     val pokemons: LiveData<List<PokemonDTO>> by lazy {
         pokemonDatabase.pokemonDao().load()
     }
+    val pokemonCount: LiveData<Int> by lazy {
+        pokemonDatabase.pokemonDao().getPokemonCount()
+    }
 
     // Retrofit API
     @Suppress("unused")
@@ -92,16 +95,16 @@ class PokemonRepository(
     // DATASTORE
     val preferencesName: LiveData<String> = profilePreferences.preferencesName.asLiveData()
     val preferencesBadges: LiveData<Int> = profilePreferences.preferencesBadges.asLiveData()
+    val preferencesPokedex: LiveData<Int> = profilePreferences.preferencesPokedex.asLiveData()
     val preferencesTime: LiveData<String> = profilePreferences.preferencesTime.asLiveData()
-    val preferencesPokedex: LiveData<String> = profilePreferences.preferencesPokedex.asLiveData()
 
     suspend fun getName() = profilePreferences.getName()
     suspend fun getBadges() = profilePreferences.getBadges()
-    suspend fun getTime() = profilePreferences.getTime()
     suspend fun getPokedex() = profilePreferences.getPokedex()
+    suspend fun getTime() = profilePreferences.getTime()
 
     suspend fun setName(name: String) = profilePreferences.setName(name)
     suspend fun setBadges(badges: Int) = profilePreferences.setBadges(badges)
+    suspend fun setPokedex(pokedex: Int) = profilePreferences.setPokedex(pokedex)
     suspend fun setTime(time: String) = profilePreferences.setTime(time)
-    suspend fun setPokedex(pokedex: String) = profilePreferences.setPokedex(pokedex)
 }

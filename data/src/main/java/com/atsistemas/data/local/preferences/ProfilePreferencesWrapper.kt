@@ -69,6 +69,23 @@ class ProfilePreferencesWrapper(private val context: Context) {
         }
     }
 
+    // Pokedex
+    val preferencesPokedex: Flow<Int> = context.dataStore.data
+        .catch {
+            catchPreferencesException(it)
+        }.map { preferences ->
+            val pokedexKey = intPreferencesKey(Constants.PREFERENCES_POKEDEX_KEY)
+            preferences[pokedexKey] ?: 0
+        }
+
+    suspend fun getPokedex(): Int = preferencesPokedex.first()
+    suspend fun setPokedex(pokedex: Int) {
+        context.dataStore.edit { preferences ->
+            val pokedexKey = intPreferencesKey(Constants.PREFERENCES_POKEDEX_KEY)
+            preferences[pokedexKey] = pokedex
+        }
+    }
+
     // Time
     val preferencesTime: Flow<String> = context.dataStore.data
         .catch {
@@ -83,23 +100,6 @@ class ProfilePreferencesWrapper(private val context: Context) {
         context.dataStore.edit { preferences ->
             val timeKey = stringPreferencesKey(Constants.PREFERENCES_TIME_KEY)
             preferences[timeKey] = time
-        }
-    }
-
-    // Pokedex
-    val preferencesPokedex: Flow<String> = context.dataStore.data
-        .catch {
-            catchPreferencesException(it)
-        }.map { preferences ->
-            val pokedexKey = stringPreferencesKey(Constants.PREFERENCES_POKEDEX_KEY)
-            preferences[pokedexKey] ?: ""
-        }
-
-    suspend fun getPokedex(): String = preferencesPokedex.first()
-    suspend fun setPokedex(pokedex: String) {
-        context.dataStore.edit { preferences ->
-            val pokedexKey = stringPreferencesKey(Constants.PREFERENCES_POKEDEX_KEY)
-            preferences[pokedexKey] = pokedex
         }
     }
 }
