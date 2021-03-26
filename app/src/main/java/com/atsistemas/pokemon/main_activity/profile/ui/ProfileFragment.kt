@@ -84,6 +84,7 @@ class ProfileFragment : BaseFragment() {
             binding.profileTime.text = it?.toString()
         }
 
+        // Top limit for pokedex input
         profileViewModel.maxPokedex.observe(viewLifecycleOwner) {
             it?.let {
                 binding.profileInputPokedex.maxCount = it

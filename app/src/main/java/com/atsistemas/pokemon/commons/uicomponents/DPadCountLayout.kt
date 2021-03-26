@@ -18,7 +18,9 @@ package com.atsistemas.pokemon.commons.uicomponents
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
+import android.widget.ImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
@@ -44,6 +46,10 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
 
     // Color de los botones
     var buttonColor: Int = defaultColor
+    // Representa al botón de incremento del contador en esta clase (horizontal/vertical)
+    private lateinit var incrementButton: ImageButton
+    // Representa al botón de decremento del contador en esta clase (horizontal/vertical)
+    private lateinit var decrementButton: ImageButton
 
     // Listener que se activa cuando cambia el contador
     var valueUpdateListener: ValueUpdateListener? = null
@@ -72,17 +78,20 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
             enableButtons(field)
             //  - se ejecuta el listener
             valueUpdateListener?.onValueUpdate(field)
+            Log.d("ASD", field.toString())
         }
 
     // Views de este componente
     private val binding: LayoutDpadCountBinding
+//    todo para ver cuando cambia set(value) {
+//        field = value
+//        Log.d("ASD","me voy a "+value)
+//    }
 
     // Constructor
     init {
         val inflater = LayoutInflater.from(context)
         binding = LayoutDpadCountBinding.inflate(inflater, this, true)
-
-        setListeners()
 
         // Se comprueban los atributos establecidos en el XML
         attrs?.let {
@@ -122,31 +131,42 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
                 recycle()
             }
         }
+
+        this.count = minCount
+        setListeners()
     }
 
-    //todo
     private fun setOrientation(orientation: Int) {
         when (orientation) {
             0 -> { // Horizontal
+                // Show horizontal buttons
                 binding.dpadLeftButton.visibility = VISIBLE
                 binding.dpadRightButton.visibility = VISIBLE
                 // Hide vertical buttons
+                binding.dpadTopButton.visibility = GONE
+                binding.dpadBottomButton.visibility = GONE
+                // Set buttons
+                incrementButton = binding.dpadRightButton
+                decrementButton = binding.dpadLeftButton
             }
-            1 -> { // Vertical
-                // Show vertical buttons
+            else -> { // Vertical
                 // Hide horizontal buttons
-            }
-            else -> { // Horizontal y vertical
+                binding.dpadLeftButton.visibility = GONE
+                binding.dpadRightButton.visibility = GONE
                 // Show vertical buttons
-                // Show horizontal buttons
+                binding.dpadTopButton.visibility = VISIBLE
+                binding.dpadBottomButton.visibility = VISIBLE
+                // Set buttons
+                incrementButton = binding.dpadTopButton
+                decrementButton = binding.dpadBottomButton
             }
         }
     }
 
     private fun setButtonsColor(color: Int) {
         buttonColor = color
-        binding.dpadLeftButton.background.setTint(buttonColor)
-        binding.dpadRightButton.background.setTint(buttonColor)
+        decrementButton.background.setTint(buttonColor)
+        incrementButton.background.setTint(buttonColor)
     }
 
     private fun setLabel(label: String) {
@@ -162,10 +182,10 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
     }
 
     private fun setListeners() {
-        binding.dpadLeftButton.setOnClickListener {
+        decrementButton.setOnClickListener {
             if (count > minCount) count--
         }
-        binding.dpadRightButton.setOnClickListener {
+        incrementButton.setOnClickListener {
             if (count + 1 <= maxCount) count++
         }
     }
@@ -186,28 +206,28 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
     private fun enableButtons(count: Int) {
         when {
             count == minCount && count == maxCount -> {
-                binding.dpadLeftButton.isEnabled = false
-                binding.dpadLeftButton.background.setTint(defaultColor)
-                binding.dpadRightButton.isEnabled = false
-                binding.dpadRightButton.background.setTint(defaultColor)
+                decrementButton.isEnabled = false
+                decrementButton.background.setTint(defaultColor)
+                incrementButton.isEnabled = false
+                incrementButton.background.setTint(defaultColor)
             }
             count <= minCount -> {
-                binding.dpadLeftButton.isEnabled = false
-                binding.dpadLeftButton.background.setTint(defaultColor)
-                binding.dpadRightButton.isEnabled = true
-                binding.dpadRightButton.background.setTint(buttonColor)
+                decrementButton.isEnabled = false
+                decrementButton.background.setTint(defaultColor)
+                incrementButton.isEnabled = true
+                incrementButton.background.setTint(buttonColor)
             }
             count >= maxCount -> {
-                binding.dpadLeftButton.isEnabled = true
-                binding.dpadLeftButton.background.setTint(buttonColor)
-                binding.dpadRightButton.isEnabled = false
-                binding.dpadRightButton.background.setTint(defaultColor)
+                decrementButton.isEnabled = true
+                decrementButton.background.setTint(buttonColor)
+                incrementButton.isEnabled = false
+                incrementButton.background.setTint(defaultColor)
             }
             else -> {
-                binding.dpadLeftButton.isEnabled = true
-                binding.dpadLeftButton.background.setTint(buttonColor)
-                binding.dpadRightButton.isEnabled = true
-                binding.dpadRightButton.background.setTint(buttonColor)
+                decrementButton.isEnabled = true
+                decrementButton.background.setTint(buttonColor)
+                incrementButton.isEnabled = true
+                incrementButton.background.setTint(buttonColor)
             }
         }
     }

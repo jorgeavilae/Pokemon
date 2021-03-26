@@ -39,6 +39,8 @@
     <string name="pokemon_official_image_content_description">Official image of a Pokemon</string>
     <string name="pokemon_paint_image_content_description">Cartoon image of a Pokemon</string>
     <string name="background_image_content_description">Gradient used for background</string>
-    <string name="left_arrow_icon">Left arrow icon</string>
-    <string name="right_arrow_icon">Right arrow icon</string>
+    <string name="left_arrow_image_button">Left arrow ImageButton</string>
+    <string name="right_arrow_image_button">Right arrow ImageButton</string>
+    <string name="top_arrow_image_button">Top Arrow ImageButton</string>
+    <string name="bottom_arrow_image_button">Bottom Arrow ImageButton</string>
 </resources>
