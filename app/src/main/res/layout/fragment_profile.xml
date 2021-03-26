@@ -38,6 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
             <TextView
                 android:id="@+id/profile_tag_name"
                 android:layout_width="wrap_content"
@@ -159,7 +160,7 @@
             android:layout_marginVertical="@dimen/fragment_margin_inner"
             android:hint="@string/player"
             app:hintTextAppearance="@style/MyFontStyles.Caption.Bigger"
-            app:layout_constraintBottom_toTopOf="@+id/profile_input_badges"
+            app:layout_constraintBottom_toTopOf="@+id/dpad_badges"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_card">
@@ -171,27 +172,20 @@
                 tools:text="Name" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/profile_input_badges"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+        <com.atsistemas.pokemon.commons.uicomponents.DPadCountLayout
+            android:id="@+id/dpad_badges"
+            style="@style/DPadCountViewInProfile"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/fragment_margin_outer"
             android:layout_marginVertical="@dimen/fragment_margin_inner"
-            android:hint="@string/badges"
-            app:hintTextAppearance="@style/MyFontStyles.Caption.Bigger"
-            app:layout_constraintBottom_toTopOf="@+id/profile_input_pokedex"
+            app:label="@string/badges"
+            app:layout_constraintBottom_toTopOf="@id/profile_input_pokedex"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_input_name">
-
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/EditTextViewInProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                tools:text="Badges" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@id/profile_input_name"
+            app:maxCount="8"
+            app:minCount="0" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/profile_input_pokedex"
@@ -205,7 +199,7 @@
             app:layout_constraintBottom_toTopOf="@id/profile_input_time"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_input_badges">
+            app:layout_constraintTop_toBottomOf="@+id/dpad_badges">
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/EditTextViewInProfile"

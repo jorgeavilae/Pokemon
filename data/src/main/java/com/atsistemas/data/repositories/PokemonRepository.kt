@@ -91,17 +91,17 @@ class PokemonRepository(
 
     // DATASTORE
     val preferencesName: LiveData<String> = profilePreferences.preferencesName.asLiveData()
+    val preferencesBadges: LiveData<Int> = profilePreferences.preferencesBadges.asLiveData()
     val preferencesTime: LiveData<String> = profilePreferences.preferencesTime.asLiveData()
-    val preferencesBadges: LiveData<String> = profilePreferences.preferencesBadges.asLiveData()
     val preferencesPokedex: LiveData<String> = profilePreferences.preferencesPokedex.asLiveData()
 
     suspend fun getName() = profilePreferences.getName()
-    suspend fun getTime() = profilePreferences.getTime()
     suspend fun getBadges() = profilePreferences.getBadges()
+    suspend fun getTime() = profilePreferences.getTime()
     suspend fun getPokedex() = profilePreferences.getPokedex()
 
     suspend fun setName(name: String) = profilePreferences.setName(name)
+    suspend fun setBadges(badges: Int) = profilePreferences.setBadges(badges)
     suspend fun setTime(time: String) = profilePreferences.setTime(time)
-    suspend fun setBadges(badges: String) = profilePreferences.setBadges(badges)
     suspend fun setPokedex(pokedex: String) = profilePreferences.setPokedex(pokedex)
 }

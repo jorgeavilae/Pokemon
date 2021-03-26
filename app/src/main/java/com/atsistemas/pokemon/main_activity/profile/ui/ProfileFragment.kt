@@ -40,27 +40,27 @@ class ProfileFragment : BaseFragment() {
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        setEditTextChangeListeners()
+        setListeners()
 
         return binding.root
     }
 
     // Guarda en persistencia el contenido del EditText cuando cambia.
-    private fun setEditTextChangeListeners() {
+    private fun setListeners() {
         // See commons/Extensions.kt
         binding.profileInputName.editText?.addAfterTextChangedListener {
             it?.let { inputText ->
                 profileViewModel.setName(inputText.toString())
             }
         }
+
+        binding.dpadBadges.setOnValueUpdateListener {
+            profileViewModel.setBadges(it)
+        }
+
         binding.profileInputTime.editText?.addAfterTextChangedListener {
             it?.let { inputText ->
                 profileViewModel.setTime(inputText.toString())
-            }
-        }
-        binding.profileInputBadges.editText?.addAfterTextChangedListener {
-            it?.let { inputText ->
-                profileViewModel.setBadges(inputText.toString())
             }
         }
         binding.profileInputPokedex.editText?.addAfterTextChangedListener {
@@ -75,11 +75,11 @@ class ProfileFragment : BaseFragment() {
         profileViewModel.name.observe(viewLifecycleOwner) {
             binding.profileName.text = it?.toString()
         }
-        profileViewModel.time.observe(viewLifecycleOwner) {
-            binding.profileTime.text = it?.toString()
-        }
         profileViewModel.badges.observe(viewLifecycleOwner) {
             binding.profileBadges.text = it?.toString()
+        }
+        profileViewModel.time.observe(viewLifecycleOwner) {
+            binding.profileTime.text = it?.toString()
         }
         profileViewModel.pokedex.observe(viewLifecycleOwner) {
             binding.profilePokedex.text = it?.toString()
@@ -89,11 +89,11 @@ class ProfileFragment : BaseFragment() {
         profileViewModel.nameEvent.observe(viewLifecycleOwner) {
             binding.profileInputName.editText?.setText(it?.toString())
         }
+        profileViewModel.badgesEvent.observe(viewLifecycleOwner) {
+            binding.dpadBadges.count = it
+        }
         profileViewModel.timeEvent.observe(viewLifecycleOwner) {
             binding.profileInputTime.editText?.setText(it?.toString())
-        }
-        profileViewModel.badgesEvent.observe(viewLifecycleOwner) {
-            binding.profileInputBadges.editText?.setText(it?.toString())
         }
         profileViewModel.pokedexEvent.observe(viewLifecycleOwner) {
             binding.profileInputPokedex.editText?.setText(it?.toString())

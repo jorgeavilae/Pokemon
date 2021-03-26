@@ -20,6 +20,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.atsistemas.data.commons.Constants
@@ -43,11 +44,28 @@ class ProfilePreferencesWrapper(private val context: Context) {
             preferences[nameKey] ?: ""
         }
 
-    suspend fun getName() : String = preferencesName.first()
+    suspend fun getName(): String = preferencesName.first()
     suspend fun setName(name: String) {
         context.dataStore.edit { preferences ->
             val nameKey = stringPreferencesKey(Constants.PREFERENCES_NAME_KEY)
             preferences[nameKey] = name
+        }
+    }
+
+    // Badges
+    val preferencesBadges: Flow<Int> = context.dataStore.data
+        .catch {
+            catchPreferencesException(it)
+        }.map { preferences ->
+            val badgesKey = intPreferencesKey(Constants.PREFERENCES_BADGES_KEY)
+            preferences[badgesKey] ?: 0
+        }
+
+    suspend fun getBadges(): Int = preferencesBadges.first()
+    suspend fun setBadges(badges: Int) {
+        context.dataStore.edit { preferences ->
+            val badgesKey = intPreferencesKey(Constants.PREFERENCES_BADGES_KEY)
+            preferences[badgesKey] = badges
         }
     }
 
@@ -60,28 +78,11 @@ class ProfilePreferencesWrapper(private val context: Context) {
             preferences[timeKey] ?: ""
         }
 
-    suspend fun getTime() : String = preferencesTime.first()
+    suspend fun getTime(): String = preferencesTime.first()
     suspend fun setTime(time: String) {
         context.dataStore.edit { preferences ->
             val timeKey = stringPreferencesKey(Constants.PREFERENCES_TIME_KEY)
             preferences[timeKey] = time
-        }
-    }
-
-    // Badges
-    val preferencesBadges: Flow<String> = context.dataStore.data
-        .catch {
-            catchPreferencesException(it)
-        }.map { preferences ->
-            val badgesKey = stringPreferencesKey(Constants.PREFERENCES_BADGES_KEY)
-            preferences[badgesKey] ?: ""
-        }
-
-    suspend fun getBadges() : String = preferencesBadges.first()
-    suspend fun setBadges(badges: String) {
-        context.dataStore.edit { preferences ->
-            val badgesKey = stringPreferencesKey(Constants.PREFERENCES_BADGES_KEY)
-            preferences[badgesKey] = badges
         }
     }
 
@@ -94,7 +95,7 @@ class ProfilePreferencesWrapper(private val context: Context) {
             preferences[pokedexKey] ?: ""
         }
 
-    suspend fun getPokedex() : String = preferencesPokedex.first()
+    suspend fun getPokedex(): String = preferencesPokedex.first()
     suspend fun setPokedex(pokedex: String) {
         context.dataStore.edit { preferences ->
             val pokedexKey = stringPreferencesKey(Constants.PREFERENCES_POKEDEX_KEY)

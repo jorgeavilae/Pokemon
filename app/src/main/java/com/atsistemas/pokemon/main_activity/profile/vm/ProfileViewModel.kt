@@ -27,20 +27,20 @@ import kotlinx.coroutines.launch
 class ProfileViewModel(private val repository: PokemonRepository) : BaseViewModel() {
 
     val name: LiveData<String> = repository.preferencesName
+    val badges: LiveData<Int> = repository.preferencesBadges
     val time: LiveData<String> = repository.preferencesTime
-    val badges: LiveData<String> = repository.preferencesBadges
     val pokedex: LiveData<String> = repository.preferencesPokedex
 
     val nameEvent = SingleLiveEvent<String>()
+    val badgesEvent = SingleLiveEvent<Int>()
     val timeEvent = SingleLiveEvent<String>()
-    val badgesEvent = SingleLiveEvent<String>()
     val pokedexEvent = SingleLiveEvent<String>()
 
     fun fetchData() {
         viewModelScope.launch(Dispatchers.IO) {
             nameEvent.postValue(repository.getName())
-            timeEvent.postValue(repository.getTime())
             badgesEvent.postValue(repository.getBadges())
+            timeEvent.postValue(repository.getTime())
             pokedexEvent.postValue(repository.getPokedex())
         }
     }
@@ -51,15 +51,15 @@ class ProfileViewModel(private val repository: PokemonRepository) : BaseViewMode
         }
     }
 
-    fun setTime(time: String) {
+    fun setBadges(badges: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.setTime(time)
+            repository.setBadges(badges)
         }
     }
 
-    fun setBadges(badges: String) {
+    fun setTime(time: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.setBadges(badges)
+            repository.setTime(time)
         }
     }
 
