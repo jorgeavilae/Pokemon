@@ -20,12 +20,16 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fragment_margin_outer">16dp</dimen>
     <dimen name="fragment_margin_inner">8dp</dimen>
+    <dimen name="fragment_margin_related">4dp</dimen>
 
     <!-- Profile fragment -->
     <dimen name="card_container_elevation">4dp</dimen>
     <dimen name="card_container_margin">24dp</dimen>
     <dimen name="card_container_padding_vertical">16dp</dimen>
     <dimen name="card_container_padding_horizontal">8dp</dimen>
+
+    <!-- Detail fragment -->
+    <dimen name="stats_card_margin_vertical_related">4dp</dimen>
 
     <!-- Dialogs -->
     <dimen name="dialog_container_margin">24dp</dimen>

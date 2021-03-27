@@ -36,6 +36,7 @@
     <color name="almost_white">#e0e0e0</color>
     <color name="light_red">#FF8A80</color>
     <color name="transparent">#00000000</color>
+    <color name="almost_transparent">#33FFFFFF</color>
     <color name="pokemon_yellow_almost_transparent">#4DFFDE00</color>
 
     <!-- Colors for SwipeRefreshLayout progress indicator-->

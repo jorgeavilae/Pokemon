@@ -22,6 +22,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.core.view.doOnPreDraw
 import com.atsistemas.data.utils.PokemonDTOUtils
 import com.atsistemas.pokemon.R
@@ -30,6 +31,7 @@ import com.atsistemas.pokemon.databinding.FragmentDetailBinding
 import com.atsistemas.pokemon.main_activity.MainActivity
 import com.atsistemas.pokemon.utils.SharedPokemonViewModel
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DetailFragment : BaseFragment() {
@@ -71,22 +73,32 @@ class DetailFragment : BaseFragment() {
             it?.let { pokemonDTO ->
                 // todo adecentar
                 (activity as? MainActivity)?.supportActionBar?.title = "${pokemonDTO.name}"
-                loadUrlIntoImageView(pokemonDTO.imgUrlMiniFront, binding.detailFront, R.drawable.pikachu_mini)
-                loadUrlIntoImageView(pokemonDTO.imgUrlMiniBack, binding.detailBack, R.drawable.pikachu_mini)
+                loadUrlIntoImageView(
+                    pokemonDTO.imgUrlMiniFront,
+                    binding.detailFront,
+                    R.drawable.pikachu_mini
+                )
+                loadUrlIntoImageView(
+                    pokemonDTO.imgUrlMiniBack,
+                    binding.detailBack,
+                    R.drawable.pikachu_mini
+                )
                 binding.detailId.text = "ID: ${pokemonDTO.id}"
                 binding.detailName.text = "${pokemonDTO.name}"
-                binding.detailOrder.text = "Order in whole Pokedex: ${pokemonDTO.order}"
+                binding.detailOrder.text = "Pokemon No. ${pokemonDTO.order}"
                 binding.detailWeight.text = "Weight: ${"%.2f".format(pokemonDTO.weight)} kg"
                 binding.detailHeight.text = "Height: ${"%.2f".format(pokemonDTO.height)} m"
                 binding.detailTypes.text =
-                    "Tipos: ${PokemonDTOUtils.convertListTypesToString(pokemonDTO.types)}"
+                    "${PokemonDTOUtils.convertListTypesToString(pokemonDTO.types, "\n")}"
                 loadUrlIntoImageView(pokemonDTO.imgUrlOfficial, binding.detailOfficial)
-                binding.detailStatHp.text = "HP: ${pokemonDTO.hp}"
-                binding.detailStatAttack.text = "Attack: ${pokemonDTO.attack}"
-                binding.detailStatDefense.text = "Defense: ${pokemonDTO.defense}"
-                binding.detailStatSpAttack.text = "Special Attack: ${pokemonDTO.specialAttack}"
-                binding.detailStatSpDefense.text = "Special Defense: ${pokemonDTO.specialDefense}"
-                binding.detailStatSpeed.text = "Speed: ${pokemonDTO.speed}"
+                binding.detailStatHp.text = "${pokemonDTO.hp}"
+                binding.detailStatAttack.text = "${pokemonDTO.attack}"
+                binding.detailStatDefense.text = "${pokemonDTO.defense}"
+                binding.detailStatSpAttack.text = "${pokemonDTO.specialAttack}"
+                binding.detailStatSpDefense.text = "${pokemonDTO.specialDefense}"
+                binding.detailStatSpeed.text = "${pokemonDTO.speed}"
+                val color = ContextCompat.getColor(requireContext(), R.color.pokemon_blue)
+                binding.detailOfficial.background?.setTint(color)
 
                 // Establece los identificadores de los sharedElements que participan en la animación
                 // de la transición en base al identificador del pokemon mostrado.
@@ -107,7 +119,10 @@ class DetailFragment : BaseFragment() {
         url: String, imageView: ImageView, placeholderResId: Int? = null
     ) {
         val glide = Glide.with(this).load(url)
-        placeholderResId?.let { glide.placeholder(placeholderResId) }
+            .transition(DrawableTransitionOptions.withCrossFade().crossFade())
+        placeholderResId?.let {
+            glide.placeholder(placeholderResId)
+        }
         glide.into(imageView)
     }
 

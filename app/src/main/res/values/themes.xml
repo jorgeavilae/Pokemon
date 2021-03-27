@@ -96,4 +96,18 @@
         <item name="labelTextAppearance">@style/MyFontStyles.Subtitle2.Normal</item>
         <item name="countTextAppearance">@style/MyFontStyles.Subtitle1.Bigger</item>
     </style>
+
+    <!-- Style para los TextView de la stats del DetailFragment -->
+    <style name="TagViewInStatsCard">
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textAppearance">@style/MyFontStyles.Subtitle2.Normal.AllCaps</item>
+        <item name="android:layout_marginStart">@dimen/fragment_margin_outer</item>
+        <item name="android:layout_marginEnd">@dimen/fragment_margin_outer</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">@dimen/stats_card_margin_vertical_related</item>
+    </style>
+    <style name="TextViewInStatsCard">
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textAppearance">@style/MyFontStyles.Subtitle1</item>
+    </style>
 </resources>

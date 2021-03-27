@@ -102,6 +102,14 @@
         <item name="android:letterSpacing">0.0125</item>
     </style>
 
+    <style name="MyFontStyles.Headline6.Normal" parent="MyFontStyles.Headline6">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="MyFontStyles.Headline6.Normal.AllCaps" parent="MyFontStyles.Headline6.Normal">
+        <item name="android:textAllCaps">true</item>
+    </style>
+
     <style name="MyFontStyles.Subtitle1" parent="android:TextAppearance.Material.Subhead">
         <item name="fontFamily">@font/vt323</item>
         <item name="android:fontFamily">@font/vt323</item>
@@ -132,6 +140,10 @@
 
     <style name="MyFontStyles.Subtitle2.Normal" parent="MyFontStyles.Subtitle2">
         <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="MyFontStyles.Subtitle2.Normal.AllCaps" parent="MyFontStyles.Subtitle2.Normal">
+        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="MyFontStyles.Body1" parent="android:TextAppearance.Material.Body1">
@@ -182,6 +194,9 @@
 
     <style name="MyFontStyles.Caption.Bigger" parent="MyFontStyles.Caption">
         <item name="android:textSize">@dimen/textSizeButton</item>
+    </style>
+    <style name="MyFontStyles.Caption.Bigger.AllCaps" parent="MyFontStyles.Caption.Bigger">
+        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="MyFontStyles.Overline" parent="android:TextAppearance.Material">

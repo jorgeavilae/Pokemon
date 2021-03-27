@@ -22,7 +22,16 @@
 
     <string name="leaf_icon">Leaf Icon</string>
     <string name="weight_icon">Weight Icon</string>
+    <string name="height_icon">Height Icon</string>
     <string name="item_weight_format">%1$.1f</string>
+
+    <string name="types">Types:</string>
+    <string name="hp">HP</string>
+    <string name="attack">attack</string>
+    <string name="defense">defense</string>
+    <string name="special_attack">special attack</string>
+    <string name="special_defense">special defense</string>
+    <string name="speed">speed</string>
 
     <string name="player">Player</string>
     <string name="badges">Badges</string>

@@ -46,8 +46,8 @@ object PokemonDTOUtils {
 
     // Convierte la lista de tipos del Pokemon, en una cadena de texto legible y que se puede
     // insertar en la base de datos Room
-    fun convertListTypesToString(typesList: List<String>): String =
-        typesList.joinToString(separator = Constants.TYPE_SEPARATOR)
+    fun convertListTypesToString(typesList: List<String>, delimiter: String = Constants.TYPE_SEPARATOR): String =
+        typesList.joinToString(separator = delimiter)
 
     // Convierte la cadena de texto insertada en Room, en una lista de tipos manejable.
     fun convertStringToListTypes(string: String): List<String> =
