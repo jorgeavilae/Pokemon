@@ -43,4 +43,10 @@ class ListViewModel(private val repository: PokemonRepository) : BaseViewModel()
             setShowLoading(false)
         }
     }
+
+    fun deleteDB() {
+        viewModelScope.launch (Dispatchers.IO) {
+            repository.deleteDB()
+        }
+    }
 }

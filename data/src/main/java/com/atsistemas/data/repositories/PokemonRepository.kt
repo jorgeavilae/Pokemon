@@ -40,6 +40,8 @@ class PokemonRepository(
         pokemonDatabase.pokemonDao().getPokemonCount()
     }
 
+    suspend fun deleteDB() = pokemonDatabase.pokemonDao().deleteAll()
+
     // Retrofit API
     @Suppress("unused")
     suspend fun loadGenerationFromServer(generationId: Int): ResultHandler<String> {
@@ -107,4 +109,11 @@ class PokemonRepository(
     suspend fun setBadges(badges: Int) = profilePreferences.setBadges(badges)
     suspend fun setPokedex(pokedex: Int) = profilePreferences.setPokedex(pokedex)
     suspend fun setTime(time: String) = profilePreferences.setTime(time)
+
+    suspend fun deletePreferences() {
+        setName("")
+        setBadges(0)
+        setPokedex(0)
+        setTime("")
+    }
 }

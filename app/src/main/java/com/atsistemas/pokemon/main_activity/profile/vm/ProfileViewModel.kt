@@ -73,6 +73,13 @@ class ProfileViewModel(private val repository: PokemonRepository) : BaseViewMode
         }
     }
 
+    fun deletePreferences() {
+        viewModelScope.launch (Dispatchers.IO) {
+            repository.deletePreferences()
+            fetchData()
+        }
+    }
+
     fun setName(name: String) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.setName(name)

@@ -48,6 +48,9 @@
     <string name="accept">Accept</string>
     <string name="close">Close</string>
 
+    <string name="delete_db">Delete Database</string>
+    <string name="delete_preferences">Delete Preferences</string>
+
     <!-- Content Description texts -->
     <string name="pokemon_front_image_content_description">Front image of a Pokemon</string>
     <string name="pokemon_back_image_content_description">Back image of a Pokemon</string>

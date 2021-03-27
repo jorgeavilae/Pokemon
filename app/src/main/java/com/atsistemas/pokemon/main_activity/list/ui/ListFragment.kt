@@ -17,9 +17,7 @@
 package com.atsistemas.pokemon.main_activity.list.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.view.doOnPreDraw
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -44,6 +42,11 @@ class ListFragment : BaseFragment(), CellClickListener {
     private val binding: FragmentListBinding get() = _binding!!
 
     private var adapter: PokemonAdapter? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -111,13 +114,30 @@ class ListFragment : BaseFragment(), CellClickListener {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.list_fragment_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.delete_db_id -> {
+                listViewModel.deleteDB()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
         adapter = null
     }
 
-    override fun onCellClickListener(viewHolder: PokemonAdapter.ViewHolder, pokemonDTO: PokemonDTO) {
+    override fun onCellClickListener(
+        viewHolder: PokemonAdapter.ViewHolder,
+        pokemonDTO: PokemonDTO
+    ) {
         sharedViewModel.setPokemon(pokemonDTO)
 
         // Crea un bundle con los sharedElements que participan en la animación de la transición.

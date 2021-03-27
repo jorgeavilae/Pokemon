@@ -17,9 +17,8 @@
 package com.atsistemas.pokemon.main_activity.profile.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.commons.BaseFragment
 import com.atsistemas.pokemon.commons.addAfterTextChangedListener
 import com.atsistemas.pokemon.databinding.FragmentProfileBinding
@@ -32,6 +31,11 @@ class ProfileFragment : BaseFragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding: FragmentProfileBinding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -128,6 +132,20 @@ class ProfileFragment : BaseFragment() {
     override fun onStart() {
         super.onStart()
         profileViewModel.fetchData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.profile_fragment_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.delete_preferences_id -> {
+                profileViewModel.deletePreferences()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onDestroyView() {
