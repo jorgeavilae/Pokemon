@@ -72,7 +72,14 @@
         <item name="android:maxLength">100</item>
         <item name="android:maxLines">1</item>
         <item name="android:textAlignment">textEnd</item>
-        <item name="android:textAppearance">@style/MyFontStyles.Headline4.OnBackground</item>
+        <item name="android:textAppearance">@style/MyFontStyles.Headline5.Bigger</item>
+    </style>
+
+    <!-- Style para los TextInputLayout del ProfileFragment -->
+    <style name="TextInputLayoutInProfile" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/pokemon_blue</item>
+        <item name="hintTextColor">@color/pokemon_blue</item>
+        <item name="hintTextAppearance">@style/MyFontStyles.Caption.Bigger</item>
     </style>
 
     <!-- Style para los EditText del ProfileFragment -->
@@ -86,7 +93,7 @@
     <!-- Style para los DPadText del ProfileFragment -->
     <style name="DPadCountViewInProfile">
         <item name="buttonColor">@color/pokemon_blue</item>
-        <item name="labelTextAppearance">@style/MyFontStyles.Caption.Bigger</item>
+        <item name="labelTextAppearance">@style/MyFontStyles.Subtitle2.Normal</item>
         <item name="countTextAppearance">@style/MyFontStyles.Subtitle1.Bigger</item>
     </style>
 </resources>

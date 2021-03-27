@@ -36,10 +36,12 @@ class ProfileViewModel(private val repository: PokemonRepository) : BaseViewMode
 
     // MediatorLiveData permite fusionar LiveDatas reaccionando a los cambios en todos (ver init{})
     val pokedex: MediatorLiveData<String> = MediatorLiveData()
+
     // Pokemon "capturados" (en DataStore)
     val pokedexCount: LiveData<Int> = repository.preferencesPokedex
+
     // Pokemons en la Pokedex (Room rows count)
-    val maxPokedex: LiveData<Int> = repository.pokemonCount
+    val pokedexTotal: LiveData<Int> = repository.pokemonCount
 
     // Tiempo jugado (en DataStore)
     val time: LiveData<String> = repository.preferencesTime
@@ -48,15 +50,16 @@ class ProfileViewModel(private val repository: PokemonRepository) : BaseViewMode
     val nameEvent = SingleLiveEvent<String>()
     val badgesEvent = SingleLiveEvent<Int>()
     val pokedexEvent = SingleLiveEvent<Int>()
-    val timeEvent = SingleLiveEvent<String>()
+    val hoursEvent = SingleLiveEvent<Int>()
+    val minutesEvent = SingleLiveEvent<Int>()
 
     init {
         // Asigna las fuentes de LiveData con las que se construirá el String de MediatorLiveData
         pokedex.addSource(pokedexCount) {
-            pokedex.value = "$it / ${maxPokedex.value}"
+            pokedex.value = mergePokedexCountTotalIntoString(it, pokedexTotal.value)
         }
-        pokedex.addSource(maxPokedex) {
-            pokedex.value = "${pokedexCount.value} / $it"
+        pokedex.addSource(pokedexTotal) {
+            pokedex.value = mergePokedexCountTotalIntoString(pokedexCount.value, it)
         }
     }
 
@@ -65,7 +68,8 @@ class ProfileViewModel(private val repository: PokemonRepository) : BaseViewMode
             nameEvent.postValue(repository.getName())
             badgesEvent.postValue(repository.getBadges())
             pokedexEvent.postValue(repository.getPokedex())
-            timeEvent.postValue(repository.getTime())
+            hoursEvent.postValue(extractHoursFromString(repository.getTime()) ?: 0)
+            minutesEvent.postValue(extractMinutesFromString(repository.getTime()) ?: 0)
         }
     }
 
@@ -87,9 +91,33 @@ class ProfileViewModel(private val repository: PokemonRepository) : BaseViewMode
         }
     }
 
-    fun setTime(time: String) {
+    fun setTime(hours: Int?, minutes: Int?) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.setTime(time)
+            repository.setTime(mergeHoursMinutesIntoString(hours, minutes))
         }
     }
+
+    // Converters
+    fun mergePokedexCountTotalIntoString(count: Int?, total: Int?): String =
+        if (count != null && total != null)
+            "$count / $total"
+        else
+            ""
+
+    fun mergeHoursMinutesIntoString(hours: Int?, minutes: Int?): String =
+        if (hours != null && minutes != null)
+            "$hours:${minutes.toString().padStart(2, '0')}"
+        else
+            ""
+
+    fun extractHoursFromString(time: String?): Int? {
+        val numberStr = time?.split(":")?.getOrNull(0)
+        return if (!numberStr.isNullOrEmpty()) numberStr.toIntOrNull() else null
+    }
+
+    fun extractMinutesFromString(time: String?): Int? {
+        val numberStr = time?.split(":")?.getOrNull(1)
+        return if (!numberStr.isNullOrEmpty()) numberStr.toIntOrNull() else null
+    }
+
 }

@@ -31,8 +31,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/card_container_margin"
-            android:background="@drawable/background_error_dialog"
-            android:elevation="@dimen/card_container_elevation"
+            android:background="@drawable/marco_pokemon_game"
+            android:backgroundTint="@color/pokemon_darkRed"
+            android:backgroundTintMode="add"
+            android:paddingHorizontal="@dimen/card_container_padding_horizontal"
+            android:paddingVertical="@dimen/card_container_padding_vertical"
             app:layout_constraintBottom_toTopOf="@+id/profile_input_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,15 +46,16 @@
                 android:id="@+id/profile_tag_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fragment_margin_outer"
-                android:layout_marginEnd="@dimen/fragment_margin_inner"
+                android:layout_marginHorizontal="@dimen/fragment_margin_outer"
+                android:layout_marginVertical="@dimen/fragment_margin_inner"
                 android:text="@string/player"
-                android:textAppearance="@style/MyFontStyles.Headline5"
+                android:textAppearance="@style/MyFontStyles.Headline5.AllCaps"
                 app:layout_constraintBottom_toTopOf="@id/profile_tag_badges"
                 app:layout_constraintEnd_toStartOf="@id/profile_card_barrier"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
                 android:id="@+id/profile_name"
@@ -68,10 +72,10 @@
                 android:id="@+id/profile_tag_badges"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fragment_margin_outer"
-                android:layout_marginEnd="@dimen/fragment_margin_inner"
+                android:layout_marginHorizontal="@dimen/fragment_margin_outer"
+                android:layout_marginVertical="@dimen/fragment_margin_inner"
                 android:text="@string/badges"
-                android:textAppearance="@style/MyFontStyles.Headline5"
+                android:textAppearance="@style/MyFontStyles.Headline5.AllCaps"
                 app:layout_constraintBottom_toTopOf="@id/profile_tag_pokedex"
                 app:layout_constraintEnd_toStartOf="@id/profile_card_barrier"
                 app:layout_constraintHorizontal_bias="0"
@@ -93,10 +97,10 @@
                 android:id="@+id/profile_tag_pokedex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fragment_margin_outer"
-                android:layout_marginEnd="@dimen/fragment_margin_inner"
+                android:layout_marginHorizontal="@dimen/fragment_margin_outer"
+                android:layout_marginVertical="@dimen/fragment_margin_inner"
                 android:text="@string/pokedex"
-                android:textAppearance="@style/MyFontStyles.Headline5"
+                android:textAppearance="@style/MyFontStyles.Headline5.AllCaps"
                 app:layout_constraintBottom_toTopOf="@id/profile_tag_time"
                 app:layout_constraintEnd_toStartOf="@id/profile_card_barrier"
                 app:layout_constraintHorizontal_bias="0"
@@ -118,10 +122,10 @@
                 android:id="@+id/profile_tag_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fragment_margin_outer"
-                android:layout_marginEnd="@dimen/fragment_margin_inner"
+                android:layout_marginHorizontal="@dimen/fragment_margin_outer"
+                android:layout_marginVertical="@dimen/fragment_margin_inner"
                 android:text="@string/time"
-                android:textAppearance="@style/MyFontStyles.Headline5"
+                android:textAppearance="@style/MyFontStyles.Headline5.AllCaps"
                 app:layout_constraintBottom_toBottomOf="@id/profile_card"
                 app:layout_constraintEnd_toStartOf="@id/profile_card_barrier"
                 app:layout_constraintHorizontal_bias="0"
@@ -153,14 +157,13 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/profile_input_name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/TextInputLayoutInProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/fragment_margin_outer"
             android:layout_marginVertical="@dimen/fragment_margin_inner"
             android:hint="@string/player"
-            app:hintTextAppearance="@style/MyFontStyles.Caption.Bigger"
-            app:layout_constraintBottom_toTopOf="@+id/profile_input_badges"
+            app:layout_constraintBottom_toTopOf="@+id/profile_separator2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_card">
@@ -172,6 +175,17 @@
                 tools:text="Name" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <View
+            android:id="@+id/profile_separator2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/fragment_margin_outer"
+            android:background="@color/light_red"
+            app:layout_constraintBottom_toTopOf="@id/profile_input_badges"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_input_name" />
+
         <com.atsistemas.pokemon.commons.uicomponents.DPadCountLayout
             android:id="@+id/profile_input_badges"
             style="@style/DPadCountViewInProfile"
@@ -180,10 +194,11 @@
             android:layout_marginHorizontal="@dimen/fragment_margin_outer"
             android:layout_marginVertical="@dimen/fragment_margin_inner"
             app:label="@string/badges"
-            app:layout_constraintBottom_toTopOf="@id/profile_input_pokedex"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/profile_separator3"
+            app:layout_constraintEnd_toStartOf="@id/profile_input_pokedex"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profile_input_name"
+            app:layout_constraintTop_toBottomOf="@id/profile_separator2"
             app:maxCount="8"
             app:minCount="0" />
 
@@ -195,47 +210,56 @@
             android:layout_marginHorizontal="@dimen/fragment_margin_outer"
             android:layout_marginVertical="@dimen/fragment_margin_inner"
             app:label="@string/pokedex"
-            app:layout_constraintBottom_toTopOf="@id/profile_input_time"
+            app:layout_constraintBottom_toBottomOf="@id/profile_input_badges"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profile_input_badges"
+            app:layout_constraintStart_toEndOf="@id/profile_input_badges"
+            app:layout_constraintTop_toTopOf="@id/profile_input_badges"
             app:maxCount="15"
             app:minCount="0" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/profile_input_time"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <View
+            android:id="@+id/profile_separator3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/fragment_margin_outer"
-            android:layout_marginVertical="@dimen/fragment_margin_inner"
-            android:hint="@string/time"
-            app:hintTextAppearance="@style/MyFontStyles.Caption.Bigger"
-            app:layout_constraintBottom_toTopOf="@id/dpad"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/card_container_margin"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="@dimen/fragment_margin_inner"
+            android:background="@color/light_red"
+            app:layout_constraintBottom_toTopOf="@id/profile_input_time_hours"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_input_pokedex">
-
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/EditTextViewInProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="Time" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@id/profile_input_pokedex" />
 
         <com.atsistemas.pokemon.commons.uicomponents.DPadCountLayout
-            android:id="@+id/dpad"
+            android:id="@+id/profile_input_time_hours"
             style="@style/DPadCountViewInProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/fragment_margin_outer"
+            android:layout_marginHorizontal="@dimen/fragment_margin_inner"
             android:layout_marginVertical="@dimen/fragment_margin_inner"
-            app:label="@string/time"
+            app:label="@string/hours"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/profile_input_time_minutes"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profile_input_time"
-            app:maxCount="15"
+            app:layout_constraintTop_toBottomOf="@id/profile_separator3"
+            app:maxCount="9999"
+            app:minCount="0"
+            app:orientation="vertical" />
+
+        <com.atsistemas.pokemon.commons.uicomponents.DPadCountLayout
+            android:id="@+id/profile_input_time_minutes"
+            style="@style/DPadCountViewInProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/fragment_margin_inner"
+            android:layout_marginVertical="@dimen/fragment_margin_inner"
+            app:label="@string/minutes"
+            app:layout_constraintBottom_toBottomOf="@id/profile_input_time_hours"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/profile_input_time_hours"
+            app:layout_constraintTop_toTopOf="@id/profile_input_time_hours"
+            app:maxCount="59"
             app:minCount="0"
             app:orientation="vertical" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,6 +40,13 @@ class ProfileFragment : BaseFragment() {
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
+        // Hacer estos componentes lifecycle-aware hace que sepan cuando
+        // se destruyen y limpian variables (binding = null).
+        binding.profileInputBadges.setLifecycleObservable(lifecycle)
+        binding.profileInputPokedex.setLifecycleObservable(lifecycle)
+        binding.profileInputTimeHours.setLifecycleObservable(lifecycle)
+        binding.profileInputTimeMinutes.setLifecycleObservable(lifecycle)
+
         setListeners()
 
         return binding.root
@@ -62,10 +69,11 @@ class ProfileFragment : BaseFragment() {
             profileViewModel.setPokedex(it)
         }
 
-        binding.profileInputTime.editText?.addAfterTextChangedListener {
-            it?.let { inputText ->
-                profileViewModel.setTime(inputText.toString())
-            }
+        binding.profileInputTimeHours.setOnValueUpdateListener {
+            profileViewModel.setTime(it, binding.profileInputTimeMinutes.count)
+        }
+        binding.profileInputTimeMinutes.setOnValueUpdateListener {
+            profileViewModel.setTime(binding.profileInputTimeHours.count, it)
         }
     }
 
@@ -85,7 +93,7 @@ class ProfileFragment : BaseFragment() {
         }
 
         // Top limit for pokedex input
-        profileViewModel.maxPokedex.observe(viewLifecycleOwner) {
+        profileViewModel.pokedexTotal.observe(viewLifecycleOwner) {
             it?.let {
                 binding.profileInputPokedex.maxCount = it
             }
@@ -105,8 +113,15 @@ class ProfileFragment : BaseFragment() {
                 binding.profileInputPokedex.count = it
             }
         }
-        profileViewModel.timeEvent.observe(viewLifecycleOwner) {
-            binding.profileInputTime.editText?.setText(it?.toString())
+        profileViewModel.hoursEvent.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.profileInputTimeHours.count = it
+            }
+        }
+        profileViewModel.minutesEvent.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.profileInputTimeMinutes.count = it
+            }
         }
     }
 

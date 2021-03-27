@@ -24,6 +24,8 @@
     <!-- Profile fragment -->
     <dimen name="card_container_elevation">4dp</dimen>
     <dimen name="card_container_margin">24dp</dimen>
+    <dimen name="card_container_padding_vertical">16dp</dimen>
+    <dimen name="card_container_padding_horizontal">8dp</dimen>
 
     <!-- Dialogs -->
     <dimen name="dialog_container_margin">24dp</dimen>

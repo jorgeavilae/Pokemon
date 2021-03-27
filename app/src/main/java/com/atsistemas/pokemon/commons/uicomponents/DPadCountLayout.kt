@@ -18,19 +18,22 @@ package com.atsistemas.pokemon.commons.uicomponents
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.databinding.LayoutDpadCountBinding
 
 // Custom View Layout que representa un contador con unos botones que lo aumentan o lo disminuyen.
 // Los botones pueden orientarse en vertical o en horizontal.
 // Utilizado en la pantalla Profile para introducir datos numéricos.
-class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout(context, attrs) {
+@Suppress("MemberVisibilityCanBePrivate")
+class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout(context, attrs), LifecycleObserver {
 
     // Interfaz para avisar de cuando cambia el valor del contador
     interface ValueUpdateListener {
@@ -46,8 +49,10 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
 
     // Color de los botones
     var buttonColor: Int = defaultColor
+
     // Representa al botón de incremento del contador en esta clase (horizontal/vertical)
     private lateinit var incrementButton: ImageButton
+
     // Representa al botón de decremento del contador en esta clase (horizontal/vertical)
     private lateinit var decrementButton: ImageButton
 
@@ -78,20 +83,16 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
             enableButtons(field)
             //  - se ejecuta el listener
             valueUpdateListener?.onValueUpdate(field)
-            Log.d("ASD", field.toString())
         }
 
     // Views de este componente
-    private val binding: LayoutDpadCountBinding
-//    todo para ver cuando cambia set(value) {
-//        field = value
-//        Log.d("ASD","me voy a "+value)
-//    }
+    private var _binding: LayoutDpadCountBinding? = null
+    private val binding: LayoutDpadCountBinding get() = _binding!!
 
     // Constructor
     init {
         val inflater = LayoutInflater.from(context)
-        binding = LayoutDpadCountBinding.inflate(inflater, this, true)
+        _binding = LayoutDpadCountBinding.inflate(inflater, this, true)
 
         // Se comprueban los atributos establecidos en el XML
         attrs?.let {
@@ -165,8 +166,8 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
 
     private fun setButtonsColor(color: Int) {
         buttonColor = color
-        decrementButton.background.setTint(buttonColor)
-        incrementButton.background.setTint(buttonColor)
+        decrementButton.background?.setTint(buttonColor)
+        incrementButton.background?.setTint(buttonColor)
     }
 
     private fun setLabel(label: String) {
@@ -174,11 +175,15 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
     }
 
     private fun setLabelTextAppearance(resourceId: Int) {
-        TextViewCompat.setTextAppearance(binding.dpadLabel, resourceId)
+        binding.let {
+            TextViewCompat.setTextAppearance(it.dpadLabel, resourceId)
+        }
     }
 
     private fun setCountTextAppearance(resourceId: Int) {
-        TextViewCompat.setTextAppearance(binding.dpadCountText, resourceId)
+        binding.let {
+            TextViewCompat.setTextAppearance(it.dpadCountText, resourceId)
+        }
     }
 
     private fun setListeners() {
@@ -198,7 +203,6 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
         })
     }
 
-    @Suppress("MemberVisibilityCanBePrivate")
     fun setOnValueUpdateListener(listener: ValueUpdateListener) {
         this.valueUpdateListener = listener
     }
@@ -207,28 +211,37 @@ class DPadCountLayout(context: Context, attrs: AttributeSet?) : ConstraintLayout
         when {
             count == minCount && count == maxCount -> {
                 decrementButton.isEnabled = false
-                decrementButton.background.setTint(defaultColor)
+                decrementButton.background?.setTint(defaultColor)
                 incrementButton.isEnabled = false
-                incrementButton.background.setTint(defaultColor)
+                incrementButton.background?.setTint(defaultColor)
             }
             count <= minCount -> {
                 decrementButton.isEnabled = false
-                decrementButton.background.setTint(defaultColor)
+                decrementButton.background?.setTint(defaultColor)
                 incrementButton.isEnabled = true
-                incrementButton.background.setTint(buttonColor)
+                incrementButton.background?.setTint(buttonColor)
             }
             count >= maxCount -> {
                 decrementButton.isEnabled = true
-                decrementButton.background.setTint(buttonColor)
+                decrementButton.background?.setTint(buttonColor)
                 incrementButton.isEnabled = false
-                incrementButton.background.setTint(defaultColor)
+                incrementButton.background?.setTint(defaultColor)
             }
             else -> {
                 decrementButton.isEnabled = true
-                decrementButton.background.setTint(buttonColor)
+                decrementButton.background?.setTint(buttonColor)
                 incrementButton.isEnabled = true
-                incrementButton.background.setTint(buttonColor)
+                incrementButton.background?.setTint(buttonColor)
             }
         }
+    }
+
+    fun setLifecycleObservable(lifecycle: Lifecycle) {
+        lifecycle.addObserver(this)
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroy() {
+        _binding = null
     }
 }
