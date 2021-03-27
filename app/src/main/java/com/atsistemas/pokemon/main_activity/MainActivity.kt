@@ -24,6 +24,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.commons.BaseActivity
+import com.atsistemas.pokemon.commons.showNav
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : BaseActivity() {
@@ -47,6 +48,16 @@ class MainActivity : BaseActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.navigation_detail) {
+                navView.showNav()
+            }
+            if(destination.id == R.id.navigation_profile) {
+                navView.showNav()
+            }
+        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -18,7 +18,11 @@ package com.atsistemas.pokemon.commons
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.EditText
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 fun EditText.addAfterTextChangedListener(action: (Editable?) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
@@ -34,4 +38,21 @@ fun EditText.addAfterTextChangedListener(action: (Editable?) -> Unit) {
             action(s)
         }
     })
+}
+
+fun BottomNavigationView.showNav() {
+    this.layoutParams?.let {
+        // Get CoordinatorLayout.LayoutParams
+        val coordinatorParams : CoordinatorLayout.LayoutParams? =
+            (this.layoutParams as? CoordinatorLayout.LayoutParams)
+
+        coordinatorParams?.let {
+            // Get HideBottomViewOnScrollBehavior
+            val hideScrollBehavior: HideBottomViewOnScrollBehavior<View>? =
+                (it.behavior as? HideBottomViewOnScrollBehavior)
+
+            // Use HideBottomViewOnScrollBehavior to show BottomNavigationView
+            hideScrollBehavior?.slideUp(this)
+        }
+    }
 }
