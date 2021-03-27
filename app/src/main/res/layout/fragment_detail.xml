@@ -24,8 +24,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="?attr/actionBarSize">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detail_container"
@@ -189,6 +188,7 @@
             android:layout_marginStart="@dimen/fragment_margin_outer"
             android:layout_marginBottom="@dimen/fragment_margin_inner"
             android:lineSpacingExtra="2dp"
+            android:textAlignment="textStart"
             android:maxLines="4"
             android:textAppearance="@style/MyFontStyles.Headline6.Normal.AllCaps"
             app:layout_constraintBottom_toTopOf="@id/detail_card_stats_container"
@@ -200,8 +200,9 @@
 
         <ImageView
             android:id="@+id/detail_front"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="H,1:1"
             android:layout_margin="@dimen/fragment_margin_outer"
             android:layout_marginEnd="@dimen/fragment_margin_inner"
             android:adjustViewBounds="true"
@@ -214,8 +215,9 @@
 
         <ImageView
             android:id="@+id/detail_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="H,1:1"
             android:layout_margin="@dimen/fragment_margin_outer"
             android:layout_marginStart="@dimen/fragment_margin_inner"
             android:adjustViewBounds="true"
@@ -225,14 +227,21 @@
             app:layout_constraintTop_toBottomOf="@+id/detail_front"
             tools:src="@drawable/pikachu_mini" />
 
-        <androidx.constraintlayout.widget.Barrier
+<!--        <androidx.constraintlayout.widget.Barrier-->
+<!--            android:id="@+id/detail_guideline"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:barrierDirection="start"-->
+<!--            app:constraint_referenced_ids="-->
+<!--                    detail_front,-->
+<!--                    detail_back" />-->
+
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/detail_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:barrierDirection="start"
-            app:constraint_referenced_ids="
-                    detail_front,
-                    detail_back" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.65" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/detail_card_stats_container"

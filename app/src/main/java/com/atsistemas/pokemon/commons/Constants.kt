@@ -21,4 +21,8 @@ object Constants {
     const val DIALOG_SUCCESS_SHOW: Long = 2000
 
     const val NETWORK_ERROR = "Network Error"
+
+    const val SHARED_ELEMENT_TRANSITION_NAME = "transition_pokemon_name_"
+    const val SHARED_ELEMENT_TRANSITION_FRONT = "transition_pokemon_front_"
+    const val SHARED_ELEMENT_TRANSITION_BACK = "transition_pokemon_back_"
 }

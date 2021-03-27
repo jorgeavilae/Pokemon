@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.atsistemas.data.models.PokemonDTO
 import com.atsistemas.data.utils.PokemonDTOUtils
 import com.atsistemas.pokemon.R
+import com.atsistemas.pokemon.commons.Constants
 import com.atsistemas.pokemon.databinding.ItemPokemonBinding
 import com.bumptech.glide.Glide
 import com.github.florent37.glidepalette.BitmapPalette
@@ -85,9 +86,12 @@ class PokemonAdapter(private val cellClickListener: CellClickListener) :
 
             // Establece los identificadores de los sharedElements que participan en la animación
             // de la transición en base al identificador del pokemon que es único en la lista.
-            binding.itemName.transitionName = "transition_pokemon_name_" + pokemonDTO.id
-            binding.itemFront.transitionName = "transition_pokemon_front_" + pokemonDTO.id
-            binding.itemBack.transitionName = "transition_pokemon_back_" + pokemonDTO.id
+            binding.itemName.transitionName =
+                Constants.SHARED_ELEMENT_TRANSITION_NAME + pokemonDTO.id
+            binding.itemFront.transitionName =
+                Constants.SHARED_ELEMENT_TRANSITION_FRONT + pokemonDTO.id
+            binding.itemBack.transitionName =
+                Constants.SHARED_ELEMENT_TRANSITION_BACK + pokemonDTO.id
         }
 
         override fun onPaletteLoaded(p: Palette?) {

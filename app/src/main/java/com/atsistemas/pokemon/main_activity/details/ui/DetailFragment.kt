@@ -16,22 +16,26 @@
 
 package com.atsistemas.pokemon.main_activity.details.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.content.ContextCompat
 import androidx.core.view.doOnPreDraw
+import com.atsistemas.data.models.PokemonDTO
 import com.atsistemas.data.utils.PokemonDTOUtils
 import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.commons.BaseFragment
+import com.atsistemas.pokemon.commons.Constants
 import com.atsistemas.pokemon.databinding.FragmentDetailBinding
 import com.atsistemas.pokemon.main_activity.MainActivity
 import com.atsistemas.pokemon.utils.SharedPokemonViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.github.florent37.glidepalette.BitmapPalette
+import com.github.florent37.glidepalette.GlidePalette
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DetailFragment : BaseFragment() {
@@ -71,58 +75,79 @@ class DetailFragment : BaseFragment() {
     override fun loadObservers() {
         sharedViewModel.pokemon.observe(viewLifecycleOwner) {
             it?.let { pokemonDTO ->
-                // todo adecentar
-                (activity as? MainActivity)?.supportActionBar?.title = "${pokemonDTO.name}"
-                loadUrlIntoImageView(
-                    pokemonDTO.imgUrlMiniFront,
-                    binding.detailFront,
-                    R.drawable.pikachu_mini
-                )
-                loadUrlIntoImageView(
-                    pokemonDTO.imgUrlMiniBack,
-                    binding.detailBack,
-                    R.drawable.pikachu_mini
-                )
-                binding.detailId.text = "ID: ${pokemonDTO.id}"
-                binding.detailName.text = "${pokemonDTO.name}"
-                binding.detailOrder.text = "Pokemon No. ${pokemonDTO.order}"
-                binding.detailWeight.text = "Weight: ${"%.2f".format(pokemonDTO.weight)} kg"
-                binding.detailHeight.text = "Height: ${"%.2f".format(pokemonDTO.height)} m"
-                binding.detailTypes.text =
-                    "${PokemonDTOUtils.convertListTypesToString(pokemonDTO.types, "\n")}"
-                loadUrlIntoImageView(pokemonDTO.imgUrlOfficial, binding.detailOfficial)
-                binding.detailStatHp.text = "${pokemonDTO.hp}"
-                binding.detailStatAttack.text = "${pokemonDTO.attack}"
-                binding.detailStatDefense.text = "${pokemonDTO.defense}"
-                binding.detailStatSpAttack.text = "${pokemonDTO.specialAttack}"
-                binding.detailStatSpDefense.text = "${pokemonDTO.specialDefense}"
-                binding.detailStatSpeed.text = "${pokemonDTO.speed}"
-                val color = ContextCompat.getColor(requireContext(), R.color.pokemon_blue)
-                binding.detailOfficial.background?.setTint(color)
-
-                // Establece los identificadores de los sharedElements que participan en la animación
-                // de la transición en base al identificador del pokemon mostrado.
-                binding.detailName.transitionName = "transition_pokemon_name_" + pokemonDTO.id
-                binding.detailFront.transitionName = "transition_pokemon_front_" + pokemonDTO.id
-                binding.detailBack.transitionName = "transition_pokemon_back_" + pokemonDTO.id
-
-                // Ahora que los datos se muestran, inicia la animación de la transición
-                // (postpuesta en onViewCreated())
-                (view?.parent as? ViewGroup)?.doOnPreDraw {
-                    startPostponedEnterTransition()
-                }
+                showDataInUI(pokemonDTO)
             }
         }
     }
 
+    private fun showDataInUI(pokemonDTO: PokemonDTO) {
+        // Title and Name
+        (activity as? MainActivity)?.supportActionBar?.title = pokemonDTO.name
+        binding.detailName.text = pokemonDTO.name
+
+        // Pokemon Image
+        loadUrlIntoImageView(pokemonDTO.imgUrlOfficial, binding.detailOfficial) {
+            it?.let { palette ->
+                /* Palette contiene los colores principales de una imagen */
+                val colorBackground = palette.getDominantColor(Color.WHITE)
+                binding.detailOfficial.background?.setTint(colorBackground)
+            }
+        }
+
+        // Pokemon mini images
+        loadUrlIntoImageView(pokemonDTO.imgUrlMiniFront, binding.detailFront)
+        loadUrlIntoImageView(pokemonDTO.imgUrlMiniBack, binding.detailBack)
+
+        // ID and Order
+        binding.detailId.text = resources.getString(R.string.id_with_number, pokemonDTO.id)
+        binding.detailOrder.text = resources.getString(R.string.order_with_number, pokemonDTO.order)
+
+        // Height and Weight
+        binding.detailHeight.text =
+            resources.getString(R.string.height_with_number, pokemonDTO.height)
+        binding.detailWeight.text =
+            resources.getString(R.string.weight_with_number, pokemonDTO.weight)
+
+        // Types
+        binding.detailTypes.text = PokemonDTOUtils.convertListTypesToString(pokemonDTO.types, "\n")
+
+        // Stats
+        binding.detailStatHp.text = "${pokemonDTO.hp}"
+        binding.detailStatAttack.text = "${pokemonDTO.attack}"
+        binding.detailStatDefense.text = "${pokemonDTO.defense}"
+        binding.detailStatSpAttack.text = "${pokemonDTO.specialAttack}"
+        binding.detailStatSpDefense.text = "${pokemonDTO.specialDefense}"
+        binding.detailStatSpeed.text = "${pokemonDTO.speed}"
+
+        // Establece los identificadores de los sharedElements que participan en la animación
+        // de la transición en base al identificador del pokemon mostrado.
+        binding.detailName.transitionName =
+            Constants.SHARED_ELEMENT_TRANSITION_NAME + pokemonDTO.id
+        binding.detailFront.transitionName =
+            Constants.SHARED_ELEMENT_TRANSITION_FRONT + pokemonDTO.id
+        binding.detailBack.transitionName =
+            Constants.SHARED_ELEMENT_TRANSITION_BACK + pokemonDTO.id
+
+        // Ahora que los datos se muestran, inicia la animación de la transición
+        // (postpuesta en onViewCreated())
+        (view?.parent as? ViewGroup)?.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+
+    }
+
     private fun loadUrlIntoImageView(
-        url: String, imageView: ImageView, placeholderResId: Int? = null
+        url: String,
+        imageView: ImageView,
+        paletteCallback: BitmapPalette.CallBack? = null
     ) {
         val glide = Glide.with(this).load(url)
             .transition(DrawableTransitionOptions.withCrossFade().crossFade())
-        placeholderResId?.let {
-            glide.placeholder(placeholderResId)
+
+        paletteCallback?.let {
+            glide.listener(GlidePalette.with(url).intoCallBack(it))
         }
+
         glide.into(imageView)
     }
 

@@ -24,6 +24,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.commons.BaseActivity
+import com.atsistemas.pokemon.commons.hideNav
 import com.atsistemas.pokemon.commons.showNav
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -51,7 +52,7 @@ class MainActivity : BaseActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if(destination.id == R.id.navigation_detail) {
-                navView.showNav()
+                navView.hideNav()
             }
             if(destination.id == R.id.navigation_profile) {
                 navView.showNav()

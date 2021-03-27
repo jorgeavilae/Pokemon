@@ -108,6 +108,7 @@
     </style>
     <style name="TextViewInStatsCard">
         <item name="android:textAlignment">textStart</item>
+        <item name="layout_constraintHorizontal_bias">0</item>
         <item name="android:textAppearance">@style/MyFontStyles.Subtitle1</item>
     </style>
 </resources>

@@ -56,3 +56,20 @@ fun BottomNavigationView.showNav() {
         }
     }
 }
+
+fun BottomNavigationView.hideNav() {
+    this.layoutParams?.let {
+        // Get CoordinatorLayout.LayoutParams
+        val coordinatorParams : CoordinatorLayout.LayoutParams? =
+            (this.layoutParams as? CoordinatorLayout.LayoutParams)
+
+        coordinatorParams?.let {
+            // Get HideBottomViewOnScrollBehavior
+            val hideScrollBehavior: HideBottomViewOnScrollBehavior<View>? =
+                (it.behavior as? HideBottomViewOnScrollBehavior)
+
+            // Use HideBottomViewOnScrollBehavior to show BottomNavigationView
+            hideScrollBehavior?.slideDown(this)
+        }
+    }
+}
