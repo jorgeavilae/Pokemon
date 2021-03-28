@@ -20,6 +20,8 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.palette.graphics.Palette
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.atsistemas.data.models.PokemonDTO
 import com.atsistemas.data.utils.PokemonDTOUtils
@@ -31,33 +33,18 @@ import com.github.florent37.glidepalette.BitmapPalette
 import com.github.florent37.glidepalette.GlidePalette
 
 class PokemonAdapter(private val cellClickListener: CellClickListener) :
-    RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
-
-    private lateinit var binding: ItemPokemonBinding
-    private var mValues: List<PokemonDTO>? = null
-
-    fun submitList(values: List<PokemonDTO>?) = values.also {
-        mValues = it
-        notifyDataSetChanged()
-    }
+    ListAdapter<PokemonDTO, PokemonAdapter.ViewHolder>(PokemonDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = ItemPokemonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemPokemonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        mValues?.let {
-            holder.bind(it[position])
-        } ?: clearList()
+        getItem(position)?.let {
+            holder.bind(it)
+        }
     }
-
-    private fun clearList() {
-        mValues = emptyList()
-        notifyDataSetChanged()
-    }
-
-    override fun getItemCount(): Int = mValues?.size ?: 0
 
     inner class ViewHolder(val binding: ItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root), BitmapPalette.CallBack {
@@ -125,6 +112,17 @@ class PokemonAdapter(private val cellClickListener: CellClickListener) :
             }
         }
     }
+}
+
+class PokemonDiffUtil : DiffUtil.ItemCallback<PokemonDTO>() {
+    override fun areItemsTheSame(oldItem: PokemonDTO, newItem: PokemonDTO): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: PokemonDTO, newItem: PokemonDTO): Boolean {
+        return oldItem == newItem
+    }
+
 }
 
 interface CellClickListener {

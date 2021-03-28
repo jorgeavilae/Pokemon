@@ -21,6 +21,7 @@ import android.view.*
 import androidx.core.view.doOnPreDraw
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.atsistemas.data.models.PokemonDTO
 import com.atsistemas.pokemon.R
@@ -63,6 +64,7 @@ class ListFragment : BaseFragment(), CellClickListener {
         binding.swipeRefreshPokemonList.setOnRefreshListener {
             listViewModel.fetchData()
         }
+        binding.pokemonList.itemAnimator = DefaultItemAnimator()
 
         binding.pokemonList.layoutManager = LinearLayoutManager(activity)
         adapter = PokemonAdapter(this)
