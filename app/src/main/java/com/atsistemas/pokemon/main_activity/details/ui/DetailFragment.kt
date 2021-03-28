@@ -17,6 +17,7 @@
 package com.atsistemas.pokemon.main_activity.details.ui
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
@@ -33,7 +34,11 @@ import com.atsistemas.pokemon.databinding.FragmentDetailBinding
 import com.atsistemas.pokemon.main_activity.MainActivity
 import com.atsistemas.pokemon.utils.SharedPokemonViewModel
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.github.florent37.glidepalette.BitmapPalette
 import com.github.florent37.glidepalette.GlidePalette
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -86,7 +91,7 @@ class DetailFragment : BaseFragment() {
         binding.detailName.text = pokemonDTO.name
 
         // Pokemon Image
-        loadUrlIntoImageView(pokemonDTO.imgUrlOfficial, binding.detailOfficial) {
+        loadUrlIntoImageView(pokemonDTO.imgUrlOfficial, binding.detailOfficial, true) {
             it?.let { palette ->
                 /* Palette contiene los colores principales de una imagen */
                 val colorBackground = palette.getDominantColor(Color.WHITE)
@@ -136,17 +141,45 @@ class DetailFragment : BaseFragment() {
 
     }
 
+    // Método utilizado para cargar imágenes de internet en un ImageView. Usa Glide para descargar
+    //  la imagen, y GlidePalette para extraer un Palette con el que colorear elementos. Cambia
+    //  la visibility de un ProgressBar cuando carga la imagen.
     private fun loadUrlIntoImageView(
         url: String,
         imageView: ImageView,
+        hideProgress: Boolean = false,
         paletteCallback: BitmapPalette.CallBack? = null
     ) {
         val glide = Glide.with(this).load(url)
             .transition(DrawableTransitionOptions.withCrossFade().crossFade())
 
         paletteCallback?.let {
-            glide.listener(GlidePalette.with(url).intoCallBack(it))
+            glide.addListener(GlidePalette.with(url).intoCallBack(it))
         }
+
+        if (hideProgress)
+            glide.addListener(object: RequestListener<Drawable>{
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    binding.detailOfficialProgress.visibility = View.GONE
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    binding.detailOfficialProgress.visibility = View.GONE
+                    return false
+                }
+            })
 
         glide.into(imageView)
     }

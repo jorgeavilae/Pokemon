@@ -48,6 +48,17 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/pikachu_official" />
 
+        <ProgressBar
+            android:id="@+id/detail_official_progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/detail_official"
+            app:layout_constraintEnd_toEndOf="@id/detail_official"
+            app:layout_constraintStart_toStartOf="@id/detail_official"
+            app:layout_constraintTop_toTopOf="@id/detail_official" />
+
         <TextView
             android:id="@+id/detail_id"
             android:layout_width="wrap_content"
