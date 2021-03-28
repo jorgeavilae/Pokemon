@@ -23,6 +23,8 @@ buildscript {
 
         navigation_version = "2.3.4"
         lifecycle_version = "2.3.0"
+
+        paging_version = "3.0.0-beta03"
     }
 
     repositories {
