@@ -19,12 +19,13 @@ package com.atsistemas.pokemon.main_activity.details.ui
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.view.doOnPreDraw
+import androidx.transition.Transition
+import androidx.transition.TransitionInflater
 import com.atsistemas.data.models.PokemonDTO
 import com.atsistemas.data.utils.PokemonDTOUtils
 import com.atsistemas.pokemon.R
@@ -53,11 +54,16 @@ class DetailFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Establece las animaciones de entrada y salida de este Fragment, declaradas en XML
+        // Establece la animación de entrada de este Fragment, declarada en XML.
+        // Sólo si la animación termina, se establece la animación de salida contraria. De esta
+        // forma se evita un error producido al volver atrás antes de que la animación finalizase.
         this.sharedElementEnterTransition = TransitionInflater.from(requireContext())
             .inflateTransition(R.transition.shared_pokemon_details_enter)
-        this.sharedElementReturnTransition = TransitionInflater.from(requireContext())
-            .inflateTransition(R.transition.shared_pokemon_details_return)
+            .addListener(setOnTransitionEnds {
+                this@DetailFragment.sharedElementReturnTransition =
+                    TransitionInflater.from(requireContext())
+                        .inflateTransition(R.transition.shared_pokemon_details_return)
+            })
     }
 
     override fun onCreateView(
@@ -158,7 +164,7 @@ class DetailFragment : BaseFragment() {
         }
 
         if (hideProgress)
-            glide.addListener(object: RequestListener<Drawable>{
+            glide.addListener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
@@ -188,4 +194,24 @@ class DetailFragment : BaseFragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    // Devuelve un TransitionListener con sólo el método onTransitionEnd implementado
+    private fun setOnTransitionEnds(function: () -> Unit): Transition.TransitionListener =
+        object : Transition.TransitionListener {
+            override fun onTransitionStart(transition: Transition) {
+            }
+
+            override fun onTransitionEnd(transition: Transition) {
+                function()
+            }
+
+            override fun onTransitionCancel(transition: Transition) {
+            }
+
+            override fun onTransitionPause(transition: Transition) {
+            }
+
+            override fun onTransitionResume(transition: Transition) {
+            }
+        }
 }
