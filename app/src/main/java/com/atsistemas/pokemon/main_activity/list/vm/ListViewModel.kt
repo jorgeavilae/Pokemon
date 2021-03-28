@@ -32,7 +32,7 @@ class ListViewModel(private val repository: PokemonRepository) : BaseViewModel()
     fun fetchData() {
         setShowLoading(true)
         viewModelScope.launch (Dispatchers.IO) {
-            when(val result = repository.loadPokemonByIdRangeFromServer(1..50)) {
+            when(val result = repository.loadPokemonByIdRangeFromServer(1..151)) {
                 is ResultHandler.Success -> {
                     setShowMessage(result.data)
                 }
