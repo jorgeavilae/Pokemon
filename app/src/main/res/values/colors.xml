@@ -37,7 +37,7 @@
     <color name="light_red">#FF8A80</color>
     <color name="transparent">#00000000</color>
     <color name="white_with_alpha_20">#33FFFFFF</color>
-    <color name="white_with_alpha_80">#CCFFFFFF</color>
+    <color name="white_with_alpha_50">#80FFFFFF</color>
     <color name="pokemon_yellow_almost_transparent">#4DFFDE00</color>
 
     <!-- Colors for SwipeRefreshLayout progress indicator-->
