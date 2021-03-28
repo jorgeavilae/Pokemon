@@ -33,9 +33,11 @@ android {
     productFlavors {
         mock {
             applicationIdSuffix ".mock"
+            resValue "string", "user_default", "mock"
             buildConfigField "boolean", "mock", "true"
         }
         pro {
+            resValue "string", "user_default", "pro"
             buildConfigField "boolean", "mock", "false"
         }
     }

@@ -16,6 +16,7 @@
 
 package com.atsistemas.pokemon.commons
 
+import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -23,6 +24,9 @@ import android.widget.EditText
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
+inline fun <reified T: BaseActivity> BaseActivity.startActivity() =
+    this.startActivity(Intent(this, T::class.java))
 
 fun EditText.addAfterTextChangedListener(action: (Editable?) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {

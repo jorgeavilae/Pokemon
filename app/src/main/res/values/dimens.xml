@@ -22,6 +22,11 @@
     <dimen name="fragment_margin_inner">8dp</dimen>
     <dimen name="fragment_margin_related">4dp</dimen>
 
+    <!-- Splash Activity -->
+    <dimen name="splash_gif_margin">48dp</dimen>
+    <dimen name="splash_gif_padding">24dp</dimen>
+    <dimen name="splash_gif_padding_text">64dp</dimen>
+
     <!-- Profile fragment -->
     <dimen name="card_container_elevation">4dp</dimen>
     <dimen name="card_container_margin">24dp</dimen>

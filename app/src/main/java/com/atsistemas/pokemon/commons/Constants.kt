@@ -17,6 +17,8 @@
 package com.atsistemas.pokemon.commons
 
 object Constants {
+    const val SPLASH_LOADING: Long = 5000
+
     // Millis showing Success Dialog
     const val DIALOG_SUCCESS_SHOW: Long = 2000
 

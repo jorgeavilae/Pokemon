@@ -17,6 +17,11 @@
 <resources>
     <string name="app_name">Pokemon</string>
 
+    <string name="splash_title">PokéList</string>
+    <string name="splash_subtitle">Una app para AtSistemas</string>
+    <string name="splash_caption">Github: jorgeavilae/Pokemon-AtSistemas</string>
+    <string name="splash_loading">Cargando…</string>
+
     <string name="title_list">Pokémon List</string>
     <string name="title_profile">Profile</string>
 
@@ -61,4 +66,5 @@
     <string name="right_arrow_image_button">Right arrow ImageButton</string>
     <string name="top_arrow_image_button">Top Arrow ImageButton</string>
     <string name="bottom_arrow_image_button">Bottom Arrow ImageButton</string>
+    <string name="splash_loading_gif">Splash loading gif</string>
 </resources>
