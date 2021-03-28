@@ -32,6 +32,6 @@ interface IPokemonAPI {
     suspend fun getPokemonByName(@Path("name") name: String): Response<Pokemon>
 
     // https://pokeapi.co/api/v2/pokemon/1
-    @GET("pokemon/{id}")
+    @GET("pokemon/{id}/")
     suspend fun getPokemonById(@Path("id") id: Int): Response<Pokemon>
 }
