@@ -17,7 +17,10 @@
 package com.atsistemas.pokemon.commons
 
 object Constants {
-    const val SPLASH_LOADING: Long = 5000
+    const val SPLASH_LOADING: Long = 3000
+
+    // Pokemons de la primera generación
+    const val MAX_POKEMON_LIST: Int = 151
 
     // Millis showing Success Dialog
     const val DIALOG_SUCCESS_SHOW: Long = 2000

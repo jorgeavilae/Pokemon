@@ -32,12 +32,16 @@ interface PokemonDao {
     @Query("SELECT * FROM $TABLE_POKEMON ORDER BY `order` ASC")
     fun load(): LiveData<List<PokemonDTO>>
 
+    /* Devolver LiveData no funciona */
+    @Query("SELECT * FROM $TABLE_POKEMON WHERE `name` LIKE :search ORDER BY `order` ASC")
+    fun search(search: String): List<PokemonDTO>
+
     @Query("SELECT COUNT(`id`) FROM $TABLE_POKEMON")
     fun getPokemonCount(): LiveData<Int>
-    
+
     @Query("DELETE FROM $TABLE_POKEMON")
     suspend fun deleteAll()
-    
+
     @Query("SELECT * FROM  $TABLE_POKEMON WHERE `id` = :pokemonId")
-    suspend fun getPokemonById(pokemonId: Int) : PokemonDTO?
+    suspend fun getPokemonById(pokemonId: Int): PokemonDTO?
 }

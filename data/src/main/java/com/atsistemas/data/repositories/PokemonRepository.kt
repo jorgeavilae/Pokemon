@@ -40,6 +40,8 @@ class PokemonRepository(
         pokemonDatabase.pokemonDao().getPokemonCount()
     }
 
+    fun searchPokemons(searchStr: String) = pokemonDatabase.pokemonDao().search("%$searchStr%")
+
     suspend fun deleteDB() = pokemonDatabase.pokemonDao().deleteAll()
 
     // Retrofit API

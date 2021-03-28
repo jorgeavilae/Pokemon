@@ -18,6 +18,8 @@ package com.atsistemas.pokemon.main_activity.list.ui
 
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.EditorInfo
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.doOnPreDraw
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -128,6 +130,22 @@ class ListFragment : BaseFragment(), CellClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.action_search -> {
+                (item.actionView as? SearchView)?.let { searchView ->
+                    searchView.imeOptions = EditorInfo.IME_ACTION_DONE
+                    searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                        override fun onQueryTextSubmit(query: String?): Boolean {
+                            return false
+                        }
+
+                        override fun onQueryTextChange(newText: String?): Boolean {
+                            listViewModel.setFiler(newText)
+                            return true
+                        }
+                    })
+                }
+                true
+            }
             R.id.delete_db_id -> {
                 listViewModel.deleteDB()
                 true
