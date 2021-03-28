@@ -25,7 +25,7 @@ Se valorará:
 * Usar UIComponents si tiene sentido.
 * Uso de ConstraintLayouts.
 * Correcto uso de Mocks.
-* Comentarios explicativos (no es necesario comentar todo el código, solo en ciertas partes importantes para explicar que se hace)
+* Comentarios explicativos (no es necesario comentar por completo el código, solo en ciertas partes importantes para explicar que se hace)
 
 Se pueden usar las herramientas y librerías que se deseen siempre que se respete la arquitectura aprendida.
 
