@@ -25,6 +25,8 @@
     <string name="title_list">Pokémon List</string>
     <string name="title_profile">Profile</string>
 
+    <string name="empty_list_msg">¿Lista vacía?</string>
+    <string name="swipe_down_to_load_data">Swipe down para cargar datos</string>
     <string name="leaf_icon">Leaf Icon</string>
     <string name="weight_icon">Weight Icon</string>
     <string name="height_icon">Height Icon</string>
@@ -67,4 +69,5 @@
     <string name="top_arrow_image_button">Top Arrow ImageButton</string>
     <string name="bottom_arrow_image_button">Bottom Arrow ImageButton</string>
     <string name="splash_loading_gif">Splash loading gif</string>
+    <string name="swipe_down_icon">Swipe down icon</string>
 </resources>

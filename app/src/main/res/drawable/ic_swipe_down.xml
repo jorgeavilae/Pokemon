@@ -1,0 +1,28 @@
+<!--
+  ~    Copyright 2021 Jorge Ávila Estévez
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="150dp"
+    android:height="150dp"
+    android:viewportWidth="30"
+    android:viewportHeight="30">
+    <path
+        android:fillColor="@color/pokemon_blue"
+        android:fillType="evenOdd"
+        android:pathData="M20.6379,13.929L19.8547,12.7401L18.6538,12.8976L18.1842,13.9538L19.0202,15.1043L18.2108,15.6924L17.0178,14.0515L15.87,14.1712L15.4004,15.2274L16.5931,16.8677L15.7838,17.4557L10.9155,10.7546L9.7676,10.8752L9.2982,11.9304L17.3257,22.9799L11.6419,20.449L10.7081,21.1275L10.8292,22.276L14.1657,23.7617L16.1784,25.6028L21.0251,26.3704L22.6163,28.5605L21.8072,29.1483L20.4595,27.2933L15.7252,26.5435L13.6102,24.6089L9.908,22.9601L9.6668,20.6635L11.5334,19.3061L14.3231,20.5484L8.1583,12.0623L9.0978,9.9527L11.3935,9.7118L14.7309,14.3066L15.1999,13.2489L17.5149,13.0329L17.9837,11.9753L20.1881,11.6089L20.6583,10.5532L22.9535,10.311L26.9644,15.8309L28.4812,21.3213L29.8974,23.2704L29.0884,23.8582L27.5656,21.7623L26.049,16.2728L22.476,11.3551L21.328,11.4757L20.8587,12.5309L21.4472,13.341L20.6379,13.929ZM1.5,8.5858L0.7929,9.2929L3.5,12L6.2071,9.2929L5.5,8.5858L4,10.0858L4,0L3,0L3,10.0858L1.5,8.5858Z"
+        android:strokeWidth="1"
+        android:strokeColor="#00000000" />
+</vector>

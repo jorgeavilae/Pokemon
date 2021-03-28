@@ -23,6 +23,42 @@
     android:transitionName="transition_pokemon_container"
     tools:context=".main_activity.list.ui.ListFragment">
 
+    <LinearLayout
+        android:id="@+id/list_container_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fragment_margin_outer"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_list_msg"
+            android:textAppearance="@style/MyFontStyles.Headline5.AllCaps"
+            android:textColor="@color/pokemon_blue" />
+
+        <ImageView
+            android:id="@+id/list_image_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fragment_margin_inner"
+            android:contentDescription="@string/swipe_down_icon"
+            android:src="@drawable/ic_swipe_down" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/swipe_down_to_load_data"
+            android:textAppearance="@style/MyFontStyles.Headline6.Normal.AllCaps"
+            android:textColor="@color/pokemon_blue" />
+    </LinearLayout>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_pokemon_list"
         android:layout_width="match_parent"

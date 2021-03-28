@@ -83,6 +83,12 @@ class ListFragment : BaseFragment(), CellClickListener {
         listViewModel.pokemons.observe(viewLifecycleOwner) {
             adapter?.submitList(it)
 
+            if (it.isNullOrEmpty()) {
+                binding.listContainerEmpty.visibility = View.VISIBLE
+            } else {
+                binding.listContainerEmpty.visibility = View.INVISIBLE
+            }
+
             // Ahora que la lista muestra los items, inicia la animación de la transición
             // (postpuesta en onViewCreated())
             (view?.parent as? ViewGroup)?.doOnPreDraw {
