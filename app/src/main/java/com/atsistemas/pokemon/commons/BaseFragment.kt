@@ -19,6 +19,7 @@ package com.atsistemas.pokemon.commons
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.atsistemas.pokemon.R
 import com.atsistemas.pokemon.commons.uicomponents.ErrorDialog
 import com.atsistemas.pokemon.commons.uicomponents.SuccessDialog
 
@@ -31,6 +32,23 @@ abstract class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadObservers()
+    }
+
+    fun showSuccessDialog(message: String) {
+        successDialog = activity?.let { activity ->
+            SuccessDialog(activity, message)
+        }
+        successDialog?.show()
+    }
+
+    fun showErrorDialog(message: String) {
+        errorDialog = activity?.let { activity ->
+            ErrorDialog(activity, getString(R.string.alert), message, getString(R.string.close)) {
+                errorDialog?.dismiss()
+            }
+        }
+        errorDialog?.setCancelable(false)
+        errorDialog?.show()
     }
 
     override fun onDestroyView() {

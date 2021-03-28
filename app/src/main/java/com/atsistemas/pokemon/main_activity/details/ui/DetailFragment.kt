@@ -171,7 +171,7 @@ class DetailFragment : BaseFragment() {
                     target: Target<Drawable>?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    binding.detailOfficialProgress.visibility = View.GONE
+                    showErrorDialog("Cannot load Pokemon image")
                     return false
                 }
 
