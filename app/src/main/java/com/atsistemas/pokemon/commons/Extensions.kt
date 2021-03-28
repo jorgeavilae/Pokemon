@@ -25,6 +25,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+// Reified es necesario para acceder a T::class.java. Inline es necesario para poner reified.
 inline fun <reified T: BaseActivity> BaseActivity.startActivity() =
     this.startActivity(Intent(this, T::class.java))
 

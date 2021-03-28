@@ -50,6 +50,7 @@ class MainActivity : BaseActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        // Muestra o esconde el BottomNavigationView en función del Fragment al que se navega.
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if(destination.id == R.id.navigation_detail) {
                 navView.hideNav()
