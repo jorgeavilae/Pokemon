@@ -44,12 +44,12 @@
 
             <TextView
                 android:id="@+id/profile_tag_name"
+                style="@style/TagViewInProfileCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/fragment_margin_outer"
                 android:layout_marginVertical="@dimen/fragment_margin_inner"
                 android:text="@string/player"
-                android:textAppearance="@style/MyFontStyles.Headline5.AllCaps"
                 app:layout_constraintBottom_toTopOf="@id/profile_tag_badges"
                 app:layout_constraintEnd_toStartOf="@id/profile_card_barrier"
                 app:layout_constraintHorizontal_bias="0"
@@ -70,12 +70,12 @@
 
             <TextView
                 android:id="@+id/profile_tag_badges"
+                style="@style/TagViewInProfileCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/fragment_margin_outer"
                 android:layout_marginVertical="@dimen/fragment_margin_inner"
                 android:text="@string/badges"
-                android:textAppearance="@style/MyFontStyles.Headline5.AllCaps"
                 app:layout_constraintBottom_toTopOf="@id/profile_tag_pokedex"
                 app:layout_constraintEnd_toStartOf="@id/profile_card_barrier"
                 app:layout_constraintHorizontal_bias="0"
@@ -95,12 +95,12 @@
 
             <TextView
                 android:id="@+id/profile_tag_pokedex"
+                style="@style/TagViewInProfileCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/fragment_margin_outer"
                 android:layout_marginVertical="@dimen/fragment_margin_inner"
                 android:text="@string/pokedex"
-                android:textAppearance="@style/MyFontStyles.Headline5.AllCaps"
                 app:layout_constraintBottom_toTopOf="@id/profile_tag_time"
                 app:layout_constraintEnd_toStartOf="@id/profile_card_barrier"
                 app:layout_constraintHorizontal_bias="0"
@@ -120,12 +120,12 @@
 
             <TextView
                 android:id="@+id/profile_tag_time"
+                style="@style/TagViewInProfileCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/fragment_margin_outer"
                 android:layout_marginVertical="@dimen/fragment_margin_inner"
                 android:text="@string/time"
-                android:textAppearance="@style/MyFontStyles.Headline5.AllCaps"
                 app:layout_constraintBottom_toBottomOf="@id/profile_card"
                 app:layout_constraintEnd_toStartOf="@id/profile_card_barrier"
                 app:layout_constraintHorizontal_bias="0"

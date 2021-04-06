@@ -27,9 +27,10 @@
         <item name="colorOnSecondary">@color/textColorBlack</item>
         <!-- Accent color-->
         <item name="colorAccent">@color/pokemon_blue</item>
+        <item name="colorControlNormal">@color/textColorWhite</item>
         <!-- Text colors-->
         <item name="android:textColorPrimary">@color/textColorBlack</item>
-        <item name="android:textColorSecondary">@color/textColorWhite</item>
+        <item name="android:textColorSecondary">@color/textColorLight</item>
         <item name="android:actionMenuTextColor">@color/textColorDarkRed</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
@@ -67,18 +68,21 @@
     </style>
 
     <!-- Style para los TextView de la tarjeta del ProfileFragment -->
+    <style name="TagViewInProfileCard">
+        <item name="android:textAppearance">@style/MyFontStyles.Headline5.AllCaps</item>
+        <item name="android:textColor">@color/textColorBlack</item>
+    </style>
     <style name="TextViewInProfileCard">
         <item name="android:ellipsize">end</item>
         <item name="android:maxLength">100</item>
         <item name="android:maxLines">1</item>
         <item name="android:textAlignment">textEnd</item>
         <item name="android:textAppearance">@style/MyFontStyles.Headline5.Bigger</item>
+        <item name="android:textColor">@color/textColorBlack</item>
     </style>
 
     <!-- Style para los TextInputLayout del ProfileFragment -->
     <style name="TextInputLayoutInProfile" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">@color/pokemon_blue</item>
-        <item name="hintTextColor">@color/pokemon_blue</item>
         <item name="hintTextAppearance">@style/MyFontStyles.Caption.Bigger</item>
     </style>
 
@@ -92,7 +96,7 @@
 
     <!-- Style para los DPadText del ProfileFragment -->
     <style name="DPadCountViewInProfile">
-        <item name="buttonColor">@color/pokemon_blue</item>
+        <item name="buttonColor">?attr/colorAccent</item>
         <item name="labelTextAppearance">@style/MyFontStyles.Subtitle2.Normal</item>
         <item name="countTextAppearance">@style/MyFontStyles.Subtitle1.Bigger</item>
     </style>
@@ -105,10 +109,12 @@
         <item name="android:layout_marginEnd">@dimen/fragment_margin_outer</item>
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_marginBottom">@dimen/stats_card_margin_vertical_related</item>
+        <item name="android:textColor">@color/textColorBlack</item>
     </style>
     <style name="TextViewInStatsCard">
         <item name="android:textAlignment">textStart</item>
         <item name="layout_constraintHorizontal_bias">0</item>
         <item name="android:textAppearance">@style/MyFontStyles.Subtitle1</item>
+        <item name="android:textColor">@color/textColorBlack</item>
     </style>
 </resources>
